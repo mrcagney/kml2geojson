@@ -23,6 +23,7 @@ pexpect==3.3
 pickleshare==0.5
 ptyprocess==0.5
 pygeoif==0.6
+pykml==0.1.0
 python-dateutil==2.4.2
 pyzmq==14.7.0
 qtconsole==4.0.1
