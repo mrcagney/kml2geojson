@@ -2,6 +2,7 @@ import json
 import subprocess
 import tempfile
 from copy import deepcopy
+import pathlib
 
 import xmltodict
 
@@ -9,18 +10,20 @@ import xmltodict
 def build_rgb_and_opacity(kml_color_str):
     """
     Given a KML color string, return an equivalent
-    RGB hex color string and an opacity float value.
+    RGB hex color string and an opacity float 
+    (rounded to 2 decimal places).
+    
     For example::
 
-        >>> to_rgb_and_opacity('ff009911')
-        '#119900', 1.0
+        >>> build_rgb_and_opacity('ee001122')
+        ('#221100', 0.93)
 
     """
     s = kml_color_str
     if isinstance(s, str):
-        b = s[-6:-4]
-        g = s[-4:-2]
-        r = s[-2:]
+        b = s[2:4]
+        g = s[4:6]
+        r = s[6:8]
         rgb = '#' + r + g + b
         opacity = s[0:2]        
     else:
@@ -40,6 +43,16 @@ def build_leaflet_styles(kml_str):
         #style ID -> Leaflet style dictionary
         
     and return the result.
+
+    The Leaflet style options (the keys in the Leaflet style dictionaries) 
+    are
+
+    - ``iconUrl``: URL of icon
+    - ``weight``:  stroke width in pixels
+    - ``color``: stroke color; RGB hex string
+    - ``opacity``: stroke opacity
+    - ``fillColor``: fill color; RGB hex string
+    - ``fillOpacity``: fill opacity
     """
     # Convert to JSON dict and grab style list only
     x = xmltodict.parse(kml_str)
@@ -79,9 +92,9 @@ def build_leaflet_styles(kml_str):
 def build_geojson(kml_str):
     """
     Convert the given KML string to a (decoded) GeoJSON FeatureCollection.
-    To do so, use the Node package ``togeojson``.
+    To do so, use the Node.js package ``togeojson``.
     Assume the Node package is installed.
-    Throw a ``subprocess.CalledProcessError`` if Node call fails.
+    Throw a ``subprocess.CalledProcessError`` if the Node call fails.
     """
     # Write to a temporary file, then call togeojson
     with tempfile.NamedTemporaryFile(mode='wt') as f:
@@ -98,50 +111,71 @@ def build_geojson_layers(kml_str):
     Each dictionary has the form::
 
         {
-          'id': folder ID,
           'name': folder name,
-          'layer': (decoded) GeoJSON FeatureCollection 
+          'geojson': (decoded) GeoJSON FeatureCollection 
         }
 
+    The GeoJSON part is created using :func:`build_geojson`.
     """
     x = xmltodict.parse(kml_str)
     y = deepcopy(x)
 
     layers = []
-    for folder in x['kml']['Document']['Folder'][1:]:
-        y['kml']['Document']['Folder'] = [folder]
+    style = x['kml']['Document']['Style']
+    for i, folder in enumerate(x['kml']['Document']['Folder']):
+        # Need to included style with folder to avoid errors in build_geojson
+        y['kml']['Document']['Folder'] = [style, folder]
         kml_str = xmltodict.unparse(y)
         try:
             g = build_geojson(kml_str)
         except subprocess.CalledProcessError:
             continue
+
+        if 'name' in folder:
+            name = folder['name']
+        else:
+            name = 'layer_{:03d}'.format(i)
+        print(name)
         d = {
-          'id': folder['@id'],
           'name': folder['name'],
-          'layer': g,
+          'geojson': g,
           }            
         layers.append(d)
 
     return layers
 
-# def run_togeojson(kml_path, geojson_path):
-#     """
-#     Convert the KML file located at ``kml_path`` to a GeoJSON file
-#     located at ``geojson_path``.
-#     To do so, use the Node package ``togeojson``.
-#     Assume the Node package is installed.
-#     Throw an ``CalledProcessError`` if the command fails. 
-#     """
-#     with open(geojson_path, 'w') as tgt:
-#         subprocess.check_call(['togeojson', kml_path], stdout=tgt)
+def kml2geojson(kml_path, output_dir, export_style=True):
+    """
+    Given a path to a KML file, convert the file to GeoJSON FeatureCollections,
+    one for each KML folder, and write the resulting files to the given
+    output directory.
+    If ``export_style == True``, then also build and write a Leaflet-based 
+    JSON style file to the output directory.
+    """
+    # Create absolute paths
+    kml_path = pathlib.Path(kml_path).resolve()
+    output_dir
+    output_dir = pathlib.Path(output_dir)
+    if not output_dir.exists():
+        output_dir.mkdir()
+    output_dir = output_dir.resolve()
 
-def kml2geojson(kml_path, geojson_path, json_path=None):
-    run_togeojson(kml_path, geojson_path)
+    # Read KML
+    with kml_path.open('r') as src:
+        kml_str = src.read()
+    
+    # Build and export GeoJSON layers
+    layers = build_geojson_layers(kml_str)
+    for layer in layers:
+        file_name = layer['name'].lower().replace(' ', '_') + '.geojson'
+        path = pathlib.Path(output_dir, file_name)
+        with path.open('w') as tgt:
+            json.dump(layer['geojson'], tgt)
 
-    # Create style file if desired
-    if json_path is not None:
-        with open(kml_path, 'r') as src:
-            kml_str = src.read() 
+    # Build and export style file if desired
+    if export_style:
         style = build_leaflet_styles(kml_str)
-        with open(json_path, 'w') as tgt:
+        path = pathlib.Path(output_dir, 'style.json')
+        with path.open('w') as tgt:
             json.dump(style, tgt)
+
