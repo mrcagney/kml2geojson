@@ -5,7 +5,7 @@ from copy import deepcopy
 import pathlib
 
 import xmltodict
-
+import click
 
 def build_rgb_and_opacity(kml_color_str):
     """
@@ -135,7 +135,6 @@ def build_geojson_layers(kml_str):
             name = folder['name']
         else:
             name = 'layer_{:03d}'.format(i)
-        print(name)
         d = {
           'name': folder['name'],
           'geojson': g,
@@ -144,13 +143,18 @@ def build_geojson_layers(kml_str):
 
     return layers
 
-def kml2geojson(kml_path, output_dir, export_style=True):
+@click.command()
+@click.argument('kml_path', type=str)
+@click.argument('output_dir', type=str)
+@click.option('--export_style', type=bool)
+def convert(kml_path, output_dir='.', export_style=True):
     """
     Given a path to a KML file, convert the file to GeoJSON FeatureCollections,
     one for each KML folder, and write the resulting files to the given
+    output directory (the default is the current directory).
+    If ``export_style == True`` (the default), 
+    then also build and write a Leaflet-based JSON style file to the 
     output directory.
-    If ``export_style == True``, then also build and write a Leaflet-based 
-    JSON style file to the output directory.
     """
     # Create absolute paths
     kml_path = pathlib.Path(kml_path).resolve()
@@ -179,3 +183,6 @@ def kml2geojson(kml_path, output_dir, export_style=True):
         with path.open('w') as tgt:
             json.dump(style, tgt)
 
+
+if __name__ == '__main__':
+    convert()
