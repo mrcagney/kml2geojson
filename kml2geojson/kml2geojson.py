@@ -145,21 +145,23 @@ def build_geojson_layers(kml_str):
 
 @click.command()
 @click.argument('kml_path', type=str)
-@click.argument('output_dir', type=str)
-@click.option('--export_style', type=bool)
-def convert(kml_path, output_dir='.', export_style=True):
+@click.option('--output_dir', type=str, default=None)
+@click.option('--export_style', type=bool, default=True)
+def convert(kml_path, output_dir=None, export_style=True):
     """
     Given a path to a KML file, convert the file to GeoJSON FeatureCollections,
     one for each KML folder, and write the resulting files to the given
-    output directory (the default is the current directory).
+    output directory (the default is the parent directory of ``kml_path``).
     If ``export_style == True`` (the default), 
     then also build and write a Leaflet-based JSON style file to the 
     output directory.
     """
     # Create absolute paths
     kml_path = pathlib.Path(kml_path).resolve()
-    output_dir
-    output_dir = pathlib.Path(output_dir)
+    if output_dir is None:
+        output_dir = kml_path.parent
+    else:
+        output_dir = pathlib.Path(output_dir)
     if not output_dir.exists():
         output_dir.mkdir()
     output_dir = output_dir.resolve()
