@@ -31,3 +31,4 @@ six==1.9.0
 terminado==0.5
 tornado==4.2.1
 traitlets==4.0.0
+xmltodict==0.9.2
