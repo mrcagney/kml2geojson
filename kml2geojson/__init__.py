@@ -1,1 +1,1 @@
-from .main import *
+from .kml2geojson import *
