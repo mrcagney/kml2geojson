@@ -6,9 +6,6 @@ from kml2geojson import *
 
 
 class TestKml2Geojson(unittest.TestCase):
-    def setUp(self):
-        pass
-
     def test_coord1(self):
         v = ' -112.2,36.0,2357 '
         get = coord1(v)
@@ -29,6 +26,9 @@ class TestKml2Geojson(unittest.TestCase):
         expect = ('#221100', 0.93)
         self.assertEqual(get, expect)
 
+    def test_cli(self):
+        pass
 
+        
 if __name__ == '__main__':
     unittest.main()

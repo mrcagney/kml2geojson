@@ -147,7 +147,7 @@ def build_geojson_layers(kml_str):
 @click.argument('kml_path', type=str)
 @click.option('--output_dir', type=str, default=None)
 @click.option('--export_style', type=bool, default=True)
-def convert(kml_path, output_dir=None, export_style=True):
+def kml2geojson(kml_path, output_dir=None, export_style=True):
     """
     Given a path to a KML file, convert the file to GeoJSON FeatureCollections,
     one for each KML folder, and write the resulting files to the given
@@ -184,7 +184,3 @@ def convert(kml_path, output_dir=None, export_style=True):
         path = pathlib.Path(output_dir, 'style.json')
         with path.open('w') as tgt:
             json.dump(style, tgt)
-
-
-if __name__ == '__main__':
-    convert()

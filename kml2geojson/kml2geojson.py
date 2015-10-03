@@ -5,6 +5,7 @@ import json
 
 import click
 
+# TODO: Change from camel case names to underscore names.
 
 # Atomic KML geometry types supported.
 # MultiGeometry is handled separately.
@@ -364,11 +365,12 @@ def build_geojson_layers(node):
     return layers
 
 @click.command()
-@click.argument('kml_path', type=str)
 @click.option('--output_dir', type=str, default=None)
 @click.option('--style_type', type=str, default=None)
 @click.option('--separate_layers', type=bool, default=True)
-def convert(kml_path, output_dir=None, separate_layers=True, style_type=None):
+@click.argument('kml_path', type=str)
+def kml2geojson(kml_path, output_dir=None, separate_layers=True, 
+  style_type=None):
     """
     Given a path to a KML file, convert the file into multiple 
     GeoJSON FeatureCollections, one for each top-level KML folder 
@@ -417,7 +419,3 @@ def convert(kml_path, output_dir=None, separate_layers=True, style_type=None):
         path = pathlib.Path(output_dir, 'style.json')
         with path.open('w') as tgt:
             json.dump(style_dict, tgt)
-
-
-if __name__ == '__main__':
-    convert()
