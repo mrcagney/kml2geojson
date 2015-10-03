@@ -1,52 +1,163 @@
-import json
-import subprocess
-import tempfile
-from copy import deepcopy
+import re
+import xml.dom.minidom as md
 import pathlib
+import json
 
-import xmltodict
 import click
 
+# TODO: Change from camel case names to underscore names.
+
+# Atomic KML geometry types supported.
+# MultiGeometry is handled separately.
+GEOTYPES = [
+  'Polygon', 
+  'LineString', 
+  'Point', 
+  'Track', 
+  'gx:Track',
+  ]
+
+# Acceptable types of style dictionaries supported
+STYLE_TYPES = [
+  'leaflet',
+  ]
+
+SPACE = re.compile(r'\s+')
+
+# ----------------
+# Helper functions
+# ----------------
+def get(node, name):
+    return node.getElementsByTagName(name)
+
+def get1(node, name):
+    """
+    Return the first element of ``get(node, name)``, if it exists.
+    Otherwise return ``None``.
+    """
+    s = get(node, name)
+    if s:
+        return s[0]
+    else:
+        return None
+
+def attr(node, name):
+    """
+    Return the value of the attribute named by ``name`` as a string,
+    if it exists.
+    Otherwise, return an empty string.
+    """
+    return node.getAttribute(name)
+
+def val(node):
+    if node is not None:
+        node.normalize()
+        return node.firstChild.nodeValue
+    else: 
+        return ''
+
+def valf(node):
+    try:
+        return float(val(node))
+    except ValueError:
+        return None
+    
+def numarray(a):
+    """
+    Cast the given list into floats.
+    """
+    return [float(aa) for aa in a]
+
+def coord1(s):
+    """
+    Convert a KML string containing one coordinate into a list.
+
+    EXAMPLE::
+
+        >>> coord1(' -112.2,36.0,2357 ')
+        [-112.2, 36.0, 2357]
+    """
+    return numarray(re.sub(SPACE, '', s).split(',')) 
+
+def coords(s):
+    """ 
+    Convert a KML string containing multiple coordinates into
+    a list of lists.
+
+    EXAMPLE::
+
+        >>> coords('''
+         -112.0,36.1,0
+         -113.0,36.0,0 
+         ''')
+        [[-112.0, 36.1, 0], [-113.0, 36.0, 0]]
+    """
+    s = s.split() #sub(TRIM_SPACE, '', v).split()
+    return [coord1(ss) for ss in s]
+     
+def gx_coord(s):
+    return numarray(s.split(' '))
+
+def gx_coords(node):
+    els = get(node, 'gx:coord')
+    coordinates = []
+    times = []
+    coordinates = [gx_coord(val(el)) for el in els]
+    timeEls = get(node, 'when')
+    times = [val(t) for t in timeEls]
+    return {
+      'coords': coordinates,
+      'times': times,
+      }
+
+# ---------------
+# Main functions
+# ---------------
 def build_rgb_and_opacity(kml_color_str):
     """
     Given a KML color string, return an equivalent
     RGB hex color string and an opacity float 
-    (rounded to 2 decimal places).
+    rounded to 2 decimal places.
     
-    For example::
+    EXAMPLE::
 
         >>> build_rgb_and_opacity('ee001122')
         ('#221100', 0.93)
 
     """
-    s = kml_color_str
-    if isinstance(s, str):
-        b = s[2:4]
-        g = s[4:6]
-        r = s[6:8]
-        rgb = '#' + r + g + b
-        opacity = s[0:2]        
-    else:
-        rgb = '#000000'
-        opacity = 'ff'
-        
-    # Convert opacity to int
-    opacity = round(int(opacity, 16)/256, 2)
-    
-    return rgb, opacity
+    color = kml_color_str
+    if not color:
+        return '#000000', 1
 
-def build_leaflet_styles(kml_str):
+    opacity = 1
+
+    if color[0] == '#':
+        color = color[1:]
+    if len(color) == 8:
+        opacity = round(int(color[0:2], 16)/256, 2)
+        color = color[6:8] + color[4:6] + color[2:4]
+    elif len(color) == 6:
+        color = color[4:6] + color[2:4] + color[0:2]        
+    elif len(color) == 3:
+        color = reversed(color)
+    else:
+        color = '000000'
+    color = '#' + color    
+    return color, opacity
+
+def build_leaflet_style(node):
     """
-    Given a KML string, grab its kml > Document > Style node,
-    convert it to a dictionary of the form
-    
-        #style ID -> Leaflet style dictionary
+    Given a DOM node, grab its top-level Style nodes, convert
+    every one into a Leaflet style dictionary, put them in
+    a master dictionary of the form
+
+        #style ID -> Leaflet style dictionary,
         
     and return the result.
 
-    The Leaflet style options (the keys in the Leaflet style dictionaries) 
-    are
-
+    The the possible keys of each Leaflet style dictionary,
+    the style options, are
+ 
     - ``iconUrl``: URL of icon
     - ``weight``:  stroke width in pixels
     - ``color``: stroke color; RGB hex string
@@ -54,60 +165,185 @@ def build_leaflet_styles(kml_str):
     - ``fillColor``: fill color; RGB hex string
     - ``fillOpacity``: fill opacity
     """
-    # Convert to JSON dict and grab style list only
-    x = xmltodict.parse(kml_str)
-    x = json.loads(json.dumps(x))
-    style_list = x['kml']['Document']['Style']
-    
-    # Convert to dict keyed by @id
     d = {}
-    for item in style_list:
-        style_id = '#' + item.pop('@id')
+    for item in get(node, 'Style'):
+        style_id = '#' + attr(item, 'id')
         # Create style properties
         props = {}
-        if 'LineStyle' in item:
-            x = item['LineStyle']
-            if 'color' in x:
-                rgb, opacity = build_rgb_and_opacity(x['color'])
-                props['color'] = rgb
-                props['opacity'] = opacity
-            if 'width' in x:
-                props['weight'] = float(x['width'])
-        if 'PolyStyle' in item:
-            x = item['PolyStyle']
-            if 'color' in x:
-                rgb, opacity = build_rgb_and_opacity(x['color'])
-                props['fillColor'] = rgb
-                props['fillOpacity'] = opacity
-        if 'IconStyle' in item:
+        for style in get(item, 'LineStyle'):
+            rgb, opacity = build_rgb_and_opacity(
+              val(get1(style, 'color')))
+            width = valf(get1(style, 'width'))
+            props['color'] = rgb
+            props['opacity'] = opacity
+            if width is not None:
+                props['weight'] = width
+        for style in get(item, 'PolyStyle'):
+            rgb, opacity = build_rgb_and_opacity(
+              val(get1(style, 'color')))
+            props['fillColor'] = rgb
+            props['fillOpacity'] = opacity
+        for style in get(item, 'IconStyle'):
+            icon = get1(style, 'Icon')
+            if not icon:
+                continue
             # Clear previous style properties
             props = {}
-            x = item['IconStyle']
-            props['iconUrl'] = x['Icon']['href']
+            props['iconUrl'] = val(get1(icon, 'href'))
             
         d[style_id] = props
         
     return d
 
-def build_geojson(kml_str):
+def build_geometry(node):
     """
-    Convert the given KML string to a (decoded) GeoJSON FeatureCollection.
-    To do so, use the Node.js package ``togeojson``.
-    Assume the Node package is installed.
-    Throw a ``subprocess.CalledProcessError`` if the Node call fails.
+    Return a (decoded) GeoJSON geometry dictionary corresponding
+    to this node.
     """
-    # Write to a temporary file, then call togeojson
-    with tempfile.NamedTemporaryFile(mode='wt') as f:
-        f.write(kml_str)
-        x = subprocess.check_output(['togeojson', f.name])
+    geoms = []
+    coordTimes = []
+    if get1(node, 'MultiGeometry'):  
+        return build_geometry(get1(node, 'MultiGeometry')) 
+    if get1(node, 'MultiTrack'):
+        return build_geometry(get1(node, 'MultiTrack')) 
+    if get1(node, 'gx:MultiTrack'):
+        return build_geometry(get1(node, 'gx:MultiTrack')) 
+    for geoType in GEOTYPES: 
+        geoNodes = get(node, geoType)
+        if not geoNodes:
+            continue 
+        for geoNode in geoNodes:
+            if geoType == 'Point': 
+                geoms.append({
+                  'type': 'Point',
+                  'coordinates': coord1(val(get1(
+                    geoNode, 'coordinates')))
+                  })
+            elif geoType == 'LineString':
+                geoms.append({
+                  'type': 'LineString',
+                  'coordinates': coords(val(get1(
+                    geoNode, 'coordinates')))
+                  })
+            elif geoType == 'Polygon':
+                rings = get(geoNode, 'LinearRing')
+                coordinates = [coords(val(get1(ring, 'coordinates')))
+                  for ring in rings]
+                geoms.append({
+                  'type': 'Polygon',
+                  'coordinates': coordinates,
+                  })
+            elif geoType in ['Track', 'gx:Track']: 
+                track = gx_coords(geoNode)
+                geoms.append({
+                  'type': 'LineString',
+                  'coordinates': track['coords'],
+                  })
+                if track['times']:
+                    coordTimes.append(track['times'])
+                
+    return {'geoms': geoms, 'coordTimes': coordTimes}
     
-    # Decode output into dict
-    return json.loads(str(x, 'UTF-8'))
+def build_feature(node):
+    """
+    Return the (decoded) GeoJSON feature dictionary corresponding to this node,
+    if it exists.
+    Otherwise, return ``None``.
+    """
+    geomsAndTimes = build_geometry(node)
+    properties = {}
+    name = val(get1(node, 'name'))
+    styleUrl = val(get1(node, 'styleUrl'))
+    description = val(get1(node, 'description'))
+    timeSpan = get1(node, 'TimeSpan')
+    extendedData = get1(node, 'ExtendedData')
+    lineStyle = get1(node, 'LineStyle')
+    polyStyle = get1(node, 'PolyStyle')
 
-def build_geojson_layers(kml_str):
+    if not geomsAndTimes['geoms']:
+        return None
+    if name:
+        properties['name'] = name
+    if styleUrl : 
+        if styleUrl[0] != '#': 
+            styleUrl = '#' + styleUrl
+        properties['styleId'] = styleUrl
+    if description: 
+        properties['description'] = description
+    if timeSpan: 
+        begin = val(get1(timeSpan, 'begin'))
+        end = val(get1(timeSpan, 'end'))
+        properties['timespan'] = {'begin': begin, 'end': end}
+    if lineStyle:
+        rgb, opacity = build_rgb_and_opacity(val(get1(
+          lineStyle, 'color')))
+        width = valf(get1(lineStyle, 'width'))
+        properties['color'] = rgb
+        properties['opacity'] = opacity
+        if width is not None:
+            properties['weight'] = width 
+    if polyStyle:
+        rgb, opacity = build_rgb_and_opacity(val(get1(
+          polyStyle, 'color'))),
+        fill = val(get1(polyStyle, 'fill'))
+        outline = val(get1(polyStyle, 'outline'))
+        properties['fillColor'] = rgb
+        properties['opacity'] = opacity
+        if fill: 
+            properties['fillOpacity'] = fill 
+        if outline: 
+            properties['weight'] = outline
+    if extendedData:
+        datas = get(extendedData, 'Data'),
+        simpleDatas = get(extendedData, 'SimpleData')
+        for data in datas:
+            properties[data.getAttribute('name')] = val(get1(
+              data, 'value'))
+        for simpleData in simpleDatas:
+            properties[simpleData.getAttribute('name')] = val(simpleData) 
+    if geomsAndTimes['coordTimes']:
+        ct = geomsAndTimes['coordTimes']
+        if len(ct) == 1:
+            properties['coordTimes'] = ct[0]
+        else:
+            properties['coordTimes'] = ct
+    
+    feature = {
+      'type': 'Feature',
+      'properties': properties,
+      }
+    geoms = geomsAndTimes['geoms']
+    if len(geoms) == 1:
+        feature['geometry'] = geoms[0]
+    else:
+        feature['geometry'] = {
+          'type': 'GeometryCollection',
+          'geometries': geoms,
+          }
+    
+    if attr(node, 'id'):
+        feature['id'] = attr(node, 'id')
+
+    return feature     
+
+def build_geojson(node):
+    """
+    Convert the given DOM node into a (decoded) GeoJSON FeatureCollection.
+    """
+    geojson = {
+      'type': 'FeatureCollection',
+      'features': []
+      }
+    for placemark in get(node, 'Placemark'):
+        feature = build_feature(placemark)
+        if feature is not None:
+            geojson['features'].append(feature)
+    return geojson   
+
+def build_geojson_layers(node):
     """
     Return a list of dictionaries, one for each folder in 
-    the given KML string that contains geodata.
+    the given DOM node that contains geodata.
     Each dictionary has the form::
 
         {
@@ -117,44 +353,37 @@ def build_geojson_layers(kml_str):
 
     The GeoJSON part is created using :func:`build_geojson`.
     """
-    x = xmltodict.parse(kml_str)
-    y = deepcopy(x)
-
     layers = []
-    style = x['kml']['Document']['Style']
-    for i, folder in enumerate(x['kml']['Document']['Folder']):
-        # Need to included style with folder to avoid errors in build_geojson
-        y['kml']['Document']['Folder'] = [style, folder]
-        kml_str = xmltodict.unparse(y)
-        try:
-            g = build_geojson(kml_str)
-        except subprocess.CalledProcessError:
+    for folder in get(node, 'Folder'):
+        geojson = build_geojson(folder) 
+        if not geojson['features']:
             continue
-
-        if 'name' in folder:
-            name = folder['name']
-        else:
-            name = 'layer_{:03d}'.format(i)
-        d = {
-          'name': folder['name'],
-          'geojson': g,
-          }            
-        layers.append(d)
-
+        layer = {}
+        layer['name'] = val(get1(folder, 'name'))
+        layer['geojson'] = geojson
+        layers.append(layer)
     return layers
 
 @click.command()
-@click.argument('kml_path', type=str)
 @click.option('--output_dir', type=str, default=None)
-@click.option('--export_style', type=bool, default=True)
-def convert(kml_path, output_dir=None, export_style=True):
+@click.option('--style_type', type=str, default=None)
+@click.option('--separate_layers', type=bool, default=True)
+@click.argument('kml_path', type=str)
+def kml2geojson(kml_path, output_dir=None, separate_layers=True, 
+  style_type=None):
     """
-    Given a path to a KML file, convert the file to GeoJSON FeatureCollections,
-    one for each KML folder, and write the resulting files to the given
+    Given a path to a KML file, convert the file into multiple 
+    GeoJSON FeatureCollections, one for each top-level KML folder 
+    containing geodata (if ``separate_layers == True``, the default), 
+    or convert the file into a single GeoJSON FeatureCollection 
+    (if ``separate_layers == False``).
+    Write the resulting file(s) to the given
     output directory (the default is the parent directory of ``kml_path``).
-    If ``export_style == True`` (the default), 
-    then also build and write a Leaflet-based JSON style file to the 
-    output directory.
+    
+    If ``style_type`` is not ``None`` (default is ``None``), 
+    then also build and write a JSON style file of the given style type
+    to the output directory.
+    Acceptable style types are listed in ``STYLE_TYPES``.
     """
     # Create absolute paths
     kml_path = pathlib.Path(kml_path).resolve()
@@ -166,12 +395,17 @@ def convert(kml_path, output_dir=None, export_style=True):
         output_dir.mkdir()
     output_dir = output_dir.resolve()
 
-    # Read KML
+    # Parse KML
     with kml_path.open('r') as src:
         kml_str = src.read()
-    
+    root = md.parseString(kml_str)
+
     # Build and export GeoJSON layers
-    layers = build_geojson_layers(kml_str)
+    if separate_layers:
+        layers = build_geojson_layers(root)
+    else:
+        name = kml_path.name.replace('.kml', '')
+        layers = [{'name': name, 'geojson': build_geojson(root)}]
     for layer in layers:
         file_name = layer['name'].lower().replace(' ', '_') + '.geojson'
         path = pathlib.Path(output_dir, file_name)
@@ -179,12 +413,9 @@ def convert(kml_path, output_dir=None, export_style=True):
             json.dump(layer['geojson'], tgt)
 
     # Build and export style file if desired
-    if export_style:
-        style = build_leaflet_styles(kml_str)
+    if style_type in STYLE_TYPES:
+        builder_name = 'build_{!s}_style'.format(style_type)
+        style_dict = globals()[builder_name](root)
         path = pathlib.Path(output_dir, 'style.json')
         with path.open('w') as tgt:
-            json.dump(style, tgt)
-
-
-if __name__ == '__main__':
-    convert()
+            json.dump(style_dict, tgt)
