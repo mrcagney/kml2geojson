@@ -1,6 +1,6 @@
 kml2geojson
 ============
-A Python 3.4 program to convert a KML file into 
+A Python 3.4 command-line program to convert a KML file into 
 
 - one or several GeoJSON files and 
 - one JSON file containing the KML styles
@@ -22,9 +22,7 @@ Installation
 
 Usage
 ------
-From the command line type the following for instructions::
-
-    kml2geojson --help
+At the command line type ``kml2geojson --help`` for instructions.
 
 
 Versioning
