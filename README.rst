@@ -17,7 +17,7 @@ It also needs more testing.
 
 Installation
 -------------
-``pip install -r requirements/production.txt``
+``pip install kml2geojson``
 
 
 Usage
