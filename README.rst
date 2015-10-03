@@ -5,7 +5,7 @@ A Python 3.4 program to convert a KML file into
 - one or several GeoJSON files and 
 - one JSON file containing the KML styles
 
-Much of the code is a translation in Python of the Node.js package
+Much of the code is a translation into Python of the Node.js package
 `togeojson <https://github.com/mapbox/togeojson>`_.
 
 
