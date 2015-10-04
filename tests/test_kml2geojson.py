@@ -6,8 +6,10 @@ import xml.dom.minidom as md
 from kml2geojson import *
 
 
-with open('tests/data/example_01/doc.kml') as src:
+with open('tests/data/doc.kml') as src:
     DOC_01 = md.parseString(src.read())
+
+ONE_TO_ONE_DIR = 'tests/data/kml_to_single_geojson/'
 
 class TestKml2Geojson(unittest.TestCase):
 
@@ -42,6 +44,26 @@ class TestKml2Geojson(unittest.TestCase):
           'weight': 4.0,
           }
         self.assertEqual(get, expect)
+
+    def test_build_feature_collection(self):
+        directory = ONE_TO_ONE_DIR
+        fnames = os.listdir(directory)
+        test_fnames = []
+        for f in fnames:
+            if f.endswith('.kml') and\
+              f.replace('.kml', '.geojson') in fnames:
+                test_fnames.append(f.replace('.kml', ''))
+        for f in test_fnames:
+            kml_path = os.path.join(directory, f + '.kml')
+            geojson_path = os.path.join(directory, f + '.geojson')
+            with open(kml_path) as src:
+                kml = md.parseString(src.read())
+            with open(geojson_path) as src:
+                geojson = json.load(src)
+
+            get = build_feature_collection(kml)
+            expect = geojson 
+            self.assertEqual(get, expect)
 
     def test_cli(self):
         pass
