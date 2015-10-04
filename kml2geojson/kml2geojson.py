@@ -10,6 +10,10 @@ Background reading:
 
 - `KML reference <https://developers.google.com/kml/documentation/kmlreference?hl=en>`_ 
 - Python's `Minimal DOM implementation <https://docs.python.org/3.4/library/xml.dom.minidom.html>`_
+
+TODO:
+
+- Compare the performances of ``xml.dom.minidom`` and ``xml.etree.ElementTree`` and switch to the latter if significantly better
 """
 
 # Atomic KML geometry types supported.
@@ -63,10 +67,10 @@ def val(node):
     Normalize the given DOM node and return the value 
     of its first child (the string content of the node).
     """
-    if node is not None:
+    try:
         node.normalize()
-        return node.firstChild.nodeValue
-    else: 
+        return node.firstChild.wholeText  # Handles CDATASection too
+    except AttributeError:
         return ''
 
 def valf(node):
@@ -154,7 +158,7 @@ def build_rgb_and_opacity(s):
     elif len(s) == 6:
         color = s[4:6] + s[2:4] + s[0:2]        
     elif len(s) == 3:
-        color = reversed(s)
+        color = s[::-1]
     
     return '#' + color, opacity
 
@@ -184,18 +188,20 @@ def build_leaflet_style(node):
         # Create style properties
         props = {}
         for x in get(item, 'LineStyle'):
-            rgb, opacity = build_rgb_and_opacity(
-              val(get1(x, 'color')))
+            color = val(get1(x, 'color'))
+            if color:
+                rgb, opacity = build_rgb_and_opacity(color)
+                props['color'] = rgb
+                props['opacity'] = opacity
             width = valf(get1(x, 'width'))
-            props['color'] = rgb
-            props['opacity'] = opacity
             if width is not None:
                 props['weight'] = width
         for x in get(item, 'PolyStyle'):
-            rgb, opacity = build_rgb_and_opacity(
-              val(get1(x, 'color')))
-            props['fillColor'] = rgb
-            props['fillOpacity'] = opacity
+            color = val(get1(x, 'color'))
+            if color:
+                rgb, opacity = build_rgb_and_opacity(color)
+                props['fillColor'] = rgb
+                props['fillOpacity'] = opacity
         for x in get(item, 'IconStyle'):
             icon = get1(x, 'Icon')
             if not icon:
@@ -271,41 +277,47 @@ def build_feature(node):
     for x in get(node, 'name')[:1]:
         properties['name'] = val(x)
     for x in get(node, 'description')[:1]:
-        properties['description'] = val(x)
+        description = val(x)
+        if description:
+            properties['description'] = val(x)
     for x in get(node, 'styleUrl')[:1]:
         style_url = val(x)
         if style_url[0] != '#': 
             style_url = '#' + style_url
-        properties['styleId'] = style_url
+        properties['styleUrl'] = style_url
+    for x in get(node, 'LineStyle')[:1]:
+        color = val(get1(x, 'color'))
+        if color:
+            rgb, opacity = build_rgb_and_opacity(color)
+            properties['color'] = rgb
+            properties['opacity'] = opacity
+        width = valf(get1(x, 'width'))
+        if width:
+            properties['weight'] = width 
+    for x in get(node, 'PolyStyle')[:1]:
+        color = val(get1(x, 'color'))
+        if color:
+            rgb, opacity = build_rgb_and_opacity(color)
+            properties['fillColor'] = rgb
+            properties['opacity'] = opacity
+        fill = valf(get1(x, 'fill'))
+        if fill: 
+            properties['fillOpacity'] = fill 
+        outline = valf(get1(x, 'outline'))
+        if outline: 
+            properties['weight'] = outline
+    for x in get(node, 'ExtendedData')[:1]:
+        datas = get(x, 'Data')
+        for data in datas:
+            properties[attr(data, 'name')] = val(get1(
+              data, 'value'))
+        simple_datas = get(x, 'SimpleData')
+        for simple_data in simple_datas:
+            properties[attr(simple_data, 'name')] = val(simple_data) 
     for x in get(node, 'timeSpan')[:1]:
         begin = val(get1(x, 'begin'))
         end = val(get1(x, 'end'))
         properties['time_span'] = {'begin': begin, 'end': end}
-    for x in get(node, 'LineStlye')[:1]:
-        rgb, opacity = build_rgb_and_opacity(val(get1(x, 'color')))
-        width = valf(get1(x, 'width'))
-        properties['color'] = rgb
-        properties['opacity'] = opacity
-        if width is not None:
-            properties['weight'] = width 
-    for x in get(node, 'PolyStlye')[:1]:
-        rgb, opacity = build_rgb_and_opacity(val(get1(x, 'color'))),
-        fill = val(get1(x, 'fill'))
-        outline = val(get1(x, 'outline'))
-        properties['fillColor'] = rgb
-        properties['opacity'] = opacity
-        if fill: 
-            properties['fillOpacity'] = fill 
-        if outline: 
-            properties['weight'] = outline
-    for x in get(node, 'extended_data')[:1]:
-        datas = get(x, 'Data'),
-        simple_datas = get(x, 'SimpleData')
-        for data in datas:
-            properties[attr(data, 'name')] = val(get1(
-              data, 'value'))
-        for simple_data in simple_datas:
-            properties[attr(simple_data, 'name')] = val(simple_data) 
     if geoms_and_times['times']:
         times = geoms_and_times['times']
         if len(times) == 1:
@@ -360,15 +372,31 @@ def build_layers(node):
 
     The GeoJSON part is created using :func:`build_feature_collection`.
     """
+    def default_name(n=None):
+        if n is not None:
+            return 'Untitled_{:02d}'.format(i)
+        else:
+            return 'Untitled'
+
     layers = []
-    for folder in get(node, 'Folder'):
+
+    for i, folder in enumerate(get(node, 'Folder')):
         geojson = build_feature_collection(folder) 
         if not geojson['features']:
             continue
         layer = {}
-        layer['name'] = val(get1(folder, 'name'))
+        layer['name'] = val(get1(folder, 'name')) or default_name(i)
         layer['geojson'] = geojson
         layers.append(layer)
+    if not layers:
+        # No folders, so use the root node
+        geojson = build_feature_collection(node) 
+        if geojson['features']:
+            layers.append({
+              'name': default_name(),
+              'geojson': geojson, 
+              })
+
     return layers
 
 # @click.command()

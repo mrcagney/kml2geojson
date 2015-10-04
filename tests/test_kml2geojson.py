@@ -9,8 +9,6 @@ from kml2geojson import *
 with open('tests/data/doc.kml') as src:
     DOC_01 = md.parseString(src.read())
 
-ONE_TO_ONE_DIR = 'tests/data/kml_to_single_geojson/'
-
 class TestKml2Geojson(unittest.TestCase):
 
     def test_coords1(self):
@@ -46,14 +44,35 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_build_feature_collection(self):
-        directory = ONE_TO_ONE_DIR
-        fnames = os.listdir(directory)
-        test_fnames = []
-        for f in fnames:
-            if f.endswith('.kml') and\
-              f.replace('.kml', '.geojson') in fnames:
-                test_fnames.append(f.replace('.kml', ''))
-        for f in test_fnames:
+        directory = 'tests/data/'
+        files = os.listdir(directory)  # file names
+        test_files = [
+          'style',
+          'inline_style',
+          'style_url',
+          'literal_color',
+          'cdata',
+          'nogeomplacemark',  
+          'noname',        
+          'selfclosing',
+          'point',
+          'point_id',
+          'linestring',
+          'polygon',
+          'multigeometry',
+          'multigeometry_discrete',
+          'simple_data',
+          'extended_data',
+          'multitrack',
+          'non_gx_multitrack',
+          'blue_hills',
+          ]
+        # for f in files:
+        #     if f.endswith('.kml') and\
+        #       f.replace('.kml', '.geojson') in fnames:
+        #         test_fnames.append(f.replace('.kml', ''))
+        for f in test_files:
+            print(f)
             kml_path = os.path.join(directory, f + '.kml')
             geojson_path = os.path.join(directory, f + '.geojson')
             with open(kml_path) as src:

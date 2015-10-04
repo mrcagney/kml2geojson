@@ -107,8 +107,7 @@
             },
             "properties": {
                 "name": "Building 41",
-                "styleUrl": "#transBluePoly",
-                "styleHash": "-28fa1d02"
+                "styleUrl": "#transBluePoly"
             }
         }
     ]

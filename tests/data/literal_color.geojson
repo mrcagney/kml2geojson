@@ -53,13 +53,12 @@
                 ]
             },
             "properties": {
-                "styleUrl": "#",
-                "styleHash": "-5813b456",
-                "stroke": "ff0",
-                "stroke-width": 3,
-                "fill": "ff0011",
-                "fill-opacity": 1,
-                "stroke-opacity": 0
+                "name": "With all inline styles",
+                "color": "#0ff",
+                "weight": 3,
+                "fillColor": "#1100ff",
+                "fillOpacity": 1,
+                "opacity": 1
             }
         }
     ]

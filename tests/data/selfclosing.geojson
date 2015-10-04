@@ -5,11 +5,7 @@
             "type": "Feature",
             "geometry": {
                 "type": "LineString",
-                "coordinates": [
-                    [
-                        null
-                    ]
-                ]
+                "coordinates": []
             },
             "properties": {
                 "name": "unextruded"
