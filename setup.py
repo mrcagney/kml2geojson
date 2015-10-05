@@ -3,7 +3,7 @@ from distutils.core import setup
 dependencies = ['click']
 setup(
     name='kml2geojson',
-    version='0.1.1',
+    version='1.0',
     author='Alexander Raichev',
     author_email='alex@raichev.net',
     packages=['kml2geojson', 'tests'],

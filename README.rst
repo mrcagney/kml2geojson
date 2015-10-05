@@ -5,8 +5,8 @@ Much of the code is a translation into Python of the KML converter in the Node.j
 `togeojson <https://github.com/mapbox/togeojson>`_.
 The added features of ``kml2geojson``, are
 
-- the ability to create several GeoJSON files of FeatureCollections, one for each top-level KML folder 
-- one JSON file containing the KML top-level styles
+- the ability to create several GeoJSON files of FeatureCollections, one for each KML folder 
+- one JSON file containing the KML styles
 
 
 Installation

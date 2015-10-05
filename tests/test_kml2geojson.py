@@ -4,12 +4,8 @@ import os, shutil
 import xml.dom.minidom as md 
 import json
 
-
 from kml2geojson.kml2geojson import *
 
-
-with open('tests/data/google_sample.kml') as src:
-    KML = md.parseString(src.read())  
 
 class TestKml2Geojson(unittest.TestCase):
 
@@ -34,7 +30,9 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_build_svg_style(self):
-        style = build_svg_style(KML)
+        with open('tests/data/google_sample.kml') as src:
+            kml = md.parseString(src.read())  
+        style = build_svg_style(kml)
         get = style['#transPurpleLineGreenPoly']
         expect = {
           'stroke': '#ff00ff',
@@ -46,7 +44,9 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_build_leaflet_style(self):
-        style = build_leaflet_style(KML)
+        with open('tests/data/google_sample.kml') as src:
+            kml = md.parseString(src.read())  
+        style = build_leaflet_style(kml)
         get = style['#transPurpleLineGreenPoly']
         expect = {
           'color': '#ff00ff',
@@ -84,7 +84,20 @@ class TestKml2Geojson(unittest.TestCase):
             self.assertEqual(get, expect)
 
     def test_build_layers(self):
-        pass
+        directory = 'tests/data/two_layers/'
+        kml_path = os.path.join(directory, 'two_layers.kml')
+        with open(kml_path) as src:
+            kml = md.parseString(src.read())
+        expect_layers = []
+        for name in ['bingo', 'bongo']:
+            path = os.path.join(directory, name + '.geojson')
+            with open(path) as src:
+                geo = json.load(src) 
+            expect_layers.append({'name': name, 'geojson': geo})
+
+        get_layers = build_layers(kml)
+        for i in range(len(get_layers)):
+            self.assertEqual(get_layers[i], expect_layers[i])
 
         
 if __name__ == '__main__':

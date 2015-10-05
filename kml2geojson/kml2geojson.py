@@ -460,25 +460,29 @@ def build_layers(node):
 
 @click.command()
 @click.option('--output_dir', type=str, default=None)
-@click.option('--separate_layers', type=bool, default=True)
+@click.option('--separate_layers', type=bool, default=False)
 @click.option('--style', type=str, default=None)
 @click.argument('kml_path', type=str)
-def main(kml_path, output_dir=None, separate_layers=True, 
+def main(kml_path, output_dir=None, separate_layers=False, 
   style=None):
     """
-    Given a path to a KML file, convert the file into multiple 
-    GeoJSON FeatureCollections, one for each top-level KML folder 
-    containing geodata (if ``separate_layers == True``, the default), 
-    or convert the file into a single GeoJSON FeatureCollection 
-    (if ``separate_layers == False``).
-    Write the resulting file(s) to the given
-    output directory (the default is the parent directory of ``kml_path``).
-    
+    Given a path to a KML file convert it to GeoJSON file(s) and 
+    put the result in the given output directory
+    (the default is the parent directory of ``kml_path``).
+    If ``separate_layers == False`` (the default), then create one
+    GeoJSON FeatureCollection file.
+    If ``separate_layers == True``, then create several GeoJSON
+    FeatureCollection files, one for each folder in the KML file 
+    that contains geodata or that has a descendant node that contains geodata.
+    Warning: this can produce GeoJSON files with the same geodata in case 
+    the KML file has nested folders with geodata.
+
     If ``style_type`` is not ``None`` (default is ``None``), 
     then also build and write a JSON style file of the given style type
     to the output directory.
     Acceptable style types are listed in ``STYLES``, e.g.
-    ``'svg'`` or ``leaflet``.
+    ``'svg'`` or ``'leaflet'``.
+
     """
     # Create absolute paths
     kml_path = pathlib.Path(kml_path).resolve()
