@@ -13,7 +13,7 @@ setup(
     long_description=open('README.rst').read(),
     install_requires=dependencies,
     entry_points = {
-      'console_scripts': ['kml2geojson=kml2geojson.cli:main'],
+      'console_scripts': ['kml2geojson=kml2geojson.kml2geojson:main'],
       },
     )
 

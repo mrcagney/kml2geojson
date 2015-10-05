@@ -2,12 +2,14 @@ import unittest
 from copy import copy
 import os, shutil
 import xml.dom.minidom as md 
+import json
 
-from kml2geojson import *
+
+from kml2geojson.kml2geojson import *
 
 
-with open('tests/data/doc.kml') as src:
-    DOC_01 = md.parseString(src.read())
+with open('tests/data/google_sample.kml') as src:
+    KML = md.parseString(src.read())  
 
 class TestKml2Geojson(unittest.TestCase):
 
@@ -31,8 +33,20 @@ class TestKml2Geojson(unittest.TestCase):
         expect = ('#221100', 0.93)
         self.assertEqual(get, expect)
 
+    def test_build_svg_style(self):
+        style = build_svg_style(KML)
+        get = style['#transPurpleLineGreenPoly']
+        expect = {
+          'stroke': '#ff00ff',
+          'stroke-opacity': 0.5,
+          'stroke-width': 4.0,
+          'fill': '#00ff00',
+          'fill-opacity': 0.5,
+          }
+        self.assertEqual(get, expect)
+
     def test_build_leaflet_style(self):
-        style = build_leaflet_style(DOC_01)
+        style = build_leaflet_style(KML)
         get = style['#transPurpleLineGreenPoly']
         expect = {
           'color': '#ff00ff',
@@ -44,33 +58,19 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_build_feature_collection(self):
+        # Build a list of eligible KML test files, ones that have GeoJSON
+        # counterparts
         directory = 'tests/data/'
-        files = os.listdir(directory)  # file names
-        test_files = [
-          'style',
-          'inline_style',
-          'style_url',
-          'literal_color',
-          'cdata',
-          'nogeomplacemark',  
-          'noname',        
-          'selfclosing',
-          'point',
-          'point_id',
-          'linestring',
-          'polygon',
-          'multigeometry',
-          'multigeometry_discrete',
-          'simple_data',
-          'extended_data',
-          'multitrack',
-          'non_gx_multitrack',
-          'blue_hills',
-          ]
-        # for f in files:
-        #     if f.endswith('.kml') and\
-        #       f.replace('.kml', '.geojson') in fnames:
-        #         test_fnames.append(f.replace('.kml', ''))
+        files = os.listdir(directory)  # file names in directory
+        test_files = []
+        for f in files:
+            if f.endswith('.kml') and\
+              f.replace('.kml', '.geojson') in files:
+                test_files.append(f.replace('.kml', ''))
+
+        # For each KML test file and its GeoJSON counterpart, 
+        # convert the KML into a single GeoJSON FeatureCollection
+        # and compare it to the GeoJSON file
         for f in test_files:
             print(f)
             kml_path = os.path.join(directory, f + '.kml')
@@ -79,12 +79,11 @@ class TestKml2Geojson(unittest.TestCase):
                 kml = md.parseString(src.read())
             with open(geojson_path) as src:
                 geojson = json.load(src)
-
             get = build_feature_collection(kml)
             expect = geojson 
             self.assertEqual(get, expect)
 
-    def test_cli(self):
+    def test_build_layers(self):
         pass
 
         

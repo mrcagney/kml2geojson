@@ -27,7 +27,8 @@ GEOTYPES = [
   ]
 
 # Supported style types
-STYLE_TYPES = [
+STYLES = [
+  'svg',
   'leaflet',
   ]
 
@@ -162,6 +163,64 @@ def build_rgb_and_opacity(s):
     
     return '#' + color, opacity
 
+def build_svg_style(node):
+    """
+    Given a DOM node, grab its top-level Style nodes, convert
+    every one into a SVG style dictionary, put them in
+    a master dictionary of the form
+
+        #style ID -> SVG style dictionary,
+        
+    and return the result.
+
+    The the possible keys of each SVG style dictionary,
+    the style options, are
+ 
+    - ``iconUrl``: URL of icon
+    - ``stroke``: stroke color; RGB hex string
+    - ``stroke-opacity``: stroke opacity
+    - ``stroke-width``:  stroke width in pixels
+    - ``fill``: fill color; RGB hex string
+    - ``fill-opacity``: fill opacity
+    """
+    d = {}
+    for item in get(node, 'Style'):
+        style_id = '#' + attr(item, 'id')
+        # Create style properties
+        props = {}
+        for x in get(item, 'LineStyle'):
+            color = val(get1(x, 'color'))
+            if color:
+                rgb, opacity = build_rgb_and_opacity(color)
+                props['stroke'] = rgb
+                props['stroke-opacity'] = opacity
+            width = valf(get1(x, 'width'))
+            if width is not None:
+                props['stroke-width'] = width
+        for x in get(item, 'PolyStyle'):
+            color = val(get1(x, 'color'))
+            if color:
+                rgb, opacity = build_rgb_and_opacity(color)
+                props['fill'] = rgb
+                props['fill-opacity'] = opacity
+            fill = valf(get1(x, 'fill'))
+            if fill: 
+                properties['fill-opacity'] = fill 
+            outline = valf(get1(x, 'outline'))
+            if outline: 
+                properties['stroke-opacity'] = outline
+        for x in get(item, 'IconStyle'):
+            icon = get1(x, 'Icon')
+            if not icon:
+                continue
+            # Clear previous style properties
+            props = {}
+            props['iconUrl'] = val(get1(icon, 'href'))
+            
+        d[style_id] = props
+        
+    return d
+
 def build_leaflet_style(node):
     """
     Given a DOM node, grab its top-level Style nodes, convert
@@ -176,9 +235,9 @@ def build_leaflet_style(node):
     the style options, are
  
     - ``iconUrl``: URL of icon
-    - ``weight``:  stroke width in pixels
     - ``color``: stroke color; RGB hex string
     - ``opacity``: stroke opacity
+    - ``weight``:  stroke width in pixels
     - ``fillColor``: fill color; RGB hex string
     - ``fillOpacity``: fill opacity
     """
@@ -289,23 +348,23 @@ def build_feature(node):
         color = val(get1(x, 'color'))
         if color:
             rgb, opacity = build_rgb_and_opacity(color)
-            properties['color'] = rgb
-            properties['opacity'] = opacity
+            properties['stroke'] = rgb
+            properties['stroke-opacity'] = opacity
         width = valf(get1(x, 'width'))
         if width:
-            properties['weight'] = width 
+            properties['stroke-width'] = width 
     for x in get(node, 'PolyStyle')[:1]:
         color = val(get1(x, 'color'))
         if color:
             rgb, opacity = build_rgb_and_opacity(color)
-            properties['fillColor'] = rgb
-            properties['opacity'] = opacity
+            properties['fill'] = rgb
+            properties['fill-opacity'] = opacity
         fill = valf(get1(x, 'fill'))
         if fill: 
-            properties['fillOpacity'] = fill 
+            properties['fill-opacity'] = fill 
         outline = valf(get1(x, 'outline'))
         if outline: 
-            properties['weight'] = outline
+            properties['stroke-opacity'] = outline
     for x in get(node, 'ExtendedData')[:1]:
         datas = get(x, 'Data')
         for data in datas:
@@ -314,10 +373,10 @@ def build_feature(node):
         simple_datas = get(x, 'SimpleData')
         for simple_data in simple_datas:
             properties[attr(simple_data, 'name')] = val(simple_data) 
-    for x in get(node, 'timeSpan')[:1]:
+    for x in get(node, 'TimeSpan')[:1]:
         begin = val(get1(x, 'begin'))
         end = val(get1(x, 'end'))
-        properties['time_span'] = {'begin': begin, 'end': end}
+        properties['timeSpan'] = {'begin': begin, 'end': end}
     if geoms_and_times['times']:
         times = geoms_and_times['times']
         if len(times) == 1:
@@ -399,13 +458,13 @@ def build_layers(node):
 
     return layers
 
-# @click.command()
-# @click.option('--output_dir', type=str, default=None)
-# @click.option('--separate_layers', type=bool, default=True)
-# @click.option('--style_type', type=str, default=None)
-# @click.argument('kml_path', type=str)
-def kml2geojson(kml_path, output_dir=None, separate_layers=True, 
-  style_type=None):
+@click.command()
+@click.option('--output_dir', type=str, default=None)
+@click.option('--separate_layers', type=bool, default=True)
+@click.option('--style', type=str, default=None)
+@click.argument('kml_path', type=str)
+def main(kml_path, output_dir=None, separate_layers=True, 
+  style=None):
     """
     Given a path to a KML file, convert the file into multiple 
     GeoJSON FeatureCollections, one for each top-level KML folder 
@@ -418,7 +477,8 @@ def kml2geojson(kml_path, output_dir=None, separate_layers=True,
     If ``style_type`` is not ``None`` (default is ``None``), 
     then also build and write a JSON style file of the given style type
     to the output directory.
-    Acceptable style types are listed in ``STYLE_TYPES``.
+    Acceptable style types are listed in ``STYLES``, e.g.
+    ``'svg'`` or ``leaflet``.
     """
     # Create absolute paths
     kml_path = pathlib.Path(kml_path).resolve()
@@ -451,8 +511,8 @@ def kml2geojson(kml_path, output_dir=None, separate_layers=True,
             json.dump(layer['geojson'], tgt)
 
     # Build and export style file if desired
-    if style_type in STYLE_TYPES:
-        builder_name = 'build_{!s}_style'.format(style_type)
+    if style in STYLES:
+        builder_name = 'build_{!s}_style'.format(style)
         style_dict = globals()[builder_name](root)
         path = pathlib.Path(output_dir, 'style.json')
         with path.open('w') as tgt:

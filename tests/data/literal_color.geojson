@@ -54,11 +54,11 @@
             },
             "properties": {
                 "name": "With all inline styles",
-                "color": "#0ff",
-                "weight": 3,
-                "fillColor": "#1100ff",
-                "fillOpacity": 1,
-                "opacity": 1
+                "stroke": "#0ff",
+                "stroke-width": 3,
+                "fill": "#1100ff",
+                "fill-opacity": 1,
+                "stroke-opacity": 1
             }
         }
     ]
