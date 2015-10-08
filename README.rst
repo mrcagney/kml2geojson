@@ -28,10 +28,9 @@ In ``docs`` and on RawGit `here <https://rawgit.com/araichev/kml2geojson/master/
 Notes
 -------
 - Development status: Alpha
-- This project uses semantic versioning (major.minor.micro), 
-where each breaking feature or API change is considered a major release.
-So the version code reflects the project's change history, rather than its development status.
-In particular, a high major version number, does not imply a mature development status. 
+- This project uses semantic versioning (major.minor.micro), where each breaking feature or API change is considered a major release.
+  So the version code reflects the project's change history, rather than its development status.
+  In particular, a high major version number, does not imply a mature development status. 
 
 
 Background Reading
