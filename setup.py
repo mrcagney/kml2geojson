@@ -3,7 +3,7 @@ from distutils.core import setup
 dependencies = ['click']
 setup(
     name='kml2geojson',
-    version='0.1.1',
+    version='2.0',
     author='Alexander Raichev',
     author_email='alex@raichev.net',
     packages=['kml2geojson', 'tests'],
@@ -13,7 +13,7 @@ setup(
     long_description=open('README.rst').read(),
     install_requires=dependencies,
     entry_points = {
-      'console_scripts': ['kml2geojson=kml2geojson.cli:main'],
+      'console_scripts': ['kml2geojson=kml2geojson.kml2geojson:main'],
       },
     )
 
