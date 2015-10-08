@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>kml2geojson 1.0.1 documentation</title>
+    <title>kml2geojson 2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.1',
+        VERSION:     '2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,13 +37,26 @@
           <div class="body" role="main">
             
   <div class="section" id="kml2geojson-version-documentation">
-<h1>kml2geojson 1.0 Documentation<a class="headerlink" href="#kml2geojson-version-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>kml2geojson 2.0 Documentation<a class="headerlink" href="#kml2geojson-version-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <span id="document-kml2geojson"></span><div class="section" id="kml2geojson-package">
 <h2>kml2geojson package<a class="headerlink" href="#kml2geojson-package" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-kml2geojson.kml2geojson">
 <span id="kml2geojson-kml2geojson-module"></span><h3>kml2geojson.kml2geojson module<a class="headerlink" href="#module-kml2geojson.kml2geojson" title="Permalink to this headline">¶</a></h3>
+<dl class="data">
+<dt id="kml2geojson.kml2geojson.GEOTYPES">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">GEOTYPES</code><em class="property"> = ['Polygon', 'LineString', 'Point', 'Track', 'gx:Track']</em><a class="headerlink" href="#kml2geojson.kml2geojson.GEOTYPES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atomic KML geometry types supported.
+MultiGeometry is handled separately.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="kml2geojson.kml2geojson.STYLE_TYPES">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">STYLE_TYPES</code><em class="property"> = ['svg', 'leaflet']</em><a class="headerlink" href="#kml2geojson.kml2geojson.STYLE_TYPES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Supported style types</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="kml2geojson.kml2geojson.attr">
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">attr</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.attr" title="Permalink to this definition">¶</a></dt>
@@ -64,7 +77,7 @@ Return <code class="docutils literal"><span class="pre">None</span></code> if no
 <dt id="kml2geojson.kml2geojson.build_feature_collection">
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_feature_collection</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_feature_collection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build and return a (decoded) GeoJSON FeatureCollection
-corresponding to this KML node (typically a KML Folder).</p>
+corresponding to this KML DOM node (typically a KML Folder).</p>
 </dd></dl>
 
 <dl class="function">
@@ -79,14 +92,14 @@ to the given KML node.</p>
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_layers</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_layers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of dictionaries, one for each folder in 
 the given KML DOM node that contains geodata.
-Each dictionary has the form:</p>
-<div class="highlight-python"><div class="highlight"><pre>{
-  &#39;name&#39;: folder name,
-  &#39;geojson&#39;: (decoded) GeoJSON FeatureCollection 
-}
-</pre></div>
-</div>
+Each dictionary has the keys and values</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">'name'</span></code>: folder name</li>
+<li><code class="docutils literal"><span class="pre">'geojson'</span></code>: (decoded) GeoJSON FeatureCollection</li>
+</ul>
 <p>The GeoJSON part is created using <a class="reference internal" href="#kml2geojson.kml2geojson.build_feature_collection" title="kml2geojson.kml2geojson.build_feature_collection"><code class="xref py py-func docutils literal"><span class="pre">build_feature_collection()</span></code></a>.</p>
+<p>Warning: this can produce layers with the same geodata in case 
+the KML node has nested folders with geodata.</p>
 </dd></dl>
 
 <dl class="function">
@@ -98,7 +111,7 @@ a master dictionary of the form</p>
 <blockquote>
 <div>#style ID -&gt; Leaflet style dictionary,</div></blockquote>
 <p>and return the result.</p>
-<p>The the possible keys of each Leaflet style dictionary,
+<p>The the possible keys and values of each Leaflet style dictionary,
 the style options, are</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">iconUrl</span></code>: URL of icon</li>
@@ -132,7 +145,7 @@ a master dictionary of the form</p>
 <blockquote>
 <div>#style ID -&gt; SVG style dictionary,</div></blockquote>
 <p>and return the result.</p>
-<p>The the possible keys of each SVG style dictionary,
+<p>The possible keys and values of each SVG style dictionary,
 the style options, are</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">iconUrl</span></code>: URL of icon</li>
@@ -148,13 +161,13 @@ the style options, are</p>
 <dt id="kml2geojson.kml2geojson.coords">
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">coords</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.coords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the given KML string containing multiple coordinate tuples into
-a list of lists.</p>
+a list of lists of floats.</p>
 <p>EXAMPLE:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coords</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
-<span class="go"> -112.0,36.1,0</span>
-<span class="go"> -113.0,36.0,0 </span>
-<span class="go"> &#39;&#39;&#39;)</span>
-<span class="go">[[-112.0, 36.1, 0], [-113.0, 36.0, 0]]</span>
+<span class="gp">... </span><span class="s">-112.0,36.1,0</span>
+<span class="gp">... </span><span class="s">-113.0,36.0,0 </span>
+<span class="gp">... </span><span class="s">&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="go">[[-112.0, 36.1, 0.0], [-113.0, 36.0, 0.0]]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -162,10 +175,11 @@ a list of lists.</p>
 <dl class="function">
 <dt id="kml2geojson.kml2geojson.coords1">
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">coords1</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.coords1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert the given KML string containing one coordinate tuple into a list.</p>
+<dd><p>Convert the given KML string containing one coordinate tuple into a list
+of floats.</p>
 <p>EXAMPLE:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coords1</span><span class="p">(</span><span class="s">&#39; -112.2,36.0,2357 &#39;</span><span class="p">)</span>
-<span class="go">[-112.2, 36.0, 2357]</span>
+<span class="go">[-112.2, 36.0, 2357.0]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -185,14 +199,27 @@ Otherwise return <code class="docutils literal"><span class="pre">None</span></c
 </dd></dl>
 
 <dl class="function">
-<dt id="kml2geojson.kml2geojson.gx_coord">
-<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">gx_coord</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.gx_coord" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
 <dt id="kml2geojson.kml2geojson.gx_coords">
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">gx_coords</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.gx_coords" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Given a KML DOM node, grab its &lt;gx:coord&gt; and &lt;gx:timestamp&gt;&lt;when&gt;
+subnodes, and convert them into a dictionary with the keys and values</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">'coordinates'</span></code>: list of lists of float coordinates</li>
+<li><code class="docutils literal"><span class="pre">'times'</span></code>: list of timestamps corresponding to the coordinates</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.gx_coords1">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">gx_coords1</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.gx_coords1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the given KML string containing one gx coordinate tuple
+into a list of floats.</p>
+<p>EXAMPLE:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">gx_coords1</span><span class="p">(</span><span class="s">&#39;-113.0 36.0 0&#39;</span><span class="p">)</span> 
+<span class="go">[-113.0, 36.0, 0.0]</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="function">
 <dt id="kml2geojson.kml2geojson.numarray">
