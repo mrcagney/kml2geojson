@@ -19,10 +19,15 @@ Usage
 At the command line type ``kml2geojson --help`` for instructions.
 
 
+Documentation
+--------------
+In ``docs`` and `here <>`_
+
+
 Notes
 -------
 - Development status: Alpha
-- This project uses semantic versioning (major.minor.patch), 
+- This project uses semantic versioning (major.minor.micro), 
 where each breaking feature or API change is considered a major release.
 So the version code reflects the project's change history, rather than its development status.
 In particular, a high major version number, does not imply a mature development status. 

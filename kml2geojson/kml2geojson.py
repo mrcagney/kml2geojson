@@ -11,9 +11,6 @@ Background reading:
 - `KML reference <https://developers.google.com/kml/documentation/kmlreference?hl=en>`_ 
 - Python's `Minimal DOM implementation <https://docs.python.org/3.4/library/xml.dom.minidom.html>`_
 
-TODO:
-
-- Compare the performances of ``xml.dom.minidom`` and ``xml.etree.ElementTree`` and switch to the latter if significantly better
 """
 
 # Atomic KML geometry types supported.
@@ -125,10 +122,10 @@ def gx_coords(node):
     coordinates = []
     times = []
     coordinates = [gx_coord(val(el)) for el in els]
-    timeEls = get(node, 'when')
-    times = [val(t) for t in timeEls]
+    time_els = get(node, 'when')
+    times = [val(t) for t in time_els]
     return {
-      'coords': coordinates,
+      'coordinates': coordinates,
       'times': times,
       }
 
@@ -315,7 +312,7 @@ def build_geometry(node):
                 track = gx_coords(geonode)
                 geoms.append({
                   'type': 'LineString',
-                  'coordinates': track['coords'],
+                  'coordinates': track['coordinates'],
                   })
                 if track['times']:
                     times.append(track['times'])
@@ -462,9 +459,10 @@ def build_layers(node):
 @click.option('--output_dir', type=str, default=None)
 @click.option('--separate_layers', type=bool, default=False)
 @click.option('--style', type=str, default=None)
+@click.option('--style_filename', type=str, default='style.json')
 @click.argument('kml_path', type=str)
 def main(kml_path, output_dir=None, separate_layers=False, 
-  style=None):
+  style=None, style_filename='style.json'):
     """
     Given a path to a KML file convert it to GeoJSON file(s) and 
     put the result in the given output directory
@@ -482,7 +480,8 @@ def main(kml_path, output_dir=None, separate_layers=False,
     to the output directory.
     Acceptable style types are listed in ``STYLES``, e.g.
     ``'svg'`` or ``'leaflet'``.
-
+    You can change the default name of the style file with the 
+    ``style_filename`` option.
     """
     # Create absolute paths
     kml_path = pathlib.Path(kml_path).resolve()
@@ -518,6 +517,6 @@ def main(kml_path, output_dir=None, separate_layers=False,
     if style in STYLES:
         builder_name = 'build_{!s}_style'.format(style)
         style_dict = globals()[builder_name](root)
-        path = pathlib.Path(output_dir, 'style.json')
+        path = pathlib.Path(output_dir, style_filename)
         with path.open('w') as tgt:
             json.dump(style_dict, tgt)

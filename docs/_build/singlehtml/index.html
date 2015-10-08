@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>kml2geojson 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="None" href="index.html#document-index" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="kml2geojson-version-documentation">
+<h1>kml2geojson 1.0 Documentation<a class="headerlink" href="#kml2geojson-version-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<span id="document-kml2geojson"></span><div class="section" id="kml2geojson-package">
+<h2>kml2geojson package<a class="headerlink" href="#kml2geojson-package" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-kml2geojson.kml2geojson">
+<span id="kml2geojson-kml2geojson-module"></span><h3>kml2geojson.kml2geojson module<a class="headerlink" href="#module-kml2geojson.kml2geojson" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.attr">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">attr</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return as a string the value of the given DOM node&#8217;s attribute named 
+by <code class="docutils literal"><span class="pre">name</span></code>, if it exists.
+Otherwise, return an empty string.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.build_feature">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_feature</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build and return a (decoded) GeoJSON Feature corresponding to
+this KML node (typically a KML Placemark).
+Return <code class="docutils literal"><span class="pre">None</span></code> if no Feature can be built.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.build_feature_collection">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_feature_collection</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_feature_collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build and return a (decoded) GeoJSON FeatureCollection
+corresponding to this KML node (typically a KML Folder).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.build_geometry">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_geometry</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a (decoded) GeoJSON geometry dictionary corresponding
+to the given KML node.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.build_layers">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_layers</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_layers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of dictionaries, one for each folder in 
+the given KML DOM node that contains geodata.
+Each dictionary has the form:</p>
+<div class="highlight-python"><div class="highlight"><pre>{
+  &#39;name&#39;: folder name,
+  &#39;geojson&#39;: (decoded) GeoJSON FeatureCollection 
+}
+</pre></div>
+</div>
+<p>The GeoJSON part is created using <a class="reference internal" href="#kml2geojson.kml2geojson.build_feature_collection" title="kml2geojson.kml2geojson.build_feature_collection"><code class="xref py py-func docutils literal"><span class="pre">build_feature_collection()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.build_leaflet_style">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_leaflet_style</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_leaflet_style" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a DOM node, grab its top-level Style nodes, convert
+every one into a Leaflet style dictionary, put them in
+a master dictionary of the form</p>
+<blockquote>
+<div>#style ID -&gt; Leaflet style dictionary,</div></blockquote>
+<p>and return the result.</p>
+<p>The the possible keys of each Leaflet style dictionary,
+the style options, are</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">iconUrl</span></code>: URL of icon</li>
+<li><code class="docutils literal"><span class="pre">color</span></code>: stroke color; RGB hex string</li>
+<li><code class="docutils literal"><span class="pre">opacity</span></code>: stroke opacity</li>
+<li><code class="docutils literal"><span class="pre">weight</span></code>:  stroke width in pixels</li>
+<li><code class="docutils literal"><span class="pre">fillColor</span></code>: fill color; RGB hex string</li>
+<li><code class="docutils literal"><span class="pre">fillOpacity</span></code>: fill opacity</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.build_rgb_and_opacity">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_rgb_and_opacity</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_rgb_and_opacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a KML color string, return an equivalent
+RGB hex color string and an opacity float 
+rounded to 2 decimal places.</p>
+<p>EXAMPLE:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">build_rgb_and_opacity</span><span class="p">(</span><span class="s">&#39;ee001122&#39;</span><span class="p">)</span>
+<span class="go">(&#39;#221100&#39;, 0.93)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.build_svg_style">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_svg_style</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_svg_style" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a DOM node, grab its top-level Style nodes, convert
+every one into a SVG style dictionary, put them in
+a master dictionary of the form</p>
+<blockquote>
+<div>#style ID -&gt; SVG style dictionary,</div></blockquote>
+<p>and return the result.</p>
+<p>The the possible keys of each SVG style dictionary,
+the style options, are</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">iconUrl</span></code>: URL of icon</li>
+<li><code class="docutils literal"><span class="pre">stroke</span></code>: stroke color; RGB hex string</li>
+<li><code class="docutils literal"><span class="pre">stroke-opacity</span></code>: stroke opacity</li>
+<li><code class="docutils literal"><span class="pre">stroke-width</span></code>:  stroke width in pixels</li>
+<li><code class="docutils literal"><span class="pre">fill</span></code>: fill color; RGB hex string</li>
+<li><code class="docutils literal"><span class="pre">fill-opacity</span></code>: fill opacity</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.coords">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">coords</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the given KML string containing multiple coordinate tuples into
+a list of lists.</p>
+<p>EXAMPLE:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coords</span><span class="p">(</span><span class="s">&#39;&#39;&#39;</span>
+<span class="go"> -112.0,36.1,0</span>
+<span class="go"> -113.0,36.0,0 </span>
+<span class="go"> &#39;&#39;&#39;)</span>
+<span class="go">[[-112.0, 36.1, 0], [-113.0, 36.0, 0]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.coords1">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">coords1</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.coords1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the given KML string containing one coordinate tuple into a list.</p>
+<p>EXAMPLE:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coords1</span><span class="p">(</span><span class="s">&#39; -112.2,36.0,2357 &#39;</span><span class="p">)</span>
+<span class="go">[-112.2, 36.0, 2357]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.get">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">get</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a KML Document Object Model (DOM) node, return a list
+of its sub-nodes that have the given tag name.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.get1">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">get1</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.get1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first element of <code class="docutils literal"><span class="pre">get(node,</span> <span class="pre">name)</span></code>, if it exists.
+Otherwise return <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.gx_coord">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">gx_coord</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.gx_coord" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.gx_coords">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">gx_coords</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.gx_coords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.numarray">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">numarray</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.numarray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the given list into a list of floats.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.val">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">val</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the given DOM node and return the value 
+of its first child (the string content of the node).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.valf">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">valf</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.valf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast <code class="docutils literal"><span class="pre">val(node)</span></code> as a float.
+Return <code class="docutils literal"><span class="pre">None</span></code> if that does not work.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html#document-index">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-kml2geojson">kml2geojson package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#module-kml2geojson.kml2geojson">kml2geojson.kml2geojson module</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html#document-index">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Alex Raichev.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
