@@ -22,7 +22,7 @@ At the command line type ``kml2geojson --help`` for instructions.
 
 Documentation
 --------------
-In ``docs`` and on RawGit `here <https://rawgit.com/araichev/kml2geojson/docs/_build/singlehtml/index.html>`_.
+In ``docs`` and on RawGit `here <https://rawgit.com/araichev/kml2geojson/blob/master/docs/_build/singlehtml/index.html>`_.
 
 
 Notes
