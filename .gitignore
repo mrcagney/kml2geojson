@@ -4,3 +4,4 @@ outputs
 *.bak
 dist
 MANIFEST
+*.DS_Store

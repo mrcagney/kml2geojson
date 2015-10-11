@@ -5,19 +5,9 @@ import json
 
 import click
 
-"""
-Background reading:
 
-- `KML reference <https://developers.google.com/kml/documentation/kmlreference?hl=en>`_ 
-- Python's `Minimal DOM implementation <https://docs.python.org/3.4/library/xml.dom.minidom.html>`_
-
-TODO:
-
-- Compare the performances of ``xml.dom.minidom`` and ``xml.etree.ElementTree`` and switch to the latter if significantly better
-"""
-
-# Atomic KML geometry types supported.
-# MultiGeometry is handled separately.
+#: Atomic KML geometry types supported.
+#: MultiGeometry is handled separately.
 GEOTYPES = [
   'Polygon', 
   'LineString', 
@@ -26,8 +16,8 @@ GEOTYPES = [
   'gx:Track',
   ]
 
-# Supported style types
-STYLES = [
+#: Supported style types
+STYLE_TYPES = [
   'svg',
   'leaflet',
   ]
@@ -92,43 +82,64 @@ def numarray(a):
 
 def coords1(s):
     """
-    Convert the given KML string containing one coordinate tuple into a list.
+    Convert the given KML string containing one coordinate tuple into a list
+    of floats.
 
     EXAMPLE::
 
         >>> coords1(' -112.2,36.0,2357 ')
-        [-112.2, 36.0, 2357]
+        [-112.2, 36.0, 2357.0]
+
     """
     return numarray(re.sub(SPACE, '', s).split(',')) 
 
 def coords(s):
     """ 
     Convert the given KML string containing multiple coordinate tuples into
-    a list of lists.
+    a list of lists of floats.
 
     EXAMPLE::
 
         >>> coords('''
-         -112.0,36.1,0
-         -113.0,36.0,0 
-         ''')
-        [[-112.0, 36.1, 0], [-113.0, 36.0, 0]]
+        ... -112.0,36.1,0
+        ... -113.0,36.0,0 
+        ... ''')
+        [[-112.0, 36.1, 0.0], [-113.0, 36.0, 0.0]]
+
     """
     s = s.split() #sub(TRIM_SPACE, '', v).split()
     return [coords1(ss) for ss in s]
      
-def gx_coord(s):
+def gx_coords1(s):
+    """
+    Convert the given KML string containing one gx coordinate tuple
+    into a list of floats.
+
+    EXAMPLE::
+
+        >>> gx_coords1('-113.0 36.0 0') 
+        [-113.0, 36.0, 0.0]
+
+    """
     return numarray(s.split(' '))
 
 def gx_coords(node):
+    """
+    Given a KML DOM node, grab its <gx:coord> and <gx:timestamp><when>
+    subnodes, and convert them into a dictionary with the keys and values
+
+    - ``'coordinates'``: list of lists of float coordinates
+    - ``'times'``: list of timestamps corresponding to the coordinates
+
+    """
     els = get(node, 'gx:coord')
     coordinates = []
     times = []
-    coordinates = [gx_coord(val(el)) for el in els]
-    timeEls = get(node, 'when')
-    times = [val(t) for t in timeEls]
+    coordinates = [gx_coords1(val(el)) for el in els]
+    time_els = get(node, 'when')
+    times = [val(t) for t in time_els]
     return {
-      'coords': coordinates,
+      'coordinates': coordinates,
       'times': times,
       }
 
@@ -173,7 +184,7 @@ def build_svg_style(node):
         
     and return the result.
 
-    The the possible keys of each SVG style dictionary,
+    The possible keys and values of each SVG style dictionary,
     the style options, are
  
     - ``iconUrl``: URL of icon
@@ -231,7 +242,7 @@ def build_leaflet_style(node):
         
     and return the result.
 
-    The the possible keys of each Leaflet style dictionary,
+    The the possible keys and values of each Leaflet style dictionary,
     the style options, are
  
     - ``iconUrl``: URL of icon
@@ -315,7 +326,7 @@ def build_geometry(node):
                 track = gx_coords(geonode)
                 geoms.append({
                   'type': 'LineString',
-                  'coordinates': track['coords'],
+                  'coordinates': track['coordinates'],
                   })
                 if track['times']:
                     times.append(track['times'])
@@ -406,7 +417,7 @@ def build_feature(node):
 def build_feature_collection(node):
     """
     Build and return a (decoded) GeoJSON FeatureCollection
-    corresponding to this KML node (typically a KML Folder).
+    corresponding to this KML DOM node (typically a KML Folder).
     """
     geojson = {
       'type': 'FeatureCollection',
@@ -422,14 +433,15 @@ def build_layers(node):
     """
     Return a list of dictionaries, one for each folder in 
     the given KML DOM node that contains geodata.
-    Each dictionary has the form::
+    Each dictionary has the keys and values
 
-        {
-          'name': folder name,
-          'geojson': (decoded) GeoJSON FeatureCollection 
-        }
+    - ``'name'``: folder name
+    - ``'geojson'``: (decoded) GeoJSON FeatureCollection 
 
     The GeoJSON part is created using :func:`build_feature_collection`.
+
+    Warning: this can produce layers with the same geodata in case 
+    the KML node has nested folders with geodata.
     """
     def default_name(n=None):
         if n is not None:
@@ -459,30 +471,34 @@ def build_layers(node):
     return layers
 
 @click.command()
-@click.option('--output_dir', type=str, default=None)
-@click.option('--separate_layers', type=bool, default=False)
-@click.option('--style', type=str, default=None)
-@click.argument('kml_path', type=str)
-def main(kml_path, output_dir=None, separate_layers=False, 
-  style=None):
+@click.option('-f', '--separate-folders', is_flag=True, 
+  default=False)
+@click.option('-st', '--style_type', type=click.Choice(STYLE_TYPES), 
+  default=None)
+@click.option('-sf', '--style_filename', 
+  default='style.json')
+@click.argument('kml_path')
+@click.argument('output_dir')
+def main(kml_path, output_dir, separate_folders=False, 
+  style_type=None, style_filename='style.json'):
     """
-    Given a path to a KML file convert it to GeoJSON file(s) and 
-    put the result in the given output directory
-    (the default is the parent directory of ``kml_path``).
-    If ``separate_layers == False`` (the default), then create one
-    GeoJSON FeatureCollection file.
-    If ``separate_layers == True``, then create several GeoJSON
-    FeatureCollection files, one for each folder in the KML file 
+    Given a path to a KML file, convert it to one or several GeoJSON 
+    FeatureCollection files and save the result(s) to the given 
+    output directory.
+
+    If ``separate_folders == False`` (the default), then create one
+    GeoJSON file.
+    If ``separate_folders == True``, then create several GeoJSON
+    files, one for each folder in the KML file 
     that contains geodata or that has a descendant node that contains geodata.
     Warning: this can produce GeoJSON files with the same geodata in case 
     the KML file has nested folders with geodata.
 
-    If ``style_type`` is not ``None`` (default is ``None``), 
-    then also build and write a JSON style file of the given style type
-    to the output directory.
-    Acceptable style types are listed in ``STYLES``, e.g.
-    ``'svg'`` or ``'leaflet'``.
-
+    If a ``style_type`` is given (default is ``None``), 
+    then also build a JSON style 
+    file of the given style type and save it to the output directory
+    under the name given by ``style_filename`` 
+    (which defaults to 'style.json')
     """
     # Create absolute paths
     kml_path = pathlib.Path(kml_path).resolve()
@@ -500,7 +516,7 @@ def main(kml_path, output_dir=None, separate_layers=False,
     root = md.parseString(kml_str)
 
     # Build and export GeoJSON layers
-    if separate_layers:
+    if separate_folders:
         layers = build_layers(root)
     else:
         name = kml_path.name.replace('.kml', '')
@@ -515,9 +531,9 @@ def main(kml_path, output_dir=None, separate_layers=False,
             json.dump(layer['geojson'], tgt)
 
     # Build and export style file if desired
-    if style in STYLES:
-        builder_name = 'build_{!s}_style'.format(style)
+    if style_type in STYLE_TYPES:
+        builder_name = 'build_{!s}_style'.format(style_type)
         style_dict = globals()[builder_name](root)
-        path = pathlib.Path(output_dir, 'style.json')
+        path = pathlib.Path(output_dir, style_filename)
         with path.open('w') as tgt:
             json.dump(style_dict, tgt)
