@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-kml2geojson |version| Documentation
+kml2geojson |release| Documentation
 =======================================
 
 Contents:

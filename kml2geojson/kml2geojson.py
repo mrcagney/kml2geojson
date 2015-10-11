@@ -199,6 +199,26 @@ def build_svg_style(node):
         style_id = '#' + attr(item, 'id')
         # Create style properties
         props = {}
+        for x in get(item, 'PolyStyle'):
+            color = val(get1(x, 'color'))
+            if color:
+                rgb, opacity = build_rgb_and_opacity(color)
+                props['fill'] = rgb
+                props['fill-opacity'] = opacity
+                # Set default border style
+                props['stroke'] = rgb
+                props['stroke-opacity'] = opacity
+                props['stroke-width'] = 1
+            fill = valf(get1(x, 'fill'))
+            if fill == 0: 
+                props['fill-opacity'] = fill 
+            elif fill == 1 and 'fill-opacity' not in props:
+                props['fill-opacity'] = fill 
+            outline = valf(get1(x, 'outline'))
+            if outline == 0: 
+                props['stroke-opacity'] = outline
+            elif outline == 1 and 'stroke-opacity' not in props:
+                props['stroke-opacity'] = outline 
         for x in get(item, 'LineStyle'):
             color = val(get1(x, 'color'))
             if color:
@@ -208,18 +228,6 @@ def build_svg_style(node):
             width = valf(get1(x, 'width'))
             if width is not None:
                 props['stroke-width'] = width
-        for x in get(item, 'PolyStyle'):
-            color = val(get1(x, 'color'))
-            if color:
-                rgb, opacity = build_rgb_and_opacity(color)
-                props['fill'] = rgb
-                props['fill-opacity'] = opacity
-            fill = valf(get1(x, 'fill'))
-            if fill: 
-                properties['fill-opacity'] = fill 
-            outline = valf(get1(x, 'outline'))
-            if outline: 
-                properties['stroke-opacity'] = outline
         for x in get(item, 'IconStyle'):
             icon = get1(x, 'Icon')
             if not icon:
@@ -257,6 +265,26 @@ def build_leaflet_style(node):
         style_id = '#' + attr(item, 'id')
         # Create style properties
         props = {}
+        for x in get(item, 'PolyStyle'):
+            color = val(get1(x, 'color'))
+            if color:
+                rgb, opacity = build_rgb_and_opacity(color)
+                props['fillColor'] = rgb
+                props['fillOpacity'] = opacity
+                # Set default border style
+                props['color'] = rgb
+                props['opacity'] = opacity
+                props['weight'] = 1
+            fill = valf(get1(x, 'fill'))
+            if fill == 0: 
+                props['fillOpacity'] = fill 
+            elif fill == 1 and 'fillOpacity' not in props:
+                props['fillOpacity'] = fill 
+            outline = valf(get1(x, 'outline'))
+            if outline == 0: 
+                props['opacity'] = outline 
+            elif outline == 1 and 'opacity' not in props:
+                props['opacity'] = outline 
         for x in get(item, 'LineStyle'):
             color = val(get1(x, 'color'))
             if color:
@@ -266,12 +294,6 @@ def build_leaflet_style(node):
             width = valf(get1(x, 'width'))
             if width is not None:
                 props['weight'] = width
-        for x in get(item, 'PolyStyle'):
-            color = val(get1(x, 'color'))
-            if color:
-                rgb, opacity = build_rgb_and_opacity(color)
-                props['fillColor'] = rgb
-                props['fillOpacity'] = opacity
         for x in get(item, 'IconStyle'):
             icon = get1(x, 'Icon')
             if not icon:
@@ -343,61 +365,69 @@ def build_feature(node):
     if not geoms_and_times['geoms']:
         return None
 
-    properties = {}
+    props = {}
     for x in get(node, 'name')[:1]:
-        properties['name'] = val(x)
+        props['name'] = val(x)
     for x in get(node, 'description')[:1]:
         description = val(x)
         if description:
-            properties['description'] = val(x)
+            props['description'] = val(x)
     for x in get(node, 'styleUrl')[:1]:
         style_url = val(x)
         if style_url[0] != '#': 
             style_url = '#' + style_url
-        properties['styleUrl'] = style_url
-    for x in get(node, 'LineStyle')[:1]:
-        color = val(get1(x, 'color'))
-        if color:
-            rgb, opacity = build_rgb_and_opacity(color)
-            properties['stroke'] = rgb
-            properties['stroke-opacity'] = opacity
-        width = valf(get1(x, 'width'))
-        if width:
-            properties['stroke-width'] = width 
+        props['styleUrl'] = style_url
     for x in get(node, 'PolyStyle')[:1]:
         color = val(get1(x, 'color'))
         if color:
             rgb, opacity = build_rgb_and_opacity(color)
-            properties['fill'] = rgb
-            properties['fill-opacity'] = opacity
+            props['fill'] = rgb
+            props['fill-opacity'] = opacity
+            # Set default border style
+            props['stroke'] = rgb
+            props['stroke-opacity'] = opacity
+            props['stroke-width'] = 1
         fill = valf(get1(x, 'fill'))
-        if fill: 
-            properties['fill-opacity'] = fill 
+        if fill == 0: 
+            props['fill-opacity'] = fill 
+        elif fill == 1 and 'fill-opacity' not in props:
+            props['fill-opacity'] = fill 
         outline = valf(get1(x, 'outline'))
-        if outline: 
-            properties['stroke-opacity'] = outline
+        if outline == 0: 
+            props['stroke-opacity'] = outline 
+        elif outline == 1 and 'stroke-opacity' not in props:
+            props['stroke-opacity'] = outline 
+    for x in get(node, 'LineStyle')[:1]:
+        color = val(get1(x, 'color'))
+        if color:
+            rgb, opacity = build_rgb_and_opacity(color)
+            props['stroke'] = rgb
+            props['stroke-opacity'] = opacity
+        width = valf(get1(x, 'width'))
+        if width:
+            props['stroke-width'] = width 
     for x in get(node, 'ExtendedData')[:1]:
         datas = get(x, 'Data')
         for data in datas:
-            properties[attr(data, 'name')] = val(get1(
+            props[attr(data, 'name')] = val(get1(
               data, 'value'))
         simple_datas = get(x, 'SimpleData')
         for simple_data in simple_datas:
-            properties[attr(simple_data, 'name')] = val(simple_data) 
+            props[attr(simple_data, 'name')] = val(simple_data) 
     for x in get(node, 'TimeSpan')[:1]:
         begin = val(get1(x, 'begin'))
         end = val(get1(x, 'end'))
-        properties['timeSpan'] = {'begin': begin, 'end': end}
+        props['timeSpan'] = {'begin': begin, 'end': end}
     if geoms_and_times['times']:
         times = geoms_and_times['times']
         if len(times) == 1:
-            properties['times'] = times[0]
+            props['times'] = times[0]
         else:
-            properties['times'] = times
+            props['times'] = times
     
     feature = {
       'type': 'Feature',
-      'properties': properties,
+      'properties': props,
       }
 
     geoms = geoms_and_times['geoms']
