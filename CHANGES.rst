@@ -1,12 +1,16 @@
 Changes
 ========
 
-v2.0, 2015-10-08
+v2.0.1, 2015-10-12
+-------------------
+- Set default border style for colored polygons
+ 
+v2, 2015-10-08
 ------------------
 - Added documentation
 - Tweaked the command line tool options 
 
-v1.0, 2015-10-05
+v1, 2015-10-05
 ------------------
 - Changed some names 
 - Added lots of tests
