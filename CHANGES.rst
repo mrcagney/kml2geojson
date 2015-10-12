@@ -1,6 +1,10 @@
 Changes
 ========
 
+v3.0.1, 2015-10-12
+-------------------
+Tweaked ``to_filename()`` to lowercase and underscore. Missed that last round.
+
 v3, 2015-10-12
 ---------------
 Changed the output of ``build_layers()`` and moved layer names into the GeoJSON FeatureCollections
