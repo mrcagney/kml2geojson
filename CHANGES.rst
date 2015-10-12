@@ -1,6 +1,10 @@
 Changes
 ========
 
+v3, 2015-10-12
+---------------
+Changed the output of ``build_layers()`` and moved layer names into the GeoJSON FeatureCollections
+
 v2.0.2, 2015-10-12
 -------------------
 - Replaced underscores with dashes in command line options

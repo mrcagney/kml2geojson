@@ -83,6 +83,18 @@ class TestKml2Geojson(unittest.TestCase):
             expect = geojson 
             self.assertEqual(get, expect)
 
+    def test_disambiguate(self):
+        names = ['bingo', 'bingo1', 'bongo', 'bingo', 'bro', 'bongo']
+        get = disambiguate(names)
+        expect = ['bingo', 'bingo1', 'bongo', 'bingo11', 'bro', 'bongo1']
+        self.assertEqual(get, expect)
+
+    def test_to_filename(self):
+        name = u"ad\nbla'{-+\)(ç?"
+        get = to_filename(name)
+        expect = "adblaç"
+        self.assertEqual(get, expect)
+
     def test_build_layers(self):
         directory = 'tests/data/two_layers/'
         kml_path = os.path.join(directory, 'two_layers.kml')
@@ -93,7 +105,7 @@ class TestKml2Geojson(unittest.TestCase):
             path = os.path.join(directory, name + '.geojson')
             with open(path) as src:
                 geo = json.load(src) 
-            expect_layers.append({'name': name, 'geojson': geo})
+            expect_layers.append(geo)
 
         get_layers = build_layers(kml)
         for i in range(len(get_layers)):

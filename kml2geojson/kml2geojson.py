@@ -444,61 +444,101 @@ def build_feature(node):
 
     return feature     
 
-def build_feature_collection(node):
+def build_feature_collection(node, name=None):
     """
     Build and return a (decoded) GeoJSON FeatureCollection
     corresponding to this KML DOM node (typically a KML Folder).
+    Set the name of the FeatureCollection to the given name 
+    if it is not ``None``
     """
+    # Initialize
     geojson = {
       'type': 'FeatureCollection',
-      'features': []
+      'features': [],
       }
+
+    # Build features
     for placemark in get(node, 'Placemark'):
         feature = build_feature(placemark)
         if feature is not None:
             geojson['features'].append(feature)
+
+    # Name the collection if requested
+    if name is not None:
+        geojson['properties']  = {'name': name} 
+    
     return geojson   
 
-def build_layers(node):
+def disambiguate(names, mark='1'):
     """
-    Return a list of dictionaries, one for each folder in 
-    the given KML DOM node that contains geodata.
-    Each dictionary has the keys and values
+    Given a list of strings ``names``, return a new list of names 
+    where repeated names have been disambiguated by repeatedly 
+    appending the given mark.
 
-    - ``'name'``: folder name
-    - ``'geojson'``: (decoded) GeoJSON FeatureCollection 
+    EXAMPLE::
 
-    The GeoJSON part is created using :func:`build_feature_collection`.
+        >>> disambiguate(['sing', 'song', 'sing', 'sing'])
+        ['sing', 'song', 'sing1', 'sing11']
+
+    """
+    names_seen = set()
+    new_names = []
+    for name in names:
+        new_name = name
+        while new_name in names_seen:
+            new_name += mark
+        new_names.append(new_name)
+        names_seen.add(new_name)
+
+    return new_names
+
+def build_layers(node, disambiguate_names=True):
+    """
+    Return a list of GeoJSON feature collections, 
+    one for each folder in the given KML DOM node that contains geodata.
+    Name each feature collection according to its folder name.
+    If ``disambiguate_names == True``, then disambiguate repeated layer names 
+    via func:`disambiguate`_.
 
     Warning: this can produce layers with the same geodata in case 
     the KML node has nested folders with geodata.
+
     """
-    def default_name(n=None):
-        if n is not None:
-            return 'Untitled_{:02d}'.format(i)
-        else:
-            return 'Untitled'
-
     layers = []
-
+    names = []
     for i, folder in enumerate(get(node, 'Folder')):
         geojson = build_feature_collection(folder) 
         if not geojson['features']:
             continue
-        layer = {}
-        layer['name'] = val(get1(folder, 'name')) or default_name(i)
-        layer['geojson'] = geojson
-        layers.append(layer)
+        layers.append(geojson)
+        name = val(get1(folder, 'name'))
+        names.append(name)
+
     if not layers:
         # No folders, so use the root node
         geojson = build_feature_collection(node) 
         if geojson['features']:
-            layers.append({
-              'name': default_name(),
-              'geojson': geojson, 
-              })
+            layers.append(geojson)
+        name = val(get1(node, 'name'))
+        names.append(name)
+
+    if disambiguate_names:
+        new_names = disambiguate(names)
+        new_layers = []
+        for i, layer in enumerate(layers):
+            layer['properties'] = {'name': new_names[i]}
+            new_layers.append(layer)
+        layers = new_layers
 
     return layers
+
+def to_filename(name):
+    """
+    Convert the given string into a safe file name.
+    """
+    keepcharacters = (' ', '.', '_')
+    return ''.join(c for c in name 
+      if c.isalnum() or c in keepcharacters).rstrip()
 
 @click.command()
 @click.option('-f', '--separate-folders', is_flag=True, 
@@ -550,15 +590,13 @@ def main(kml_path, output_dir, separate_folders=False,
         layers = build_layers(root)
     else:
         name = kml_path.name.replace('.kml', '')
-        layers = [{
-          'name': name, 
-          'geojson': build_feature_collection(root),
-          }]
+        layers = [build_feature_collection(root, name=name)]
     for layer in layers:
-        file_name = layer['name'].lower().replace(' ', '_') + '.geojson'
+        name = layer['properties']['name']
+        file_name = to_filename(name) + '.geojson'
         path = pathlib.Path(output_dir, file_name)
         with path.open('w') as tgt:
-            json.dump(layer['geojson'], tgt)
+            json.dump(layer, tgt)
 
     # Build and export style file if desired
     if style_type in STYLE_TYPES:

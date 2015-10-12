@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>kml2geojson 2.0.2 documentation</title>
+    <title>kml2geojson 3 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.2',
+        VERSION:     '3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,7 +37,7 @@
           <div class="body" role="main">
             
   <div class="section" id="kml2geojson-release-documentation">
-<h1>kml2geojson 2.0.2 Documentation<a class="headerlink" href="#kml2geojson-release-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>kml2geojson 3 Documentation<a class="headerlink" href="#kml2geojson-release-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <span id="document-kml2geojson"></span><div class="section" id="kml2geojson-package">
@@ -75,9 +75,11 @@ Return <code class="docutils literal"><span class="pre">None</span></code> if no
 
 <dl class="function">
 <dt id="kml2geojson.kml2geojson.build_feature_collection">
-<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_feature_collection</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_feature_collection" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_feature_collection</code><span class="sig-paren">(</span><em>node</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_feature_collection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build and return a (decoded) GeoJSON FeatureCollection
-corresponding to this KML DOM node (typically a KML Folder).</p>
+corresponding to this KML DOM node (typically a KML Folder).
+Set the name of the FeatureCollection to the given name 
+if it is not <code class="docutils literal"><span class="pre">None</span></code></p>
 </dd></dl>
 
 <dl class="function">
@@ -89,15 +91,12 @@ to the given KML node.</p>
 
 <dl class="function">
 <dt id="kml2geojson.kml2geojson.build_layers">
-<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_layers</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_layers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of dictionaries, one for each folder in 
-the given KML DOM node that contains geodata.
-Each dictionary has the keys and values</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">'name'</span></code>: folder name</li>
-<li><code class="docutils literal"><span class="pre">'geojson'</span></code>: (decoded) GeoJSON FeatureCollection</li>
-</ul>
-<p>The GeoJSON part is created using <a class="reference internal" href="#kml2geojson.kml2geojson.build_feature_collection" title="kml2geojson.kml2geojson.build_feature_collection"><code class="xref py py-func docutils literal"><span class="pre">build_feature_collection()</span></code></a>.</p>
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_layers</code><span class="sig-paren">(</span><em>node</em>, <em>disambiguate_names=True</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_layers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of GeoJSON feature collections, 
+one for each folder in the given KML DOM node that contains geodata.
+Name each feature collection according to its folder name.
+If <code class="docutils literal"><span class="pre">disambiguate_names</span> <span class="pre">==</span> <span class="pre">True</span></code>, then disambiguate repeated layer names 
+via func:<a href="#id1"><span class="problematic" id="id2">`disambiguate`_</span></a>.</p>
 <p>Warning: this can produce layers with the same geodata in case 
 the KML node has nested folders with geodata.</p>
 </dd></dl>
@@ -185,6 +184,19 @@ of floats.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="kml2geojson.kml2geojson.disambiguate">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">disambiguate</code><span class="sig-paren">(</span><em>names</em>, <em>mark='1'</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.disambiguate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of strings <code class="docutils literal"><span class="pre">names</span></code>, return a new list of names 
+where repeated names have been disambiguated by repeatedly 
+appending the given mark.</p>
+<p>EXAMPLE:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">disambiguate</span><span class="p">([</span><span class="s">&#39;sing&#39;</span><span class="p">,</span> <span class="s">&#39;song&#39;</span><span class="p">,</span> <span class="s">&#39;sing&#39;</span><span class="p">,</span> <span class="s">&#39;sing&#39;</span><span class="p">])</span>
+<span class="go">[&#39;sing&#39;, &#39;song&#39;, &#39;sing1&#39;, &#39;sing11&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="kml2geojson.kml2geojson.get">
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">get</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a KML Document Object Model (DOM) node, return a list
@@ -225,6 +237,12 @@ into a list of floats.</p>
 <dt id="kml2geojson.kml2geojson.numarray">
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">numarray</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.numarray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the given list into a list of floats.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="kml2geojson.kml2geojson.to_filename">
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">to_filename</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.to_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the given string into a safe file name.</p>
 </dd></dl>
 
 <dl class="function">
