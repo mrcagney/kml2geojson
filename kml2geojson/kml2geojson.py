@@ -143,6 +143,49 @@ def gx_coords(node):
       'times': times,
       }
 
+def disambiguate(names, mark='1'):
+    """
+    Given a list of strings ``names``, return a new list of names 
+    where repeated names have been disambiguated by repeatedly 
+    appending the given mark.
+
+    EXAMPLE::
+
+        >>> disambiguate(['sing', 'song', 'sing', 'sing'])
+        ['sing', 'song', 'sing1', 'sing11']
+
+    """
+    names_seen = set()
+    new_names = []
+    for name in names:
+        new_name = name
+        while new_name in names_seen:
+            new_name += mark
+        new_names.append(new_name)
+        names_seen.add(new_name)
+
+    return new_names
+
+def to_filename(name):
+    """
+    Convert the given string into a safe file name.
+
+    EXAMPLE::
+
+        >>> to_filename('A d\sbla,{-+\].[ç?')
+        'a_dsbla.ç'
+
+    """
+    # Replace bad characters
+    keepcharacters = (' ', '.', '_')
+    name = ''.join(c for c in name 
+      if c.isalnum() or c in keepcharacters)
+
+    # Strip, lowercase, and replace blanks
+    name = name.rstrip().lower().replace(' ', '_')
+
+    return name
+
 # ---------------
 # Main functions
 # ---------------
@@ -469,29 +512,6 @@ def build_feature_collection(node, name=None):
     
     return geojson   
 
-def disambiguate(names, mark='1'):
-    """
-    Given a list of strings ``names``, return a new list of names 
-    where repeated names have been disambiguated by repeatedly 
-    appending the given mark.
-
-    EXAMPLE::
-
-        >>> disambiguate(['sing', 'song', 'sing', 'sing'])
-        ['sing', 'song', 'sing1', 'sing11']
-
-    """
-    names_seen = set()
-    new_names = []
-    for name in names:
-        new_name = name
-        while new_name in names_seen:
-            new_name += mark
-        new_names.append(new_name)
-        names_seen.add(new_name)
-
-    return new_names
-
 def build_layers(node, disambiguate_names=True):
     """
     Return a list of GeoJSON feature collections, 
@@ -531,14 +551,6 @@ def build_layers(node, disambiguate_names=True):
         layers = new_layers
 
     return layers
-
-def to_filename(name):
-    """
-    Convert the given string into a safe file name.
-    """
-    keepcharacters = (' ', '.', '_')
-    return ''.join(c for c in name 
-      if c.isalnum() or c in keepcharacters).rstrip()
 
 @click.command()
 @click.option('-f', '--separate-folders', is_flag=True, 
