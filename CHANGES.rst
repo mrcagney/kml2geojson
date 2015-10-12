@@ -1,6 +1,10 @@
 Changes
 ========
 
+v2.0.2, 2015-10-12
+-------------------
+- Replaced underscores with dashes in command line options
+
 v2.0.1, 2015-10-12
 -------------------
 - Set default border style for colored polygons

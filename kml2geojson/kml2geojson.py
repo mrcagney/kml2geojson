@@ -503,9 +503,9 @@ def build_layers(node):
 @click.command()
 @click.option('-f', '--separate-folders', is_flag=True, 
   default=False)
-@click.option('-st', '--style_type', type=click.Choice(STYLE_TYPES), 
+@click.option('-st', '--style-type', type=click.Choice(STYLE_TYPES), 
   default=None)
-@click.option('-sf', '--style_filename', 
+@click.option('-sf', '--style-filename', 
   default='style.json')
 @click.argument('kml_path')
 @click.argument('output_dir')
@@ -567,3 +567,6 @@ def main(kml_path, output_dir, separate_folders=False,
         path = pathlib.Path(output_dir, style_filename)
         with path.open('w') as tgt:
             json.dump(style_dict, tgt)
+
+if __name__ == '__main__':
+    main()
