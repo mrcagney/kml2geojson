@@ -90,9 +90,9 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_to_filename(self):
-        name = u"ad\nbla'{-+\)(ç?"
+        name = u"A d\nbla'{-+\)(ç?"
         get = to_filename(name)
-        expect = "adblaç"
+        expect = "a_dblaç"
         self.assertEqual(get, expect)
 
     def test_build_layers(self):
