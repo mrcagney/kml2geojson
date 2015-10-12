@@ -166,25 +166,24 @@ def disambiguate(names, mark='1'):
 
     return new_names
 
-def to_filename(name):
+def to_filename(s):
     """
-    Convert the given string into a safe file name.
-
+    Based on `django/utils/text.py <https://github.com/django/django/blob/master/django/utils/text.py>`_. 
+    Return the given string converted to a string that can be used for a clean
+    filename. 
+    Specifically, leading and trailing spaces are removed; other
+    spaces are converted to underscores; and anything that is not a unicode
+    alphanumeric, dash, underscore, or dot, is removed.
+ 
     EXAMPLE::
-
-        >>> to_filename('A d\sbla,{-+\].[ç?')
-        'a_dsbla.ç'
-
+    
+        >>> to_filename("  A d\sbla'{-+\)(ç? ")
+        'A_dsbla-ç'
+    
     """
-    # Replace bad characters
-    keepcharacters = (' ', '.', '_')
-    name = ''.join(c for c in name 
-      if c.isalnum() or c in keepcharacters)
+    s = s.strip().replace(' ', '_')
+    return re.sub(r'(?u)[^-\w.]', '', s)
 
-    # Strip, lowercase, and replace blanks
-    name = name.rstrip().lower().replace(' ', '_')
-
-    return name
 
 # ---------------
 # Main functions
