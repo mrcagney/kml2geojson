@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>kml2geojson 3.0.1 documentation</title>
+    <title>kml2geojson 3.0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '3.0.1',
+        VERSION:     '3.0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,7 +37,7 @@
           <div class="body" role="main">
             
   <div class="section" id="kml2geojson-release-documentation">
-<h1>kml2geojson 3.0.1 Documentation<a class="headerlink" href="#kml2geojson-release-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>kml2geojson 3.0.2 Documentation<a class="headerlink" href="#kml2geojson-release-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <span id="document-kml2geojson"></span><div class="section" id="kml2geojson-package">
@@ -241,11 +241,16 @@ into a list of floats.</p>
 
 <dl class="function">
 <dt id="kml2geojson.kml2geojson.to_filename">
-<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">to_filename</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.to_filename" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert the given string into a safe file name.</p>
+<code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">to_filename</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.to_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on <a class="reference external" href="https://github.com/django/django/blob/master/django/utils/text.py">django/utils/text.py</a>. 
+Return the given string converted to a string that can be used for a clean
+filename. 
+Specifically, leading and trailing spaces are removed; other
+spaces are converted to underscores; and anything that is not a unicode
+alphanumeric, dash, underscore, or dot, is removed.</p>
 <p>EXAMPLE:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">to_filename</span><span class="p">(</span><span class="s">&#39;A d\sbla,{-+\].[ç?&#39;</span><span class="p">)</span>
-<span class="go">&#39;a_dsbla.ç&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">to_filename</span><span class="p">(</span><span class="s">&quot;  A d\sbla&#39;{-+\)(ç? &quot;</span><span class="p">)</span>
+<span class="go">&#39;A_dsbla-ç&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
