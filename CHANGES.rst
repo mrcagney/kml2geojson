@@ -1,6 +1,10 @@
 Changes
 ========
 
+v3.0.3, 2015-10-13
+-------------------
+Improved ``to_filename()`` again.
+
 v3.0.2, 2015-10-12
 -------------------
 Improved ``to_filename()`` and removed the lowercasing.
