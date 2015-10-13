@@ -53,6 +53,23 @@ def attr(node, name):
     """
     return node.getAttribute(name)
 
+def del_attrs(node):
+    """
+    Remove all the attributes of the given node and do the same for all 
+    of its descendants. 
+    Return the resulting node.
+    """
+    if node.attributes:
+        keys = list(node.attributes.keys())
+        for key in keys:
+            node.removeAttribute(key)
+
+    for child in reversed(node.childNodes):
+        node.removeChild(child)
+        node.appendChild(del_attrs(child))
+
+    return node 
+
 def val(node):
     """
     Normalize the given DOM node and return the value 
@@ -142,6 +159,18 @@ def gx_coords(node):
       'coordinates': coordinates,
       'times': times,
       }
+
+def clean_description(node):
+    """
+
+    """
+    text = kg.val(node)
+    text = re.sub(r'<META .*>', '', text, flags=re.I)
+    try:
+        x = md.parseString(text)
+    except Exception:
+        x = node
+    return kg.del_attrs(x)
 
 def disambiguate(names, mark='1'):
     """
@@ -413,7 +442,7 @@ def build_feature(node):
     for x in get(node, 'description')[:1]:
         description = val(x)
         if description:
-            props['description'] = val(x)
+            props['description'] = description
     for x in get(node, 'styleUrl')[:1]:
         style_url = val(x)
         if style_url[0] != '#': 

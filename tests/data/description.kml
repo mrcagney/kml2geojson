@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Placemark>
+  <name>Feature.kml</name>
+  <Snippet maxLines="4">
+    The snippet is a way of
+    providing an alternative
+    description that will be
+    shown in the List view.
+  </Snippet> 
+      <description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Coorparoo</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>SA1_MAIN11</td>
+
+<td>30302105312</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SA1_7DIG11</td>
+
+<td>3105312</td>
+
+</tr>
+
+<tr>
+
+<td>SA2_MAIN11</td>
+
+<td>303021053</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SA2_5DIG11</td>
+
+<td>31053</td>
+
+</tr>
+
+<tr>
+
+<td>SA2_NAME11</td>
+
+<td>Coorparoo</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SA3_CODE11</td>
+
+<td>30302</td>
+
+</tr>
+
+<tr>
+
+<td>SA3_NAME11</td>
+
+<td>Holland Park - Yeronga</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SA4_CODE11</td>
+
+<td>303</td>
+
+</tr>
+
+<tr>
+
+<td>SA4_NAME11</td>
+
+<td>Brisbane - South</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>GCC_CODE11</td>
+
+<td>3GBRI</td>
+
+</tr>
+
+<tr>
+
+<td>GCC_NAME11</td>
+
+<td>Greater Brisbane</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>STE_CODE11</td>
+
+<td>3</td>
+
+</tr>
+
+<tr>
+
+<td>STE_NAME11</td>
+
+<td>Queensland</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>ALBERS_SQM</td>
+
+<td>161010.701877</td>
+
+</tr>
+
+<tr>
+
+<td>total_revenue2013</td>
+
+<td>4564.999911</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>total_demand2013</td>
+
+<td>2589.097715</td>
+
+</tr>
+
+<tr>
+
+<td>actual_total_revenue2014</td>
+
+<td>4010.303671</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>actual_total_demand2014</td>
+
+<td>2195.404603</td>
+
+</tr>
+
+<tr>
+
+<td>predicted_total_revenue2014</td>
+
+<td>4692.43761</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>predicted_total_demand2014</td>
+
+<td>2515.499697</td>
+
+</tr>
+
+<tr>
+
+<td>revenue_basediff1413</td>
+
+<td>-554.69624</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>demand_basediff1413</td>
+
+<td>-393.693112</td>
+
+</tr>
+
+<tr>
+
+<td>revenue_predictdiff14</td>
+
+<td>682.133939</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>demand_predictdiff14</td>
+
+<td>320.095093</td>
+
+</tr>
+
+<tr>
+
+<td>average_fare2013</td>
+
+<td>1.763162</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>average_fare2014</td>
+
+<td>1.826681</td>
+
+</tr>
+
+<tr>
+
+<td>predicted_average_fare2014</td>
+
+<td>1.86541</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>average_fare_basediff1413_net</td>
+
+<td>0.063518</td>
+
+</tr>
+
+<tr>
+
+<td>revenue_basediff1413_percent</td>
+
+<td>-12.151068</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>demand_basediff1413_percent</td>
+
+<td>-15.205804</td>
+
+</tr>
+
+<tr>
+
+<td>average_fare_basediff1413_percent</td>
+
+<td>3.602529</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>average_fare_predictdiff14_net</td>
+
+<td>0.038729</td>
+
+</tr>
+
+<tr>
+
+<td>revenue_predictdiff14_percent</td>
+
+<td>17.009533</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>demand_predictdiff14_percent</td>
+
+<td>14.580232</td>
+
+</tr>
+
+<tr>
+
+<td>average_fare_predictdiff14_percent</td>
+
+<td>2.120175</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>net_change_demand0_35</td>
+
+<td>262.842475</td>
+
+</tr>
+
+<tr>
+
+<td>percentage_change_demand0_35</td>
+
+<td>0.002861</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>net_change_average_fare0_35</td>
+
+<td>-0.014796</td>
+
+</tr>
+
+<tr>
+
+<td>percentage_change_average_fare0_35</td>
+
+<td>-0.008479</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>net_change_demand0_175</td>
+
+<td>129.741741</td>
+
+</tr>
+
+<tr>
+
+<td>percentage_change_demand0_175</td>
+
+<td>0.001412</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>net_change_average_fare0_175</td>
+
+<td>-0.014784</td>
+
+</tr>
+
+<tr>
+
+<td>percentage_change_average_fare0_175</td>
+
+<td>-0.008472</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>net_change_demand0</td>
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>percentage_change_demand0</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>net_change_average_fare0</td>
+
+<td>-0.014772</td>
+
+</tr>
+
+<tr>
+
+<td>percentage_change_average_fare0</td>
+
+<td>-0.008465</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>
+
+]]></description>
+  <Point>
+    <coordinates>-122.378927,37.826793,0</coordinates>
+  </Point>
+</Placemark>
+</kml>
