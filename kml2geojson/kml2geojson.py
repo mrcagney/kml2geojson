@@ -53,22 +53,22 @@ def attr(node, name):
     """
     return node.getAttribute(name)
 
-def del_attrs(node):
-    """
-    Remove all the attributes of the given node and do the same for all 
-    of its descendants. 
-    Return the resulting node.
-    """
-    if node.attributes:
-        keys = list(node.attributes.keys())
-        for key in keys:
-            node.removeAttribute(key)
+# def del_attrs(node):
+#     """
+#     Remove all the attributes of the given node and do the same for all 
+#     of its descendants. 
+#     Return the resulting node.
+#     """
+#     if node.attributes:
+#         keys = list(node.attributes.keys())
+#         for key in keys:
+#             node.removeAttribute(key)
 
-    for child in reversed(node.childNodes):
-        node.removeChild(child)
-        node.appendChild(del_attrs(child))
+#     for child in reversed(node.childNodes):
+#         node.removeChild(child)
+#         node.appendChild(del_attrs(child))
 
-    return node 
+#     return node 
 
 def val(node):
     """
@@ -159,18 +159,6 @@ def gx_coords(node):
       'coordinates': coordinates,
       'times': times,
       }
-
-def clean_description(node):
-    """
-
-    """
-    text = kg.val(node)
-    text = re.sub(r'<META .*>', '', text, flags=re.I)
-    try:
-        x = md.parseString(text)
-    except Exception:
-        x = node
-    return kg.del_attrs(x)
 
 def disambiguate(names, mark='1'):
     """
