@@ -206,13 +206,13 @@ def to_filename(s):
  
     EXAMPLE::
     
-        >>> to_filename("  A d\sbla'{-+\)(ç? ")
+        >>> to_filename("%  A d\sbla'{-+\)(ç? ")
         'A_dsbla-ç'
     
     """
+    s = re.sub(r'(?u)[^-\w. ]', '', s)
     s = s.strip().replace(' ', '_')
-    return re.sub(r'(?u)[^-\w.]', '', s)
-
+    return s
 
 # ---------------
 # Main functions
