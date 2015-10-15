@@ -6,9 +6,9 @@ Much of the code is a translation into Python of the KML converter in the
 Node.js package `togeojson <https://github.com/mapbox/togeojson>`_.
 But ``kml2geojson`` also adds the following features.
 
-- Preserves KML object styling, such as color and opacity
-- Optionally writes one JSON file cataloging all the KML styles used
-- Optionally creates several GeoJSON files of FeatureCollections, one for each KML folder 
+- Preserve KML object styling, such as color and opacity
+- Optionally write one JSON file cataloging all the KML styles used
+- Optionally create several GeoJSON files of FeatureCollections, one for each KML folder 
 
 
 Installation
