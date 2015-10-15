@@ -1,6 +1,10 @@
 Changes
 ========
 
+v3.0.4, 2015-10-15
+-------------------
+Disambiguated filenames in ``main()``.
+
 v3.0.3, 2015-10-13
 -------------------
 Improved ``to_filename()`` again.

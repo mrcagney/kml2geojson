@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>kml2geojson 3.0.3 documentation</title>
+    <title>kml2geojson 3.0.4 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '3.0.3',
+        VERSION:     '3.0.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -37,7 +37,7 @@
           <div class="body" role="main">
             
   <div class="section" id="kml2geojson-release-documentation">
-<h1>kml2geojson 3.0.3 Documentation<a class="headerlink" href="#kml2geojson-release-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>kml2geojson 3.0.4 Documentation<a class="headerlink" href="#kml2geojson-release-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <span id="document-kml2geojson"></span><div class="section" id="kml2geojson-package">
@@ -92,11 +92,12 @@ to the given KML node.</p>
 <dl class="function">
 <dt id="kml2geojson.kml2geojson.build_layers">
 <code class="descclassname">kml2geojson.kml2geojson.</code><code class="descname">build_layers</code><span class="sig-paren">(</span><em>node</em>, <em>disambiguate_names=True</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.kml2geojson.build_layers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a list of GeoJSON feature collections, 
+<dd><p>Return a list of GeoJSON FeatureCollections, 
 one for each folder in the given KML DOM node that contains geodata.
-Name each feature collection according to its folder name.
-If <code class="docutils literal"><span class="pre">disambiguate_names</span> <span class="pre">==</span> <span class="pre">True</span></code>, then disambiguate repeated layer names 
-via func:<a href="#id1"><span class="problematic" id="id2">`disambiguate`_</span></a>.</p>
+Name each FeatureCollection (setting its <code class="docutils literal"><span class="pre">properties</span></code> -&gt; <code class="docutils literal"><span class="pre">name</span></code> value) 
+according to its corresponding KML folder name.</p>
+<p>If <code class="docutils literal"><span class="pre">disambiguate_names</span> <span class="pre">==</span> <span class="pre">True</span></code>, then disambiguate repeated layer names 
+via <a class="reference internal" href="#kml2geojson.kml2geojson.disambiguate" title="kml2geojson.kml2geojson.disambiguate"><code class="xref py py-func docutils literal"><span class="pre">disambiguate()</span></code></a>.</p>
 <p>Warning: this can produce layers with the same geodata in case 
 the KML node has nested folders with geodata.</p>
 </dd></dl>

@@ -53,23 +53,6 @@ def attr(node, name):
     """
     return node.getAttribute(name)
 
-# def del_attrs(node):
-#     """
-#     Remove all the attributes of the given node and do the same for all 
-#     of its descendants. 
-#     Return the resulting node.
-#     """
-#     if node.attributes:
-#         keys = list(node.attributes.keys())
-#         for key in keys:
-#             node.removeAttribute(key)
-
-#     for child in reversed(node.childNodes):
-#         node.removeChild(child)
-#         node.appendChild(del_attrs(child))
-
-#     return node 
-
 def val(node):
     """
     Normalize the given DOM node and return the value 
@@ -530,15 +513,16 @@ def build_feature_collection(node, name=None):
 
 def build_layers(node, disambiguate_names=True):
     """
-    Return a list of GeoJSON feature collections, 
+    Return a list of GeoJSON FeatureCollections, 
     one for each folder in the given KML DOM node that contains geodata.
-    Name each feature collection according to its folder name.
+    Name each FeatureCollection (setting its ``properties`` -> ``name`` value) 
+    according to its corresponding KML folder name.
+
     If ``disambiguate_names == True``, then disambiguate repeated layer names 
-    via func:`disambiguate`_.
+    via :func:`disambiguate`.
 
     Warning: this can produce layers with the same geodata in case 
     the KML node has nested folders with geodata.
-
     """
     layers = []
     names = []
@@ -613,18 +597,24 @@ def main(kml_path, output_dir, separate_folders=False,
         kml_str = src.read()
     root = md.parseString(kml_str)
 
-    # Build and export GeoJSON layers
+    # Build GeoJSON layers
     if separate_folders:
         layers = build_layers(root)
     else:
         name = kml_path.name.replace('.kml', '')
         layers = [build_feature_collection(root, name=name)]
-    for layer in layers:
-        name = layer['properties']['name']
-        file_name = to_filename(name) + '.geojson'
-        path = pathlib.Path(output_dir, file_name)
+    
+    # Create filenames for layers
+    filenames = disambiguate(
+      [to_filename(layer['properties']['name'])
+      for layer in layers])
+    filenames = [name + '.geojson' for name in filenames]
+
+    # Write layers to files
+    for i in range(len(layers)):
+        path = pathlib.Path(output_dir, filenames[i])
         with path.open('w') as tgt:
-            json.dump(layer, tgt)
+            json.dump(layers[i], tgt)
 
     # Build and export style file if desired
     if style_type in STYLE_TYPES:

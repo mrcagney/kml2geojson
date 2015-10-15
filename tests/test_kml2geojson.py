@@ -101,7 +101,7 @@ class TestKml2Geojson(unittest.TestCase):
         with open(kml_path) as src:
             kml = md.parseString(src.read())
         expect_layers = []
-        for name in ['bingo', 'bongo']:
+        for name in ['Bingo', 'Bingo1']:
             path = os.path.join(directory, name + '.geojson')
             with open(path) as src:
                 geo = json.load(src) 

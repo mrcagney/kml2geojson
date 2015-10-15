@@ -1,13 +1,14 @@
 kml2geojson
 ============
 This is a Python 3.4 command-line program to convert KML files to GeoJSON.
+
 Much of the code is a translation into Python of the KML converter in the 
 Node.js package `togeojson <https://github.com/mapbox/togeojson>`_.
+But ``kml2geojson`` also adds the following features.
 
-The added features of ``kml2geojson``, are
-
-- the ability to create several GeoJSON files of FeatureCollections, one for each KML folder 
-- one JSON file containing all the KML styles
+- Preserves KML object styling, such as color and opacity
+- Optionally writes one JSON file cataloging all the KML styles used
+- Optionally creates several GeoJSON files of FeatureCollections, one for each KML folder 
 
 
 Installation
