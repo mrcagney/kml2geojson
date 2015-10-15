@@ -103,7 +103,7 @@
       </BalloonStyle>
     </Style>
     <Folder>
-      <name>bingo</name>
+      <name>%Bingo</name>
       <description>These are just some of the different kinds of placemarks with
         which you can mark your favorite places</description>
       <LookAt>
@@ -162,7 +162,7 @@
       </Placemark>
     </Folder>
     <Folder>
-      <name>bongo</name>
+      <name>#Bingo</name>
       <visibility>0</visibility>
       <description>A collection showing how easy it is to create 3-dimensional
         buildings</description>
