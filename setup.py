@@ -1,19 +1,19 @@
 from distutils.core import setup
 
-dependencies = ['click']
 setup(
     name='kml2geojson',
-    version='3.0.4',
+    version='4.0.0',
     author='Alexander Raichev',
-    author_email='alex@raichev.net',
     packages=['kml2geojson', 'tests'],
     url='https://github.com/araichev/kml2geojson',
     license='LICENSE',
     description='A Python 3.4 tool kit for converting KML files to GeoJSON files',
     long_description=open('README.rst').read(),
-    install_requires=dependencies,
+    install_requires=[
+        'click>=6.6',
+    ],
     entry_points = {
-      'console_scripts': ['kml2geojson=kml2geojson.kml2geojson:main'],
+      'console_scripts': ['k2g=kml2geojson.cli:k2g'],
       },
     )
 
