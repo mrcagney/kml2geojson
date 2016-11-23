@@ -11,7 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   kml2geojson
+   modules
 
 
 Indices and tables

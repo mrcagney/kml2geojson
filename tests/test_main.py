@@ -4,10 +4,15 @@ import os, shutil
 import xml.dom.minidom as md 
 import json
 
-from kml2geojson.kml2geojson import *
+from kml2geojson.main import *
 
 
-class TestKml2Geojson(unittest.TestCase):
+PROJECT_ROOT = Path(os.path.abspath(os.path.join(
+  os.path.dirname(__file__), '../')))
+DATA_DIR = PROJECT_ROOT/'tests'/'data'
+
+
+class TestMain(unittest.TestCase):
 
     def test_coords1(self):
         v = ' -112.2,36.0,2357 '
@@ -30,7 +35,8 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_build_svg_style(self):
-        with open('tests/data/google_sample.kml') as src:
+        path = DATA_DIR/'google_sample.kml'
+        with path.open() as src:
             kml = md.parseString(src.read())  
         style = build_svg_style(kml)
         get = style['#transPurpleLineGreenPoly']
@@ -44,7 +50,8 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_build_leaflet_style(self):
-        with open('tests/data/google_sample.kml') as src:
+        path = DATA_DIR/'google_sample.kml'
+        with path.open() as src:
             kml = md.parseString(src.read())  
         style = build_leaflet_style(kml)
         get = style['#transPurpleLineGreenPoly']
@@ -58,26 +65,19 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_build_feature_collection(self):
-        # Build a list of eligible KML test files, ones that have GeoJSON
-        # counterparts
-        directory = 'tests/data/'
-        files = os.listdir(directory)  # file names in directory
-        test_files = []
-        for f in files:
-            if f.endswith('.kml') and\
-              f.replace('.kml', '.geojson') in files:
-                test_files.append(f.replace('.kml', ''))
+        # Collect the test files: the KML files that GeoJSON counterparts
+        root = DATA_DIR
+        stems = set(p.stem for p in root.glob('*.kml')) &\
+          set(p.stem for p in root.glob('*.geojson'))
 
-        # For each KML test file and its GeoJSON counterpart, 
-        # convert the KML into a single GeoJSON FeatureCollection
-        # and compare it to the GeoJSON file
-        for f in test_files:
-            print(f)
-            kml_path = os.path.join(directory, f + '.kml')
-            geojson_path = os.path.join(directory, f + '.geojson')
-            with open(kml_path) as src:
+        # For test file convert it into a single GeoJSON FeatureCollection
+        # and compare the result to the corresponding GeoJSON file
+        for s in stems:
+            k_path = root/(s + '.kml')
+            g_path = root/(s + '.geojson')
+            with k_path.open() as src:
                 kml = md.parseString(src.read())
-            with open(geojson_path) as src:
+            with g_path.open() as src:
                 geojson = json.load(src)
             get = build_feature_collection(kml)
             expect = geojson 
@@ -96,14 +96,13 @@ class TestKml2Geojson(unittest.TestCase):
         self.assertEqual(get, expect)
 
     def test_build_layers(self):
-        directory = 'tests/data/two_layers/'
-        kml_path = os.path.join(directory, 'two_layers.kml')
-        with open(kml_path) as src:
+        k_path = DATA_DIR/'two_layers'/'two_layers.kml'
+        with k_path.open() as src:
             kml = md.parseString(src.read())
         expect_layers = []
         for name in ['Bingo', 'Bingo1']:
-            path = os.path.join(directory, name + '.geojson')
-            with open(path) as src:
+            g_path = k_path.parent/(name + '.geojson')
+            with g_path.open() as src:
                 geo = json.load(src) 
             expect_layers.append(geo)
 
@@ -111,6 +110,24 @@ class TestKml2Geojson(unittest.TestCase):
         for i in range(len(get_layers)):
             self.assertEqual(get_layers[i], expect_layers[i])
 
-        
+    def test_main(self):
+        in_path = DATA_DIR/'two_layers'/'two_layers.kml'
+        out_path = DATA_DIR/'tmp'
+        rm_paths(out_path)
+
+        convert(in_path, out_path, separate_folders=True, style_type='svg')
+        for p in in_path.parent.iterdir():
+            if p.suffix == '.kml':
+                continue
+            gp = out_path/p.name
+            with gp.open() as src:
+                get = json.load(src)
+            with p.open() as src:
+                expect = json.load(src)
+            self.assertEqual(get, expect)
+
+        rm_paths(out_path)
+
+
 if __name__ == '__main__':
     unittest.main()

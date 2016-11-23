@@ -1,5 +1,5 @@
 kml2geojson
-============
+************
 This is a Python 3.4 command-line program to convert KML files to GeoJSON.
 
 Much of the code is a translation into Python of the KML converter in the 
@@ -12,30 +12,28 @@ But ``kml2geojson`` also adds the following features.
 
 
 Installation
--------------
+=============
 ``pip install kml2geojson``
 
 
 Usage
-------
+======
 At the command line type ``kml2geojson --help`` for instructions.
 
 
 Documentation
---------------
+==============
 In ``docs`` and on RawGit `here <https://rawgit.com/araichev/kml2geojson/master/docs/_build/singlehtml/index.html>`_.
 
 
 Notes
--------
+========
 - Development status: Alpha
-- This project uses semantic versioning (major.minor.micro), where each breaking feature or API change is considered a major release.
-  So the version code reflects the project's change history, rather than its development status.
-  In particular, a high major version number, does not imply a mature development status. 
+- This project uses semantic versioning (major.minor.micro), where each breaking feature or API change is considered a major change.
 
 
-Background Reading
-------------------
+Contributing
+===================
 If you want to help develop this project, here is some background reading.
 
 - The `KML reference <https://developers.google.com/kml/documentation/kmlreference?hl=en>`_ 
@@ -43,7 +41,74 @@ If you want to help develop this project, here is some background reading.
 
 
 Authors
----------
+========
 - Alex Raichev (2015-10-03)
+
+
+History
+========
+
+4.0.0, 2016-11-24
+-------------------
+- Moved command line functionality to separate module
+- Renamed some functions
+
+
+3.0.4, 2015-10-15
+-------------------
+Disambiguated filenames in ``main()``.
+
+
+3.0.3, 2015-10-13
+-------------------
+Improved ``to_filename()`` again.
+
+
+3.0.2, 2015-10-12
+-------------------
+Improved ``to_filename()`` and removed the lowercasing.
+
+
+3.0.1, 2015-10-12
+-------------------
+Tweaked ``to_filename()`` to lowercase and underscore results. 
+Forgot to do that last time.
+
+
+3.0.0, 2015-10-12
+---------------
+Changed the output of ``build_layers()`` and moved layer names into the GeoJSON FeatureCollections
+
+
+2.0.2, 2015-10-12
+-------------------
+- Replaced underscores with dashes in command line options
+
+
+2.0.1, 2015-10-12
+-------------------
+- Set default border style for colored polygons
+ 
+
+2.0.0, 2015-10-08
+------------------
+- Added documentation
+- Tweaked the command line tool options 
+
+
+1.0.0, 2015-10-05
+------------------
+- Changed some names 
+- Added lots of tests
+
+
+0.1.1, 2015-10-03
+-------------------
+Fixed packaging to find ``README.rst``
+
+
+0.1.0, 2015-10-03
+-----------------
+First
 
 

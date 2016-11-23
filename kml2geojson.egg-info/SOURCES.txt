@@ -1,0 +1,14 @@
+MANIFEST.in
+README.rst
+kml2geojson/__init__.py
+kml2geojson/cli.py
+kml2geojson/main.py
+kml2geojson.egg-info/PKG-INFO
+kml2geojson.egg-info/SOURCES.txt
+kml2geojson.egg-info/dependency_links.txt
+kml2geojson.egg-info/entry_points.txt
+kml2geojson.egg-info/requires.txt
+kml2geojson.egg-info/top_level.txt
+tests/__init__.py
+tests/test_cli.py
+tests/test_main.py

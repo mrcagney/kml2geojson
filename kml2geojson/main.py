@@ -1,9 +1,9 @@
+import os
+import shutil
 import xml.dom.minidom as md
 import re
-import pathlib
+from pathlib import Path
 import json
-
-import click
 
 
 #: Atomic KML geometry types supported.
@@ -27,10 +27,21 @@ SPACE = re.compile(r'\s+')
 # ----------------
 # Helper functions
 # ----------------
+def rm_paths(*paths):
+    """
+    Delete the given file paths/directory paths, if they exists.
+    """
+    for p in paths:
+        p = Path(p)
+        if p.exists():
+            if p.is_file():
+                p.unlink()
+            else:
+                shutil.rmtree(str(p))
+
 def get(node, name):
     """
-    Given a KML Document Object Model (DOM) node, return a list
-    of its sub-nodes that have the given tag name.
+    Given a KML Document Object Model (DOM) node, return a list of its sub-nodes that have the given tag name.
     """
     return node.getElementsByTagName(name)
 
@@ -47,16 +58,14 @@ def get1(node, name):
 
 def attr(node, name):
     """
-    Return as a string the value of the given DOM node's attribute named 
-    by ``name``, if it exists.
+    Return as a string the value of the given DOM node's attribute named by ``name``, if it exists.
     Otherwise, return an empty string.
     """
     return node.getAttribute(name)
 
 def val(node):
     """
-    Normalize the given DOM node and return the value 
-    of its first child (the string content of the node).
+    Normalize the given DOM node and return the value of its first child (the string content of the node).
     """
     try:
         node.normalize()
@@ -82,8 +91,7 @@ def numarray(a):
 
 def coords1(s):
     """
-    Convert the given KML string containing one coordinate tuple into a list
-    of floats.
+    Convert the given KML string containing one coordinate tuple into a list of floats.
 
     EXAMPLE::
 
@@ -95,8 +103,7 @@ def coords1(s):
 
 def coords(s):
     """ 
-    Convert the given KML string containing multiple coordinate tuples into
-    a list of lists of floats.
+    Convert the given KML string containing multiple coordinate tuples into a list of lists of floats.
 
     EXAMPLE::
 
@@ -112,8 +119,7 @@ def coords(s):
      
 def gx_coords1(s):
     """
-    Convert the given KML string containing one gx coordinate tuple
-    into a list of floats.
+    Convert the given KML string containing one gx coordinate tuple into a list of floats.
 
     EXAMPLE::
 
@@ -125,8 +131,7 @@ def gx_coords1(s):
 
 def gx_coords(node):
     """
-    Given a KML DOM node, grab its <gx:coord> and <gx:timestamp><when>
-    subnodes, and convert them into a dictionary with the keys and values
+    Given a KML DOM node, grab its <gx:coord> and <gx:timestamp><when>subnodes, and convert them into a dictionary with the keys and values
 
     - ``'coordinates'``: list of lists of float coordinates
     - ``'times'``: list of timestamps corresponding to the coordinates
@@ -145,9 +150,7 @@ def gx_coords(node):
 
 def disambiguate(names, mark='1'):
     """
-    Given a list of strings ``names``, return a new list of names 
-    where repeated names have been disambiguated by repeatedly 
-    appending the given mark.
+    Given a list of strings ``names``, return a new list of names where repeated names have been disambiguated by repeatedly appending the given mark.
 
     EXAMPLE::
 
@@ -169,11 +172,8 @@ def disambiguate(names, mark='1'):
 def to_filename(s):
     """
     Based on `django/utils/text.py <https://github.com/django/django/blob/master/django/utils/text.py>`_. 
-    Return the given string converted to a string that can be used for a clean
-    filename. 
-    Specifically, leading and trailing spaces are removed; other
-    spaces are converted to underscores; and anything that is not a unicode
-    alphanumeric, dash, underscore, or dot, is removed.
+    Return the given string converted to a string that can be used for a clean filename. 
+    Specifically, leading and trailing spaces are removed; other spaces are converted to underscores, and anything that is not a unicode alphanumeric, dash, underscore, or dot, is removed.
  
     EXAMPLE::
     
@@ -190,9 +190,7 @@ def to_filename(s):
 # ---------------
 def build_rgb_and_opacity(s):
     """
-    Given a KML color string, return an equivalent
-    RGB hex color string and an opacity float 
-    rounded to 2 decimal places.
+    Given a KML color string, return an equivalent RGB hex color string and an opacity float rounded to 2 decimal places.
     
     EXAMPLE::
 
@@ -218,16 +216,13 @@ def build_rgb_and_opacity(s):
 
 def build_svg_style(node):
     """
-    Given a DOM node, grab its top-level Style nodes, convert
-    every one into a SVG style dictionary, put them in
-    a master dictionary of the form
+    Given a DOM node, grab its top-level Style nodes, convert every one into a SVG style dictionary, put them in a master dictionary of the form
 
         #style ID -> SVG style dictionary,
         
     and return the result.
 
-    The possible keys and values of each SVG style dictionary,
-    the style options, are
+    The possible keys and values of each SVG style dictionary, the style options, are
  
     - ``iconUrl``: URL of icon
     - ``stroke``: stroke color; RGB hex string
@@ -284,16 +279,13 @@ def build_svg_style(node):
 
 def build_leaflet_style(node):
     """
-    Given a DOM node, grab its top-level Style nodes, convert
-    every one into a Leaflet style dictionary, put them in
-    a master dictionary of the form
+    Given a DOM node, grab its top-level Style nodes, convert every one into a Leaflet style dictionary, put them in a master dictionary of the form
 
         #style ID -> Leaflet style dictionary,
         
     and return the result.
 
-    The the possible keys and values of each Leaflet style dictionary,
-    the style options, are
+    The the possible keys and values of each Leaflet style dictionary, the style options, are
  
     - ``iconUrl``: URL of icon
     - ``color``: stroke color; RGB hex string
@@ -350,8 +342,7 @@ def build_leaflet_style(node):
 
 def build_geometry(node):
     """
-    Return a (decoded) GeoJSON geometry dictionary corresponding
-    to the given KML node.
+    Return a (decoded) GeoJSON geometry dictionary corresponding to the given KML node.
     """
     geoms = []
     times = []
@@ -399,8 +390,7 @@ def build_geometry(node):
     
 def build_feature(node):
     """
-    Build and return a (decoded) GeoJSON Feature corresponding to
-    this KML node (typically a KML Placemark).
+    Build and return a (decoded) GeoJSON Feature corresponding to this KML node (typically a KML Placemark).
     Return ``None`` if no Feature can be built.
     """
     geoms_and_times = build_geometry(node)
@@ -488,10 +478,8 @@ def build_feature(node):
 
 def build_feature_collection(node, name=None):
     """
-    Build and return a (decoded) GeoJSON FeatureCollection
-    corresponding to this KML DOM node (typically a KML Folder).
-    Set the name of the FeatureCollection to the given name 
-    if it is not ``None``
+    Build and return a (decoded) GeoJSON FeatureCollection corresponding to this KML DOM node (typically a KML Folder).
+    Set the name of the FeatureCollection to the given name if it is not ``None``
     """
     # Initialize
     geojson = {
@@ -513,16 +501,12 @@ def build_feature_collection(node, name=None):
 
 def build_layers(node, disambiguate_names=True):
     """
-    Return a list of GeoJSON FeatureCollections, 
-    one for each folder in the given KML DOM node that contains geodata.
-    Name each FeatureCollection (setting its ``properties`` -> ``name`` value) 
-    according to its corresponding KML folder name.
+    Return a list of GeoJSON FeatureCollections, one for each folder in the given KML DOM node that contains geodata.
+    Name each FeatureCollection (setting its ``properties`` -> ``name`` value) according to its corresponding KML folder name.
 
-    If ``disambiguate_names == True``, then disambiguate repeated layer names 
-    via :func:`disambiguate`.
+    If ``disambiguate_names == True``, then disambiguate repeated layer names via :func:`disambiguate`.
 
-    Warning: this can produce layers with the same geodata in case 
-    the KML node has nested folders with geodata.
+    Warning: this can produce layers with the same geodata in case the KML node has nested folders with geodata.
     """
     layers = []
     names = []
@@ -552,48 +536,26 @@ def build_layers(node, disambiguate_names=True):
 
     return layers
 
-@click.command()
-@click.option('-f', '--separate-folders', is_flag=True, 
-  default=False)
-@click.option('-st', '--style-type', type=click.Choice(STYLE_TYPES), 
-  default=None)
-@click.option('-sf', '--style-filename', 
-  default='style.json')
-@click.argument('kml_path')
-@click.argument('output_dir')
-def main(kml_path, output_dir, separate_folders=False, 
+def convert(kml_path, output_dir, separate_folders=False, 
   style_type=None, style_filename='style.json'):
     """
-    Given a path to a KML file, convert it to one or several GeoJSON 
-    FeatureCollection files and save the result(s) to the given 
-    output directory.
+    Given a path to a KML file, convert it to one or several GeoJSON FeatureCollection files and save the result(s) to the given output directory.
 
-    If ``separate_folders == False`` (the default), then create one
-    GeoJSON file.
-    If ``separate_folders == True``, then create several GeoJSON
-    files, one for each folder in the KML file 
-    that contains geodata or that has a descendant node that contains geodata.
-    Warning: this can produce GeoJSON files with the same geodata in case 
-    the KML file has nested folders with geodata.
+    If not ``separate_folders`` (the default), then create one GeoJSON file.
+    Otherwise, create several GeoJSON files, one for each folder in the KML file that contains geodata or that has a descendant node that contains geodata.
+    Warning: this can produce GeoJSON files with the same geodata in case the KML file has nested folders with geodata.
 
-    If a ``style_type`` is given (default is ``None``), 
-    then also build a JSON style 
-    file of the given style type and save it to the output directory
-    under the name given by ``style_filename`` 
-    (which defaults to 'style.json')
+    If a ``style_type`` is given, then also build a JSON style file of the given style type and save it to the output directory under the name given by ``style_filename``.
     """
     # Create absolute paths
-    kml_path = pathlib.Path(kml_path).resolve()
-    if output_dir is None:
-        output_dir = kml_path.parent
-    else:
-        output_dir = pathlib.Path(output_dir)
+    kml_path = Path(kml_path).resolve()
+    output_dir = Path(output_dir)
     if not output_dir.exists():
         output_dir.mkdir()
     output_dir = output_dir.resolve()
 
     # Parse KML
-    with kml_path.open('r') as src:
+    with kml_path.open() as src:
         kml_str = src.read()
     root = md.parseString(kml_str)
 
@@ -601,8 +563,8 @@ def main(kml_path, output_dir, separate_folders=False,
     if separate_folders:
         layers = build_layers(root)
     else:
-        name = kml_path.name.replace('.kml', '')
-        layers = [build_feature_collection(root, name=name)]
+        # name = kml_path.name.replace('.kml', '')
+        layers = [build_feature_collection(root, name=kml_path.stem)]
     
     # Create filenames for layers
     filenames = disambiguate(
@@ -612,17 +574,17 @@ def main(kml_path, output_dir, separate_folders=False,
 
     # Write layers to files
     for i in range(len(layers)):
-        path = pathlib.Path(output_dir, filenames[i])
+        path = output_dir/filenames[i]
         with path.open('w') as tgt:
             json.dump(layers[i], tgt)
 
     # Build and export style file if desired
-    if style_type in STYLE_TYPES:
+    if style_type is not None:
+        if style_type not in STYLE_TYPES:
+            raise ValueError('style type must be one of {!s}'.format(
+              STYLE_TYPES))
         builder_name = 'build_{!s}_style'.format(style_type)
         style_dict = globals()[builder_name](root)
-        path = pathlib.Path(output_dir, style_filename)
+        path = output_dir/style_filename
         with path.open('w') as tgt:
             json.dump(style_dict, tgt)
-
-if __name__ == '__main__':
-    main()
