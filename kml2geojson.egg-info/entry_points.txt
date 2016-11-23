@@ -1,3 +1,0 @@
-[console_scripts]
-k2g = kml2geojson.cli:k2g
-

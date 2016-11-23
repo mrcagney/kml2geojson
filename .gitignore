@@ -5,3 +5,4 @@ outputs
 dist
 MANIFEST
 *.DS_Store
+*.egg-info
