@@ -555,7 +555,7 @@ def convert(kml_path, output_dir, separate_folders=False,
     output_dir = output_dir.resolve()
 
     # Parse KML
-    with kml_path.open() as src:
+    with kml_path.open(encoding='utf-8', errors='ignore') as src:
         kml_str = src.read()
     root = md.parseString(kml_str)
 
