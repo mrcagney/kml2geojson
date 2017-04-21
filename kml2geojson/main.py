@@ -495,7 +495,7 @@ def build_feature_collection(node, name=None):
 
     # Name the collection if requested
     if name is not None:
-        geojson['properties']  = {'name': name} 
+        geojson['name'] = name
     
     return geojson   
 
