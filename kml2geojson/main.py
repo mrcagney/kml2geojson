@@ -9,18 +9,18 @@ import json
 #: Atomic KML geometry types supported.
 #: MultiGeometry is handled separately.
 GEOTYPES = [
-  'Polygon', 
-  'LineString', 
-  'Point', 
-  'Track', 
+  'Polygon',
+  'LineString',
+  'Point',
+  'Track',
   'gx:Track',
-  ]
+]
 
 #: Supported style types
 STYLE_TYPES = [
   'svg',
   'leaflet',
-  ]
+]
 
 SPACE = re.compile(r'\s+')
 
@@ -65,7 +65,7 @@ def attr(node, name):
 
 def val(node):
     """
-    Normalize the given DOM node and return the value of its first child (the string content of the node) stripped of leanding and trailing whitespace.
+    Normalize the given DOM node and return the value of its first child (the string content of the node) stripped of leading and trailing whitespace.
     """
     try:
         node.normalize()
@@ -82,7 +82,7 @@ def valf(node):
         return float(val(node))
     except ValueError:
         return None
-    
+
 def numarray(a):
     """
     Cast the given list into a list of floats.
@@ -99,31 +99,31 @@ def coords1(s):
         [-112.2, 36.0, 2357.0]
 
     """
-    return numarray(re.sub(SPACE, '', s).split(',')) 
+    return numarray(re.sub(SPACE, '', s).split(','))
 
 def coords(s):
-    """ 
+    """
     Convert the given KML string containing multiple coordinate tuples into a list of lists of floats.
 
     EXAMPLE::
 
         >>> coords('''
         ... -112.0,36.1,0
-        ... -113.0,36.0,0 
+        ... -113.0,36.0,0
         ... ''')
         [[-112.0, 36.1, 0.0], [-113.0, 36.0, 0.0]]
 
     """
     s = s.split() #sub(TRIM_SPACE, '', v).split()
     return [coords1(ss) for ss in s]
-     
+
 def gx_coords1(s):
     """
     Convert the given KML string containing one gx coordinate tuple into a list of floats.
 
     EXAMPLE::
 
-        >>> gx_coords1('-113.0 36.0 0') 
+        >>> gx_coords1('-113.0 36.0 0')
         [-113.0, 36.0, 0.0]
 
     """
@@ -146,7 +146,7 @@ def gx_coords(node):
     return {
       'coordinates': coordinates,
       'times': times,
-      }
+    }
 
 def disambiguate(names, mark='1'):
     """
@@ -171,15 +171,15 @@ def disambiguate(names, mark='1'):
 
 def to_filename(s):
     """
-    Based on `django/utils/text.py <https://github.com/django/django/blob/master/django/utils/text.py>`_. 
-    Return the given string converted to a string that can be used for a clean filename. 
+    Based on `django/utils/text.py <https://github.com/django/django/blob/master/django/utils/text.py>`_.
+    Return the given string converted to a string that can be used for a clean filename.
     Specifically, leading and trailing spaces are removed; other spaces are converted to underscores, and anything that is not a unicode alphanumeric, dash, underscore, or dot, is removed.
- 
+
     EXAMPLE::
-    
+
         >>> to_filename("%  A d\sbla'{-+\)(ç? ")
         'A_dsbla-ç'
-    
+
     """
     s = re.sub(r'(?u)[^-\w. ]', '', s)
     s = s.strip().replace(' ', '_')
@@ -191,7 +191,7 @@ def to_filename(s):
 def build_rgb_and_opacity(s):
     """
     Given a KML color string, return an equivalent RGB hex color string and an opacity float rounded to 2 decimal places.
-    
+
     EXAMPLE::
 
         >>> build_rgb_and_opacity('ee001122')
@@ -201,17 +201,17 @@ def build_rgb_and_opacity(s):
     # Set defaults
     color = '000000'
     opacity = 1
-   
+
     if s.startswith('#'):
         s = s[1:]
     if len(s) == 8:
         color = s[6:8] + s[4:6] + s[2:4]
         opacity = round(int(s[0:2], 16)/256, 2)
     elif len(s) == 6:
-        color = s[4:6] + s[2:4] + s[0:2]        
+        color = s[4:6] + s[2:4] + s[0:2]
     elif len(s) == 3:
         color = s[::-1]
-    
+
     return '#' + color, opacity
 
 def build_svg_style(node):
@@ -219,11 +219,11 @@ def build_svg_style(node):
     Given a DOM node, grab its top-level Style nodes, convert every one into a SVG style dictionary, put them in a master dictionary of the form
 
         #style ID -> SVG style dictionary,
-        
+
     and return the result.
 
     The possible keys and values of each SVG style dictionary, the style options, are
- 
+
     - ``iconUrl``: URL of icon
     - ``stroke``: stroke color; RGB hex string
     - ``stroke-opacity``: stroke opacity
@@ -247,15 +247,15 @@ def build_svg_style(node):
                 props['stroke-opacity'] = opacity
                 props['stroke-width'] = 1
             fill = valf(get1(x, 'fill'))
-            if fill == 0: 
-                props['fill-opacity'] = fill 
+            if fill == 0:
+                props['fill-opacity'] = fill
             elif fill == 1 and 'fill-opacity' not in props:
-                props['fill-opacity'] = fill 
+                props['fill-opacity'] = fill
             outline = valf(get1(x, 'outline'))
-            if outline == 0: 
+            if outline == 0:
                 props['stroke-opacity'] = outline
             elif outline == 1 and 'stroke-opacity' not in props:
-                props['stroke-opacity'] = outline 
+                props['stroke-opacity'] = outline
         for x in get(item, 'LineStyle'):
             color = val(get1(x, 'color'))
             if color:
@@ -272,9 +272,9 @@ def build_svg_style(node):
             # Clear previous style properties
             props = {}
             props['iconUrl'] = val(get1(icon, 'href'))
-            
+
         d[style_id] = props
-        
+
     return d
 
 def build_leaflet_style(node):
@@ -282,11 +282,11 @@ def build_leaflet_style(node):
     Given a DOM node, grab its top-level Style nodes, convert every one into a Leaflet style dictionary, put them in a master dictionary of the form
 
         #style ID -> Leaflet style dictionary,
-        
+
     and return the result.
 
     The the possible keys and values of each Leaflet style dictionary, the style options, are
- 
+
     - ``iconUrl``: URL of icon
     - ``color``: stroke color; RGB hex string
     - ``opacity``: stroke opacity
@@ -310,15 +310,15 @@ def build_leaflet_style(node):
                 props['opacity'] = opacity
                 props['weight'] = 1
             fill = valf(get1(x, 'fill'))
-            if fill == 0: 
-                props['fillOpacity'] = fill 
+            if fill == 0:
+                props['fillOpacity'] = fill
             elif fill == 1 and 'fillOpacity' not in props:
-                props['fillOpacity'] = fill 
+                props['fillOpacity'] = fill
             outline = valf(get1(x, 'outline'))
-            if outline == 0: 
-                props['opacity'] = outline 
+            if outline == 0:
+                props['opacity'] = outline
             elif outline == 1 and 'opacity' not in props:
-                props['opacity'] = outline 
+                props['opacity'] = outline
         for x in get(item, 'LineStyle'):
             color = val(get1(x, 'color'))
             if color:
@@ -335,9 +335,9 @@ def build_leaflet_style(node):
             # Clear previous style properties
             props = {}
             props['iconUrl'] = val(get1(icon, 'href'))
-            
+
         d[style_id] = props
-        
+
     return d
 
 def build_geometry(node):
@@ -346,29 +346,29 @@ def build_geometry(node):
     """
     geoms = []
     times = []
-    if get1(node, 'MultiGeometry'):  
-        return build_geometry(get1(node, 'MultiGeometry')) 
+    if get1(node, 'MultiGeometry'):
+        return build_geometry(get1(node, 'MultiGeometry'))
     if get1(node, 'MultiTrack'):
-        return build_geometry(get1(node, 'MultiTrack')) 
+        return build_geometry(get1(node, 'MultiTrack'))
     if get1(node, 'gx:MultiTrack'):
-        return build_geometry(get1(node, 'gx:MultiTrack')) 
-    for geotype in GEOTYPES: 
+        return build_geometry(get1(node, 'gx:MultiTrack'))
+    for geotype in GEOTYPES:
         geonodes = get(node, geotype)
         if not geonodes:
-            continue 
+            continue
         for geonode in geonodes:
-            if geotype == 'Point': 
+            if geotype == 'Point':
                 geoms.append({
                   'type': 'Point',
                   'coordinates': coords1(val(get1(
                     geonode, 'coordinates')))
-                  })
+                })
             elif geotype == 'LineString':
                 geoms.append({
                   'type': 'LineString',
                   'coordinates': coords(val(get1(
                     geonode, 'coordinates')))
-                  })
+                })
             elif geotype == 'Polygon':
                 rings = get(geonode, 'LinearRing')
                 coordinates = [coords(val(get1(ring, 'coordinates')))
@@ -376,18 +376,18 @@ def build_geometry(node):
                 geoms.append({
                   'type': 'Polygon',
                   'coordinates': coordinates,
-                  })
-            elif geotype in ['Track', 'gx:Track']: 
+                })
+            elif geotype in ['Track', 'gx:Track']:
                 track = gx_coords(geonode)
                 geoms.append({
                   'type': 'LineString',
                   'coordinates': track['coordinates'],
-                  })
+                })
                 if track['times']:
                     times.append(track['times'])
-                
+
     return {'geoms': geoms, 'times': times}
-    
+
 def build_feature(node):
     """
     Build and return a (decoded) GeoJSON Feature corresponding to this KML node (typically a KML Placemark).
@@ -408,7 +408,7 @@ def build_feature(node):
             props['description'] = desc
     for x in get(node, 'styleUrl')[:1]:
         style_url = val(x)
-        if style_url[0] != '#': 
+        if style_url[0] != '#':
             style_url = '#' + style_url
         props['styleUrl'] = style_url
     for x in get(node, 'PolyStyle')[:1]:
@@ -422,15 +422,15 @@ def build_feature(node):
             props['stroke-opacity'] = opacity
             props['stroke-width'] = 1
         fill = valf(get1(x, 'fill'))
-        if fill == 0: 
-            props['fill-opacity'] = fill 
+        if fill == 0:
+            props['fill-opacity'] = fill
         elif fill == 1 and 'fill-opacity' not in props:
-            props['fill-opacity'] = fill 
+            props['fill-opacity'] = fill
         outline = valf(get1(x, 'outline'))
-        if outline == 0: 
-            props['stroke-opacity'] = outline 
+        if outline == 0:
+            props['stroke-opacity'] = outline
         elif outline == 1 and 'stroke-opacity' not in props:
-            props['stroke-opacity'] = outline 
+            props['stroke-opacity'] = outline
     for x in get(node, 'LineStyle')[:1]:
         color = val(get1(x, 'color'))
         if color:
@@ -439,14 +439,14 @@ def build_feature(node):
             props['stroke-opacity'] = opacity
         width = valf(get1(x, 'width'))
         if width:
-            props['stroke-width'] = width 
+            props['stroke-width'] = width
     for x in get(node, 'ExtendedData')[:1]:
         datas = get(x, 'Data')
         for data in datas:
             props[attr(data, 'name')] = val(get1(data, 'value'))
         simple_datas = get(x, 'SimpleData')
         for simple_data in simple_datas:
-            props[attr(simple_data, 'name')] = val(simple_data) 
+            props[attr(simple_data, 'name')] = val(simple_data)
     for x in get(node, 'TimeSpan')[:1]:
         begin = val(get1(x, 'begin'))
         end = val(get1(x, 'end'))
@@ -457,11 +457,11 @@ def build_feature(node):
             props['times'] = times[0]
         else:
             props['times'] = times
-    
+
     feature = {
       'type': 'Feature',
       'properties': props,
-      }
+    }
 
     geoms = geoms_and_times['geoms']
     if len(geoms) == 1:
@@ -470,12 +470,12 @@ def build_feature(node):
         feature['geometry'] = {
           'type': 'GeometryCollection',
           'geometries': geoms,
-          }
-    
+        }
+
     if attr(node, 'id'):
         feature['id'] = attr(node, 'id')
 
-    return feature     
+    return feature
 
 def build_feature_collection(node, name=None):
     """
@@ -486,7 +486,7 @@ def build_feature_collection(node, name=None):
     geojson = {
       'type': 'FeatureCollection',
       'features': [],
-      }
+    }
 
     # Build features
     for placemark in get(node, 'Placemark'):
@@ -497,8 +497,8 @@ def build_feature_collection(node, name=None):
     # Give the collection a name if requested
     if name is not None:
         geojson['name'] = name
-        
-    return geojson   
+
+    return geojson
 
 def build_layers(node, disambiguate_names=True):
     """
@@ -513,7 +513,7 @@ def build_layers(node, disambiguate_names=True):
     names = []
     for i, folder in enumerate(get(node, 'Folder')):
         name = val(get1(folder, 'name'))
-        geojson = build_feature_collection(folder, name) 
+        geojson = build_feature_collection(folder, name)
         if geojson['features']:
             layers.append(geojson)
             names.append(name)
@@ -521,7 +521,7 @@ def build_layers(node, disambiguate_names=True):
     if not layers:
         # No folders, so use the root node
         name = val(get1(node, 'name'))
-        geojson = build_feature_collection(node, name) 
+        geojson = build_feature_collection(node, name)
         if geojson['features']:
             layers.append(geojson)
             names.append(name)
@@ -536,7 +536,7 @@ def build_layers(node, disambiguate_names=True):
 
     return layers
 
-def convert(kml_path, output_dir, separate_folders=False, 
+def convert(kml_path, output_dir, separate_folders=False,
   style_type=None, style_filename='style.json'):
     """
     Given a path to a KML file, convert it to one or several GeoJSON FeatureCollection files and save the result(s) to the given output directory.
@@ -564,7 +564,7 @@ def convert(kml_path, output_dir, separate_folders=False,
         layers = build_layers(root)
     else:
         layers = [build_feature_collection(root, name=kml_path.stem)]
-    
+
     # Create filenames for layers
     filenames = disambiguate(
       [to_filename(layer['name'])

@@ -17,7 +17,8 @@
         VERSION:     '',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -25,7 +26,6 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="None" href="index.html#document-index" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -113,7 +113,7 @@ Return <code class="docutils literal"><span class="pre">None</span></code> if no
 <dt id="kml2geojson.main.build_feature_collection">
 <code class="descclassname">kml2geojson.main.</code><code class="descname">build_feature_collection</code><span class="sig-paren">(</span><em>node</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_feature_collection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build and return a (decoded) GeoJSON FeatureCollection corresponding to this KML DOM node (typically a KML Folder).
-Set the name of the FeatureCollection to the given name if it is not <code class="docutils literal"><span class="pre">None</span></code></p>
+If a name is given, store it in the FeatureCollection&#8217;s <code class="docutils literal"><span class="pre">'name'</span></code> attribute.</p>
 </dd></dl>
 
 <dl class="function">
@@ -126,7 +126,7 @@ Set the name of the FeatureCollection to the given name if it is not <code class
 <dt id="kml2geojson.main.build_layers">
 <code class="descclassname">kml2geojson.main.</code><code class="descname">build_layers</code><span class="sig-paren">(</span><em>node</em>, <em>disambiguate_names=True</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_layers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of GeoJSON FeatureCollections, one for each folder in the given KML DOM node that contains geodata.
-Name each FeatureCollection (setting its <code class="docutils literal"><span class="pre">properties</span></code> -&gt; <code class="docutils literal"><span class="pre">name</span></code> value) according to its corresponding KML folder name.</p>
+Name each FeatureCollection (via a <code class="docutils literal"><span class="pre">'name'</span></code> attribute) according to its corresponding KML folder name.</p>
 <p>If <code class="docutils literal"><span class="pre">disambiguate_names</span> <span class="pre">==</span> <span class="pre">True</span></code>, then disambiguate repeated layer names via <a class="reference internal" href="#kml2geojson.main.disambiguate" title="kml2geojson.main.disambiguate"><code class="xref py py-func docutils literal"><span class="pre">disambiguate()</span></code></a>.</p>
 <p>Warning: this can produce layers with the same geodata in case the KML node has nested folders with geodata.</p>
 </dd></dl>
@@ -286,7 +286,7 @@ Specifically, leading and trailing spaces are removed; other spaces are converte
 <dl class="function">
 <dt id="kml2geojson.main.val">
 <code class="descclassname">kml2geojson.main.</code><code class="descname">val</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.val" title="Permalink to this definition">¶</a></dt>
-<dd><p>Normalize the given DOM node and return the value of its first child (the string content of the node).</p>
+<dd><p>Normalize the given DOM node and return the value of its first child (the string content of the node) stripped of leanding and trailing whitespace.</p>
 </dd></dl>
 
 <dl class="function">
@@ -371,8 +371,8 @@ Options:
       &copy;2015, Alex Raichev.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.9</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
     </div>
 
