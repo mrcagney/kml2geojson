@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+<Folder>
+<Folder id="SV">
+<name>RIDGE2 SVR Warnings</name>
+<description>RIDGE2 Active Warnings generated at 2017/04/22 01:02:01</description>
+<Style id="SV">
+<LabelStyle>
+<scale>0.7</scale>
+</LabelStyle>
+<LineStyle>
+<color>7fff0000</color>
+<width>3</width>
+</LineStyle>
+<PolyStyle>
+<color>7fff0000</color>
+</PolyStyle>
+<IconStyle>
+<scale>0.4</scale>
+<Icon><href>http://www.srh.noaa.gov/ridge/graphics/svr.gif</href></Icon>
+</IconStyle>
+</Style>
+<Placemark>
+<styleUrl>#SV</styleUrl>
+<name>
+KFWD.SV.W.00:33Z
+</name>
+<description>
+<pre>
+634 
+WUUS54 KFWD 220033
+SVRFWD
+TXC133-143-363-429-220130-
+/O.NEW.KFWD.SV.W.0139.170422T0033Z-170422T0130Z/
+
+BULLETIN - IMMEDIATE BROADCAST REQUESTED
+Severe Thunderstorm Warning
+National Weather Service Fort Worth TX
+733 PM CDT FRI APR 21 2017
+
+The National Weather Service in Fort Worth has issued a
+
+* Severe Thunderstorm Warning for...
+  Northwestern Erath County in north central Texas...
+  Northeastern Eastland County in north central Texas...
+  Southeastern Stephens County in north central Texas...
+  Southwestern Palo Pinto County in north central Texas...
+
+* Until 830 PM CDT.
+
+* At 732 PM CDT, a severe thunderstorm was located over Ranger,
+  moving southeast at 35 mph.
+
+  HAZARD...60 mph wind gusts and half dollar size hail. 
+
+  SOURCE...Radar indicated. 
+
+  IMPACT...Hail damage to vehicles is expected. Expect wind damage 
+           to roofs, siding, and trees. 
+
+* Locations impacted include...
+  Ranger, Gordon, Huckabay, Strawn and Mingus. 
+
+This includes Interstate 20 between mile markers 345 and 379.
+ 
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+For your protection get inside a sturdy structure and stay away from
+windows.
+
+  
+
+A tornado watch remains in effect until 100 AM CDT for north central
+Texas.
+
+LAT...LON 3243 9879 3263 9872 3264 9817 3217 9839
+      3227 9856
+TIME...MOT...LOC 0032Z 289DEG 41KT 3251 9867 
+
+HAIL...1.25IN
+WIND...60MPH</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-98.790000915527344,32.430000305175781 -98.720001220703125,32.630001068115234 -98.169998168945312,32.639999389648438 -98.389999389648438,32.169998168945312 -98.55999755859375,32.270000457763672 -98.790000915527344,32.430000305175781</coordinates></LineString>
+<Point>
+<coordinates>-98.790000915527344,32.430000305175781</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-98.790000915527344,32.430000305175781 -98.720001220703125,32.630001068115234 -98.169998168945312,32.639999389648438 -98.389999389648438,32.169998168945312 -98.55999755859375,32.270000457763672 -98.790000915527344,32.430000305175781</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#SV</styleUrl>
+<name>
+KOUN.SV.W.00:41Z
+</name>
+<description>
+<pre>
+739 
+WUUS54 KOUN 220041
+SVROUN
+OKC013-095-220130-
+/O.NEW.KOUN.SV.W.0168.170422T0041Z-170422T0130Z/
+
+BULLETIN - IMMEDIATE BROADCAST REQUESTED
+Severe Thunderstorm Warning
+National Weather Service Norman OK
+741 PM CDT FRI APR 21 2017
+
+The National Weather Service in Norman has issued a
+
+* Severe Thunderstorm Warning for...
+  Southwestern Bryan County in southeastern Oklahoma...
+  Southeastern Marshall County in southeastern Oklahoma...
+
+* Until 830 PM CDT
+
+* At 741 PM CDT, a severe thunderstorm was located near Lake Texoma,
+  moving east at 40 mph.
+
+  HAZARD...60 mph wind gusts and quarter size hail. 
+
+  SOURCE...Radar indicated. 
+
+  IMPACT...Hail damage to vehicles is expected. Expect wind damage 
+           to roofs, siding, and trees. 
+
+* Locations impacted include...
+  Durant, Kingston, Colbert, Achille, Kemp, Mead, Hendrix,
+  Cartwright, Blue, Woodville, Utica, eastern Lake Texoma, Albany,
+  Calera and Mcbride.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A tornado watch remains in effect for the warned area. Tornadoes can
+develop quickly from severe thunderstorms.
+
+For your protection move to an interior room on the lowest floor of a
+building.
+
+  
+
+LAT...LON 3378 9643 3377 9650 3382 9653 3384 9662
+      3390 9659 3392 9667 3384 9670 3382 9675
+      3388 9681 3401 9674 3401 9613 3384 9613
+      3384 9614 3381 9618 3380 9618 3381 9616
+      3377 9617 3377 9629 3369 9635
+TIME...MOT...LOC 0041Z 270DEG 35KT 3392 9668 
+
+HAIL...1.00IN
+WIND...60MPH</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-96.430000305175781,33.779998779296875 -96.5,33.770000457763672 -96.529998779296875,33.819999694824219 -96.620002746582031,33.840000152587891 -96.589996337890625,33.900001525878906 -96.669998168945312,33.919998168945312 -96.699996948242188,33.840000152587891 -96.75,33.819999694824219 -96.80999755859375,33.880001068115234 -96.739997863769531,34.009998321533203 -96.129997253417969,34.009998321533203 -96.129997253417969,33.840000152587891 -96.139999389648438,33.840000152587891 -96.180000305175781,33.810001373291016 -96.180000305175781,33.799999237060547 -96.160003662109375,33.810001373291016 -96.169998168945312,33.770000457763672 -96.290000915527344,33.770000457763672 -96.349998474121094,33.689998626708984 -96.430000305175781,33.779998779296875</coordinates></LineString>
+<Point>
+<coordinates>-96.430000305175781,33.779998779296875</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-96.430000305175781,33.779998779296875 -96.5,33.770000457763672 -96.529998779296875,33.819999694824219 -96.620002746582031,33.840000152587891 -96.589996337890625,33.900001525878906 -96.669998168945312,33.919998168945312 -96.699996948242188,33.840000152587891 -96.75,33.819999694824219 -96.80999755859375,33.880001068115234 -96.739997863769531,34.009998321533203 -96.129997253417969,34.009998321533203 -96.129997253417969,33.840000152587891 -96.139999389648438,33.840000152587891 -96.180000305175781,33.810001373291016 -96.180000305175781,33.799999237060547 -96.160003662109375,33.810001373291016 -96.169998168945312,33.770000457763672 -96.290000915527344,33.770000457763672 -96.349998474121094,33.689998626708984 -96.430000305175781,33.779998779296875</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#SV</styleUrl>
+<name>
+KFWD.SV.W.00:42Z
+</name>
+<description>
+<pre>
+412 
+WUUS54 KFWD 220042
+SVRFWD
+TXC085-097-121-220145-
+/O.NEW.KFWD.SV.W.0140.170422T0042Z-170422T0145Z/
+
+BULLETIN - IMMEDIATE BROADCAST REQUESTED
+Severe Thunderstorm Warning
+National Weather Service Fort Worth TX
+742 PM CDT FRI APR 21 2017
+
+The National Weather Service in Fort Worth has issued a
+
+* Severe Thunderstorm Warning for...
+  Northern Denton County in north central Texas...
+  Northwestern Collin County in north central Texas...
+  Southeastern Cooke County in north central Texas...
+
+* Until 845 PM CDT.
+
+* At 741 PM CDT, a severe thunderstorm was located near Pilot Point,
+  or 13 miles south of Whitesboro, moving east at 35 mph.
+
+  HAZARD...60 mph wind gusts and half dollar size hail. 
+
+  SOURCE...Radar indicated. 
+
+  IMPACT...Hail damage to vehicles is expected. Expect wind damage 
+           to roofs, siding, and trees. 
+
+* Locations impacted include...
+  McKinney, Frisco, Denton, Sanger, Little Elm, Prosper, Celina,
+  Krum, Pilot Point, Aubrey, Krugerville, Cross Roads, Ray Roberts
+  Park Isle Du Bois, Ray Roberts Park Johnson Branch, Oak Point,
+  Valley View, Weston and Lincoln Park.
+
+This includes Interstate 35 between mile markers 468 and 487.
+ 
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+For your protection get inside a sturdy structure and stay away from
+windows.
+
+  
+
+A tornado watch remains in effect until 100 AM CDT for north central
+Texas.
+
+LAT...LON 3342 9694 3340 9667 3316 9667 3319 9705
+      3324 9731 3343 9738 3354 9729
+TIME...MOT...LOC 0041Z 289DEG 32KT 3348 9696 
+
+HAIL...1.25IN
+WIND...60MPH</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-96.94000244140625,33.419998168945312 -96.669998168945312,33.400001525878906 -96.669998168945312,33.159999847412109 -97.050003051757812,33.189998626708984 -97.30999755859375,33.240001678466797 -97.379997253417969,33.430000305175781 -97.290000915527358,33.540000915527344 -96.94000244140625,33.419998168945312</coordinates></LineString>
+<Point>
+<coordinates>-96.94000244140625,33.419998168945312</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-96.94000244140625,33.419998168945312 -96.669998168945312,33.400001525878906 -96.669998168945312,33.159999847412109 -97.050003051757812,33.189998626708984 -97.30999755859375,33.240001678466797 -97.379997253417969,33.430000305175781 -97.290000915527358,33.540000915527344 -96.94000244140625,33.419998168945312</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#SV</styleUrl>
+<name>
+KOUN.SV.W.00:43Z
+</name>
+<description>
+<pre>
+572 
+WUUS54 KOUN 220043
+SVROUN
+OKC005-013-220145-
+/O.NEW.KOUN.SV.W.0169.170422T0043Z-170422T0145Z/
+
+BULLETIN - IMMEDIATE BROADCAST REQUESTED
+Severe Thunderstorm Warning
+National Weather Service Norman OK
+743 PM CDT FRI APR 21 2017
+
+The National Weather Service in Norman has issued a
+
+* Severe Thunderstorm Warning for...
+  Northeastern Bryan County in southeastern Oklahoma...
+  Southern Atoka County in southeastern Oklahoma...
+
+* Until 845 PM CDT
+
+* At 743 PM CDT, a severe thunderstorm was located over Caney, moving
+  east at 25 mph.
+
+  HAZARD...60 mph wind gusts and quarter size hail. 
+
+  SOURCE...Radar indicated. 
+
+  IMPACT...Hail damage to vehicles is expected. Expect wind damage 
+           to roofs, siding, and trees. 
+
+* Locations impacted include...
+  Caddo, Tushka, Caney, Kenefic, Lane, Boggy Depot Park, Bentley and
+  Darwin.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A tornado watch remains in effect for the warned area. Tornadoes can
+develop quickly from severe thunderstorms.
+
+For your protection move to an interior room on the lowest floor of a
+building.
+
+  
+
+LAT...LON 3416 9598 3415 9596 3414 9595 3413 9595
+      3412 9594 3401 9594 3416 9641 3437 9640
+      3429 9578 3416 9578
+TIME...MOT...LOC 0043Z 279DEG 21KT 3423 9621 
+
+HAIL...1.00IN
+WIND...60MPH</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-95.980003356933594,34.159999847412109 -95.95999908447267,34.150001525878906 -95.949996948242188,34.139999389648438 -95.949996948242188,34.130001068115234 -95.94000244140625,34.119998931884766 -95.94000244140625,34.009998321533203 -96.410003662109389,34.159999847412109 -96.400001525878906,34.369998931884766 -95.779998779296875,34.290000915527344 -95.779998779296875,34.159999847412109 -95.980003356933594,34.159999847412109</coordinates></LineString>
+<Point>
+<coordinates>-95.980003356933594,34.159999847412109</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-95.980003356933594,34.159999847412109 -95.95999908447267,34.150001525878906 -95.949996948242188,34.139999389648438 -95.949996948242188,34.130001068115234 -95.94000244140625,34.119998931884766 -95.94000244140625,34.009998321533203 -96.410003662109389,34.159999847412109 -96.400001525878906,34.369998931884766 -95.779998779296875,34.290000915527344 -95.779998779296875,34.159999847412109 -95.980003356933594,34.159999847412109</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#SV</styleUrl>
+<name>
+KFWD.SV.W.00:55Z
+</name>
+<description>
+<pre>
+356 
+WUUS54 KFWD 220055
+SVRFWD
+TXC097-181-220145-
+/O.NEW.KFWD.SV.W.0141.170422T0055Z-170422T0145Z/
+
+BULLETIN - IMMEDIATE BROADCAST REQUESTED
+Severe Thunderstorm Warning
+National Weather Service Fort Worth TX
+755 PM CDT FRI APR 21 2017
+
+The National Weather Service in Fort Worth has issued a
+
+* Severe Thunderstorm Warning for...
+  Southeastern Cooke County in north central Texas...
+  Southwestern Grayson County in north central Texas...
+
+* Until 845 PM CDT.
+
+* At 754 PM CDT, a severe thunderstorm was located near Gunter, or 15
+  miles south of Whitesboro, moving southeast at 30 mph.
+
+  HAZARD...Golf ball size hail and 60 mph wind gusts. 
+
+  SOURCE...Radar indicated. 
+
+  IMPACT...People and animals outdoors will be injured. Expect hail 
+           damage to roofs, siding, windows, and vehicles. Expect 
+           wind damage to roofs, siding, and trees. 
+
+* Locations impacted include...
+  Sherman, Van Alstyne, Howe, Collinsville, Gunter, Dorchester, Tioga
+  and Valley View.
+
+This includes Interstate 35 near mile marker 487.
+ 
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+For your protection get inside a sturdy structure and stay away from
+windows.
+
+  
+
+A tornado watch remains in effect until 100 AM CDT for north central
+Texas.
+
+LAT...LON 3340 9659 3342 9696 3350 9718 3356 9695
+      3358 9665
+TIME...MOT...LOC 0054Z 294DEG 27KT 3344 9685 
+
+HAIL...1.75IN
+WIND...60MPH</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-96.589996337890625,33.400001525878906 -96.959999084472656,33.419998168945312 -97.180000305175781,33.5 -96.949996948242188,33.560001373291023 -96.650001525878906,33.580001831054688 -96.589996337890625,33.400001525878906</coordinates></LineString>
+<Point>
+<coordinates>-96.589996337890625,33.400001525878906</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-96.589996337890625,33.400001525878906 -96.959999084472656,33.419998168945312 -97.180000305175781,33.5 -96.949996948242188,33.560001373291023 -96.650001525878906,33.580001831054688 -96.589996337890625,33.400001525878906</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#SV</styleUrl>
+<name>
+KFWD.SV.W.00:56Z
+</name>
+<description>
+<pre>
+TXC133-143-363-220130-
+/O.CON.KFWD.SV.W.0139.000000T0000Z-170422T0130Z/
+Erath TX-Eastland TX-Palo Pinto TX-
+756 PM CDT FRI APR 21 2017
+
+...A SEVERE THUNDERSTORM WARNING REMAINS IN EFFECT UNTIL 830 PM CDT
+FOR NORTHWESTERN ERATH...NORTHEASTERN EASTLAND AND SOUTHWESTERN PALO
+PINTO COUNTIES...
+
+At 755 PM CDT, a severe thunderstorm with confirmed quarter size 
+hail was located 7 miles east of Ranger, moving southeast at 20 mph.
+
+HAZARD...60 mph wind gusts and quarter size hail. 
+
+SOURCE...Trained weather spotters. 
+
+IMPACT...Hail damage to vehicles is expected. Expect wind damage to 
+         roofs, siding, and trees. 
+
+Locations impacted include...
+Ranger, Gordon, Huckabay, Strawn and Mingus. 
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+For your protection stay inside a sturdy structure and keep away from
+windows.
+
+  
+
+A tornado watch remains in effect until 100 AM CDT for north central
+Texas.
+
+LAT...LON 3252 9876 3251 9858 3255 9857 3254 9822
+      3217 9839 3243 9879
+TIME...MOT...LOC 0055Z 307DEG 19KT 3244 9855 
+
+HAIL...1.00IN
+WIND...60MPH</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-98.760002136230469,32.520000457763672 -98.580001831054688,32.509998321533203 -98.569999694824219,32.549999237060547 -98.220001220703125,32.540000915527344 -98.389999389648438,32.169998168945312 -98.790000915527344,32.430000305175781 -98.760002136230469,32.520000457763672</coordinates></LineString>
+<Point>
+<coordinates>-98.760002136230469,32.520000457763672</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-98.760002136230469,32.520000457763672 -98.580001831054688,32.509998321533203 -98.569999694824219,32.549999237060547 -98.220001220703125,32.540000915527344 -98.389999389648438,32.169998168945312 -98.790000915527344,32.430000305175781 -98.760002136230469,32.520000457763672</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+</Folder>
+<Folder id="TO">
+<name>RIDGE2 TOR Warnings</name>
+<description>RIDGE2 Active Warnings generated at 2017/04/22 01:02:01</description>
+<Style id="TO">
+<LabelStyle>
+<scale>0.7</scale>
+</LabelStyle>
+<LineStyle>
+<color>7f0000ff</color>
+<width>3</width>
+</LineStyle>
+<PolyStyle>
+<color>7f0000ff</color>
+</PolyStyle>
+<IconStyle>
+<scale>0.4</scale>
+<Icon><href>http://www.srh.noaa.gov/ridge/graphics/tor.gif</href></Icon>
+</IconStyle>
+</Style>
+<Placemark>
+<styleUrl>#TO</styleUrl>
+<name>
+KMEG.TO.W.00:47Z
+</name>
+<description>
+<pre>
+792 
+WFUS54 KMEG 220047
+TORMEG
+MSC117-139-220130-
+/O.NEW.KMEG.TO.W.0018.170422T0047Z-170422T0130Z/
+
+BULLETIN - EAS ACTIVATION REQUESTED
+Tornado Warning
+National Weather Service Memphis TN
+747 PM CDT FRI APR 21 2017
+
+The National Weather Service in Memphis has issued a
+
+* Tornado Warning for...
+  Southeastern Tippah County in northeastern Mississippi...
+  Prentiss County in northeastern Mississippi...
+
+* Until 830 PM CDT
+    
+* At 747 PM CDT, a severe thunderstorm producing a tornado was
+  located near Jumpertown, or 9 miles west of Booneville, moving east
+  at 30 mph.
+
+  HAZARD...Tornado. 
+
+  SOURCE...Radar indicated rotation. 
+
+  IMPACT...Flying debris will be dangerous to those caught without 
+           shelter. Mobile homes will be damaged or destroyed. 
+           Damage to roofs, windows, and vehicles will occur.  Tree 
+           damage is likely. 
+
+* This dangerous storm will be near...
+  Jumpertown around 755 PM CDT. 
+  Wheeler around 800 PM CDT. 
+  Booneville around 805 PM CDT. 
+  Thrashers around 815 PM CDT. 
+  Burton around 830 PM CDT. 
+
+Other locations impacted by this tornadic thunderstorm include
+Thrasher, Geeville, Hobo Station, Blackland, Frankstown, Gaston and
+Altitude.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+TAKE COVER NOW! Move to a storm shelter or an interior room on the
+lowest floor of a sturdy building. Avoid windows. If you are
+outdoors, in a mobile home, or in a vehicle, move to the closest
+substantial shelter and protect yourself from flying debris.
+
+  
+
+LAT...LON 3457 8874 3460 8874 3460 8881 3473 8880
+      3475 8835 3474 8835 3474 8833 3453 8833
+TIME...MOT...LOC 0047Z 267DEG 27KT 3464 8873 
+
+TORNADO...RADAR INDICATED
+HAIL... .75IN</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-88.739997863769531,34.569999694824219 -88.739997863769531,34.599998474121094 -88.80999755859375,34.599998474121094 -88.800003051757812,34.729999542236328 -88.349998474121094,34.75 -88.349998474121094,34.740001678466797 -88.330001831054702,34.740001678466797 -88.330001831054702,34.529998779296875 -88.739997863769531,34.569999694824219</coordinates></LineString>
+<Point>
+<coordinates>-88.739997863769531,34.569999694824219</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-88.739997863769531,34.569999694824219 -88.739997863769531,34.599998474121094 -88.80999755859375,34.599998474121094 -88.800003051757812,34.729999542236328 -88.349998474121094,34.75 -88.349998474121094,34.740001678466797 -88.330001831054702,34.740001678466797 -88.330001831054702,34.529998779296875 -88.739997863769531,34.569999694824219</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+</Folder>
+<Folder id="FF">
+<name>RIDGE2 FFW Warnings</name>
+<description>RIDGE2 Active Warnings generated at 2017/04/22 01:02:01</description>
+<Style id="FF">
+<LabelStyle>
+<scale>0.7</scale>
+</LabelStyle>
+<LineStyle>
+<color>7f00ff00</color>
+<width>3</width>
+</LineStyle>
+<PolyStyle>
+<color>7f00ff00</color>
+</PolyStyle>
+<IconStyle>
+<scale>0.4</scale>
+<Icon><href>http://www.srh.noaa.gov/ridge/graphics/ff.gif</href></Icon>
+</IconStyle>
+</Style>
+<Placemark>
+<styleUrl>#FF</styleUrl>
+<name>
+KSGF.FF.W.20:02Z
+</name>
+<description>
+<pre>
+599 
+WGUS73 KSGF 212002
+FFSSGF
+
+Flash Flood Statement
+National Weather Service Springfield MO
+302 PM CDT FRI APR 21 2017
+
+MOC009-119-145-220215-
+/O.CON.KSGF.FF.W.0005.000000T0000Z-170422T0215Z/
+/00000.0.ER.000000T0000Z.000000T0000Z.000000T0000Z.OO/
+Newton MO-McDonald MO-Barry MO-
+302 PM CDT FRI APR 21 2017
+
+...THE FLASH FLOOD WARNING REMAINS IN EFFECT UNTIL 915 PM CDT FRIDAY
+FOR NEWTON...MCDONALD AND BARRY COUNTIES...
+
+At 301 PM CDT, Doppler radar indicated heavy rain developing over 
+portions of Oklahoma, which will likely import areas of McDonald, 
+Newton, and Barry counties. Three to five inches of rain has already 
+fallen. Flash flooding is already occurring...and could become worse 
+through the evening hours. 
+
+This warning includes but is not limited to the following low water
+crossings...
+Highway 43 at Buffalo Creek west of Anderson...
+Business Highway 60 just north of Neosho...
+Route Y at Flat Creek just northeast of Cassville...
+Route C just south of Mcdowell...
+and Highway 39 at Flat Creek south of Jenkins.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+In hilly terrain there are hundreds of low water crossings which are
+potentially dangerous in heavy rain. Do not attempt to cross flooded
+roads. Find an alternate route.
+
+  
+
+LAT...LON 3650 9462 3706 9462 3705 9406 3693 9406
+      3692 9362 3683 9361 3681 9358 3650 9358</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-94.620002746582031,36.5 -94.620002746582031,37.060001373291016 -94.05999755859375,37.049999237060547 -94.05999755859375,36.930000305175781 -93.620002746582031,36.919998168945312 -93.610000610351562,36.830001831054688 -93.580001831054688,36.810001373291016 -93.580001831054688,36.5 -94.620002746582031,36.5</coordinates></LineString>
+<Point>
+<coordinates>-94.620002746582031,36.5</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-94.620002746582031,36.5 -94.620002746582031,37.060001373291016 -94.05999755859375,37.049999237060547 -94.05999755859375,36.930000305175781 -93.620002746582031,36.919998168945312 -93.610000610351562,36.830001831054688 -93.580001831054688,36.810001373291016 -93.580001831054688,36.5 -94.620002746582031,36.5</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#FF</styleUrl>
+<name>
+KSGF.FF.W.23:19Z
+</name>
+<description>
+<pre>
+694 
+WGUS53 KSGF 212319
+FFWSGF
+MOC067-091-149-153-203-215-229-221115-
+/O.NEW.KSGF.FF.W.0008.170421T2319Z-170422T1115Z/
+/00000.0.ER.000000T0000Z.000000T0000Z.000000T0000Z.OO/
+
+BULLETIN - EAS ACTIVATION REQUESTED
+Flash Flood Warning
+National Weather Service Springfield MO
+619 PM CDT FRI APR 21 2017
+
+The National Weather Service in Springfield has issued a
+
+* Flash Flood Warning for...
+  Ozark County in southwestern Missouri...
+  Shannon County in south central Missouri...
+  Douglas County in southwestern Missouri...
+  Southern Wright County in southwestern Missouri...
+  Howell County in south central Missouri...
+  Southern Texas County in south central Missouri...
+  Oregon County in south central Missouri...
+
+* Until 615 AM CDT Saturday
+
+* At 616 PM CDT, Doppler radar indicated heavy rain across the warned
+  area. Up to three inches of rain has already fallen. Flash 
+  flooding is already occurring...with another several hours of rain 
+  expected through the evening.  This rain will create an increase 
+  in flash flooding across much of south central Missouri this 
+  evening and overnight. 
+
+* Creeks, streams, and low water crossings will be especially
+  susceptible to the dangers of flash flooding.
+  Locations in the warning include...
+  West Plains...                    Current River State Park...
+  Grand Gulf State Park...          Mountain Grove...
+  Ava...                            Mountain View...
+  Thayer...                         Willow Springs...
+  Cabool...                         Winona...
+  Mansfield...                      Alton...
+  Gainesville...                    Birch Tree...
+  Norwood...                        Eminence...
+  Pomona...                         Summersville...
+  Bakersfield...                    Theodosia...
+
+This warning includes but is not limited to the following low water
+crossings...
+Route FF at Hunter Creek east of Ava...
+Route H, 3 miles east of Winona...
+Route FF at Turkey Creek east of Ava...
+Highway 142 at The Spring River west of Lanton...
+and Highway 142 at The Bennetts River west of Moody.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+In hilly terrain there are hundreds of low water crossings which are
+potentially dangerous in heavy rain. Do not attempt to cross flooded
+roads. Find an alternate route.
+
+  
+
+LAT...LON 3680 9277 3681 9291 3707 9290 3707 9269
+      3718 9268 3740 9117 3726 9116 3714 9102
+      3709 9102 3708 9122 3683 9123 3682 9111
+      3650 9113 3650 9277</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-92.769996643066406,36.799999237060547 -92.910003662109375,36.810001373291016 -92.900001525878906,37.069999694824219 -92.69000244140625,37.069999694824219 -92.680000305175781,37.180000305175781 -91.169998168945312,37.400001525878906 -91.160003662109375,37.259998321533203 -91.019996643066406,37.139999389648438 -91.019996643066406,37.090000152587891 -91.220001220703125,37.080001831054688 -91.230003356933594,36.830001831054688 -91.110000610351562,36.819999694824219 -91.129997253417969,36.5 -92.769996643066406,36.5 -92.769996643066406,36.799999237060547</coordinates></LineString>
+<Point>
+<coordinates>-92.769996643066406,36.799999237060547</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-92.769996643066406,36.799999237060547 -92.910003662109375,36.810001373291016 -92.900001525878906,37.069999694824219 -92.69000244140625,37.069999694824219 -92.680000305175781,37.180000305175781 -91.169998168945312,37.400001525878906 -91.160003662109375,37.259998321533203 -91.019996643066406,37.139999389648438 -91.019996643066406,37.090000152587891 -91.220001220703125,37.080001831054688 -91.230003356933594,36.830001831054688 -91.110000610351562,36.819999694824219 -91.129997253417969,36.5 -92.769996643066406,36.5 -92.769996643066406,36.799999237060547</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#FF</styleUrl>
+<name>
+KSGF.FF.W.20:09Z
+</name>
+<description>
+<pre>
+633 
+WGUS73 KSGF 212009
+FFSSGF
+
+Flash Flood Statement
+National Weather Service Springfield MO
+309 PM CDT FRI APR 21 2017
+
+MOC109-220345-
+/O.CON.KSGF.FF.W.0006.000000T0000Z-170422T0345Z/
+/00000.0.ER.000000T0000Z.000000T0000Z.000000T0000Z.OO/
+Lawrence MO-
+309 PM CDT FRI APR 21 2017
+
+...THE FLASH FLOOD WARNING REMAINS IN EFFECT UNTIL 1045 PM CDT FRIDAY
+FOR LAWRENCE COUNTY...
+
+At 307 PM CDT, Doppler radar indicated thunderstorms producing heavy 
+rain across the warned area. Up to three inches of rain has already 
+fallen. Flash flooding is likely ongoing across small streams and 
+creeks, along with the Spring River.  
+
+Additional rainfall is possible later this evening as a disturbance 
+moves into the region from Oklahoma. 
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+In hilly terrain there are hundreds of low water crossings which are
+potentially dangerous in heavy rain. Do not attempt to cross flooded
+roads. Find an alternate route.
+
+  
+
+LAT...LON 3693 9403 3694 9406 3725 9406 3729 9405
+      3728 9363 3728 9361 3692 9362</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-94.029998779296889,36.930000305175781 -94.05999755859375,36.939998626708984 -94.05999755859375,37.25 -94.050003051757812,37.290000915527344 -93.629997253417969,37.279998779296875 -93.610000610351562,37.279998779296875 -93.620002746582031,36.919998168945312 -94.029998779296889,36.930000305175781</coordinates></LineString>
+<Point>
+<coordinates>-94.029998779296889,36.930000305175781</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-94.029998779296889,36.930000305175781 -94.05999755859375,36.939998626708984 -94.05999755859375,37.25 -94.050003051757812,37.290000915527344 -93.629997253417969,37.279998779296875 -93.610000610351562,37.279998779296875 -93.620002746582031,36.919998168945312 -94.029998779296889,36.930000305175781</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#FF</styleUrl>
+<name>
+KSGF.FF.W.20:18Z
+</name>
+<description>
+<pre>
+069 
+WGUS73 KSGF 212018
+FFSSGF
+
+Flash Flood Statement
+National Weather Service Springfield MO
+318 PM CDT FRI APR 21 2017
+
+MOC043-077-209-213-220400-
+/O.CON.KSGF.FF.W.0007.000000T0000Z-170422T0400Z/
+/00000.0.ER.000000T0000Z.000000T0000Z.000000T0000Z.OO/
+Christian MO-Taney MO-Stone MO-Greene MO-
+318 PM CDT FRI APR 21 2017
+
+...THE FLASH FLOOD WARNING REMAINS IN EFFECT UNTIL 1100 PM CDT FRIDAY
+FOR CHRISTIAN...TANEY...STONE AND GREENE COUNTIES...
+
+At 317 PM CDT, Doppler radar indicated thunderstorms developing over 
+Oklahoma, which will track into portions of southern Missouri this 
+evening. Up to three inches of rain has already fallen. Flash 
+flooding is ongoing, which could become worse with additional rain 
+expected this evening. 
+
+This warning includes but is not limited to the following low water
+crossings...
+Route CC west of Fair Grove at The Pomme De Terre River...
+Highway 13 at Railey Creek near Reeds Spring...
+Highway 13 at Pine Run northwest of Galena...
+Route U at Pedelo Creek northeast of Sparta...
+and Scenic Avenue in southwest Springfield.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+In hilly terrain there are hundreds of low water crossings which are
+potentially dangerous in heavy rain. Do not attempt to cross flooded
+roads. Find an alternate route.
+
+  
+
+LAT...LON 3650 9358 3682 9358 3683 9361 3743 9362
+      3741 9308 3709 9306 3708 9290 3681 9291
+      3680 9277 3650 9278</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-93.580001831054688,36.5 -93.580001831054688,36.819999694824219 -93.610000610351562,36.830001831054688 -93.620002746582031,37.430000305175781 -93.080001831054688,37.409999847412109 -93.05999755859375,37.090000152587891 -92.900001525878906,37.080001831054688 -92.910003662109375,36.810001373291016 -92.769996643066406,36.799999237060547 -92.779998779296875,36.5 -93.580001831054688,36.5</coordinates></LineString>
+<Point>
+<coordinates>-93.580001831054688,36.5</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-93.580001831054688,36.5 -93.580001831054688,36.819999694824219 -93.610000610351562,36.830001831054688 -93.620002746582031,37.430000305175781 -93.080001831054688,37.409999847412109 -93.05999755859375,37.090000152587891 -92.900001525878906,37.080001831054688 -92.910003662109375,36.810001373291016 -92.769996643066406,36.799999237060547 -92.779998779296875,36.5 -93.580001831054688,36.5</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#FF</styleUrl>
+<name>
+KSGF.FF.W.18:37Z
+</name>
+<description>
+<pre>
+457 
+WGUS73 KSGF 211837
+FFSSGF
+
+Flash Flood Statement
+National Weather Service Springfield MO
+137 PM CDT FRI APR 21 2017
+
+KSC021-MOC097-220215-
+/O.CON.KSGF.FF.W.0004.000000T0000Z-170422T0215Z/
+/00000.0.ER.000000T0000Z.000000T0000Z.000000T0000Z.OO/
+Cherokee KS-Jasper MO-
+137 PM CDT FRI APR 21 2017
+
+...THE FLASH FLOOD WARNING REMAINS IN EFFECT UNTIL 915 PM CDT FRIDAY
+FOR CHEROKEE AND JASPER COUNTIES...
+
+At 136 PM CDT, Doppler radar indicated heavy rain across the warned 
+area. Up to three or four inches of rain has already fallen. Flash 
+flooding is already occurring.
+
+This warning includes but is not limited to the following low water
+crossings...
+North Main and Murphy Boulevard In Joplin...
+Highway 37 at The Spring River southwest of Avilla...
+Highway 7 at Little Cherry Creek north of Columbus...
+Route JJ at Center Creek southeast of Carl Junction...
+and Route F, 3 miles northeast of Reeds.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+A Flash Flood Warning means that flooding is imminent or occurring.
+If you are in the warned area move to higher ground immediately.
+Residents living along streams and creeks should take immediate
+precautions to protect life and property.
+
+  
+
+LAT...LON 3734 9507 3734 9462 3736 9461 3736 9452
+      3734 9409 3730 9408 3729 9407 3725 9405
+      3705 9406 3706 9461 3700 9462 3700 9507</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-95.069999694824219,37.340000152587891 -94.620002746582031,37.340000152587891 -94.610000610351562,37.360000610351562 -94.519996643066406,37.360000610351562 -94.089996337890625,37.340000152587891 -94.080001831054688,37.299999237060547 -94.069999694824219,37.290000915527344 -94.050003051757812,37.25 -94.05999755859375,37.049999237060547 -94.610000610351562,37.060001373291016 -94.620002746582031,37 -95.069999694824219,37 -95.069999694824219,37.340000152587891</coordinates></LineString>
+<Point>
+<coordinates>-95.069999694824219,37.340000152587891</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-95.069999694824219,37.340000152587891 -94.620002746582031,37.340000152587891 -94.610000610351562,37.360000610351562 -94.519996643066406,37.360000610351562 -94.089996337890625,37.340000152587891 -94.080001831054688,37.299999237060547 -94.069999694824219,37.290000915527344 -94.050003051757812,37.25 -94.05999755859375,37.049999237060547 -94.610000610351562,37.060001373291016 -94.620002746582031,37 -95.069999694824219,37 -95.069999694824219,37.340000152587891</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#FF</styleUrl>
+<name>
+KJKL.FF.W.23:48Z
+</name>
+<description>
+<pre>
+976 
+WGUS73 KJKL 212348
+FFSJKL
+
+Flash Flood Statement
+National Weather Service JACKSON KY
+748 PM EDT FRI APR 21 2017
+
+KYC121-235-220200-
+/O.CON.KJKL.FF.W.0003.000000T0000Z-170422T0200Z/
+/00000.0.ER.000000T0000Z.000000T0000Z.000000T0000Z.OO/
+Knox KY-Whitley KY-
+748 PM EDT FRI APR 21 2017
+
+...THE FLASH FLOOD WARNING REMAINS IN EFFECT UNTIL 1000 PM EDT FOR
+WESTERN KNOX AND NORTH CENTRAL WHITLEY COUNTIES...
+
+At 741 PM EDT, Doppler radar indicated thunderstorms producing heavy 
+rain exiting to the north. While the heaviest rainfall has ended 
+across the warned area, excessive runoff from previous heavy 
+rainfall will continue to cause flash flooding of low lying and poor 
+drainage areas. 
+
+Some locations that will experience flooding  include...Woodbine, 
+Wilton, Moore Hill, Barton, North Corbin and Corbin. 
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+Turn around, don't drown when encountering flooded roads. Most flood
+deaths occur in vehicles.
+
+  
+
+LAT...LON 3689 8418 3696 8415 3697 8414 3696 8414
+      3697 8412 3695 8409 3697 8407 3698 8402
+      3687 8402</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-84.180000305175781,36.889999389648438 -84.150001525878906,36.959999084472656 -84.139999389648438,36.970001220703125 -84.139999389648438,36.959999084472656 -84.120002746582031,36.970001220703125 -84.089996337890625,36.950000762939453 -84.069999694824219,36.970001220703125 -84.019996643066406,36.979999542236328 -84.019996643066406,36.869998931884773 -84.180000305175781,36.889999389648438</coordinates></LineString>
+<Point>
+<coordinates>-84.180000305175781,36.889999389648438</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-84.180000305175781,36.889999389648438 -84.150001525878906,36.959999084472656 -84.139999389648438,36.970001220703125 -84.139999389648438,36.959999084472656 -84.120002746582031,36.970001220703125 -84.089996337890625,36.950000762939453 -84.069999694824219,36.970001220703125 -84.019996643066406,36.979999542236328 -84.019996643066406,36.869998931884773 -84.180000305175781,36.889999389648438</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+</Folder>
+<Folder id="MA">
+<name>RIDGE2 SMW Warnings</name>
+<description>RIDGE2 Active Warnings generated at 2017/04/22 01:02:01</description>
+<Style id="MA">
+<LabelStyle>
+<scale>0.7</scale>
+</LabelStyle>
+<LineStyle>
+<color>7f0066ff</color>
+<width>3</width>
+</LineStyle>
+<PolyStyle>
+<color>7f0066ff</color>
+</PolyStyle>
+<IconStyle>
+<scale>0.4</scale>
+<Icon><href>http://www.srh.noaa.gov/ridge/graphics/sw.gif</href></Icon>
+</IconStyle>
+</Style>
+<Placemark>
+<styleUrl>#MA</styleUrl>
+<name>
+KLWX.MA.W.00:13Z
+</name>
+<description>
+<pre>
+813 
+WHUS51 KLWX 220013
+SMWLWX
+ANZ534-543-220145-
+/O.NEW.KLWX.MA.W.0039.170422T0013Z-170422T0145Z/
+
+BULLETIN - IMMEDIATE BROADCAST REQUESTED
+SPECIAL MARINE WARNING
+NATIONAL WEATHER SERVICE BALTIMORE MD/WASHINGTON DC
+813 PM EDT FRI APR 21 2017
+
+THE NATIONAL WEATHER SERVICE IN STERLING VIRGINIA HAS ISSUED A
+
+* SPECIAL MARINE WARNING FOR...
+  CHESAPEAKE BAY FROM DRUM POINT MD TO SMITH POINT VA...
+  TANGIER SOUND AND THE INLAND WATERS SURROUNDING BLOODSWORTH
+  ISLAND...
+
+* UNTIL 945 PM EDT
+
+* AT 812 PM EDT...A STRONG THUNDERSTORM WAS LOCATED NEAR RICHLAND 
+  POINT BUOY...MOVING EAST AT 20 KNOTS. ANOTHER VERY STRONG 
+  THUNDERSTORM WAS MOVING EASTWARD ALONG THE LOWER POTOMAC RIVER.
+
+  HAZARD...WIND GUSTS 34 KNOTS OR GREATER AND SMALL HAIL. 
+
+  SOURCE...RADAR INDICATED. 
+
+  IMPACT...BOATERS IN SMALL CRAFT COULD BE THROWN OVERBOARD BY 
+           SUDDENLY HIGHER WINDS AND WAVES CAPSIZING THEIR VESSEL. 
+
+* LOCATIONS IMPACTED INCLUDE...
+  HOOPER ISLAND LIGHT...
+  SMITH ISLAND...
+  CRISFIELD...
+  DEEP HOLE...
+  NANTICOKE RIVER MOUTH...
+  SOUTHWEST MIDDLE GROUNDS...
+  EWELL...
+  TANGIER SOUND...
+  FISHING BAY...
+  HONGA RIVER...
+  POINT NO POINT...
+  RICHLAND POINT BUOY...
+  THE TARGETS...
+  AND DEAL ISLAND.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+MOVE TO SAFE HARBOR UNTIL HAZARDOUS WEATHER PASSES.
+
+  
+
+LAT...LON 3795 7586 3795 7599 3808 7633 3822 7640
+      3830 7611 3822 7603 3830 7606 3833 7596
+      3823 7597 3825 7596 3832 7592 3822 7582
+      3814 7596 3815 7579 3806 7587 3806 7581
+      3807 7579 3808 7578 3807 7578
+TIME...MOT...LOC 0012Z 283DEG 19KT 3818 7619 
+
+HAIL... .75IN
+WIND... 34KTS</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-75.860000610351562,37.950000762939453 -75.989997863769545,37.950000762939453 -76.330001831054688,38.080001831054688 -76.400001525878906,38.220001220703132 -76.110000610351562,38.299999237060547 -76.029998779296875,38.220001220703132 -76.05999755859375,38.299999237060547 -75.959999084472656,38.330001831054688 -75.970001220703125,38.229999542236328 -75.959999084472656,38.25 -75.919998168945312,38.319999694824219 -75.819999694824219,38.220001220703132 -75.959999084472656,38.139999389648438 -75.790000915527344,38.150001525878906 -75.870002746582031,38.060001373291023 -75.80999755859375,38.060001373291023 -75.790000915527344,38.069999694824219 -75.779998779296875,38.080001831054688 -75.779998779296875,38.069999694824219 -75.860000610351562,37.950000762939453</coordinates></LineString>
+<Point>
+<coordinates>-75.860000610351562,37.950000762939453</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-75.860000610351562,37.950000762939453 -75.989997863769545,37.950000762939453 -76.330001831054688,38.080001831054688 -76.400001525878906,38.220001220703132 -76.110000610351562,38.299999237060547 -76.029998779296875,38.220001220703132 -76.05999755859375,38.299999237060547 -75.959999084472656,38.330001831054688 -75.970001220703125,38.229999542236328 -75.959999084472656,38.25 -75.919998168945312,38.319999694824219 -75.819999694824219,38.220001220703132 -75.959999084472656,38.139999389648438 -75.790000915527344,38.150001525878906 -75.870002746582031,38.060001373291023 -75.80999755859375,38.060001373291023 -75.790000915527344,38.069999694824219 -75.779998779296875,38.080001831054688 -75.779998779296875,38.069999694824219 -75.860000610351562,37.950000762939453</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#MA</styleUrl>
+<name>
+KLWX.MA.W.00:41Z
+</name>
+<description>
+<pre>
+161 
+WHUS51 KLWX 220041
+SMWLWX
+ANZ534-543-220145-
+/O.NEW.KLWX.MA.W.0040.170422T0041Z-170422T0145Z/
+
+BULLETIN - IMMEDIATE BROADCAST REQUESTED
+SPECIAL MARINE WARNING
+NATIONAL WEATHER SERVICE BALTIMORE MD/WASHINGTON DC
+841 PM EDT FRI APR 21 2017
+
+THE NATIONAL WEATHER SERVICE IN STERLING VIRGINIA HAS ISSUED A
+
+* SPECIAL MARINE WARNING FOR...
+  CHESAPEAKE BAY FROM DRUM POINT MD TO SMITH POINT VA...
+  TANGIER SOUND AND THE INLAND WATERS SURROUNDING BLOODSWORTH
+  ISLAND...
+
+* UNTIL 945 PM EDT
+
+* AT 840 PM EDT...A STRONG THUNDERSTORM WAS LOCATED NEAR SOUTHWEST
+  MIDDLE GROUNDS...MOVING EAST AT 30 KNOTS.
+
+  HAZARD...WIND GUSTS 34 KNOTS OR GREATER. 
+
+  SOURCE...RADAR INDICATED. 
+
+  IMPACT...BOATERS IN SMALL CRAFT COULD BE THROWN OVERBOARD BY 
+           SUDDENLY HIGHER WINDS AND WAVES CAPSIZING THEIR VESSEL. 
+
+* THE STRONG THUNDERSTORM WILL REMAIN OVER MAINLY OPEN WATERS.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+MOVE TO SAFE HARBOR UNTIL HAZARDOUS WEATHER PASSES.
+
+  
+
+LAT...LON 3790 7605 3798 7606 3797 7605 3794 7604
+      3796 7604 3797 7603 3796 7601 3795 7600
+      3795 7589 3792 7590 3792 7589 3790 7591
+      3789 7603
+TIME...MOT...LOC 0040Z 292DEG 28KT 3801 7624 
+
+HAIL...0.00IN
+WIND... 34KTS</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-76.050003051757812,37.900001525878906 -76.05999755859375,37.979999542236328 -76.050003051757812,37.970001220703125 -76.040000915527344,37.939998626708984 -76.040000915527344,37.959999084472656 -76.029998779296875,37.970001220703125 -76.010002136230469,37.959999084472656 -76,37.950000762939453 -75.889999389648438,37.950000762939453 -75.900001525878906,37.919998168945312 -75.889999389648438,37.919998168945312 -75.910003662109375,37.900001525878906 -76.029998779296875,37.889999389648438 -76.050003051757812,37.900001525878906</coordinates></LineString>
+<Point>
+<coordinates>-76.050003051757812,37.900001525878906</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-76.050003051757812,37.900001525878906 -76.05999755859375,37.979999542236328 -76.050003051757812,37.970001220703125 -76.040000915527344,37.939998626708984 -76.040000915527344,37.959999084472656 -76.029998779296875,37.970001220703125 -76.010002136230469,37.959999084472656 -76,37.950000762939453 -75.889999389648438,37.950000762939453 -75.900001525878906,37.919998168945312 -75.889999389648438,37.919998168945312 -75.910003662109375,37.900001525878906 -76.029998779296875,37.889999389648438 -76.050003051757812,37.900001525878906</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+<Placemark>
+<styleUrl>#MA</styleUrl>
+<name>
+KLWX.MA.W.23:56Z
+</name>
+<description>
+<pre>
+939 
+WHUS51 KLWX 212356
+SMWLWX
+ANZ534-537-220130-
+/O.NEW.KLWX.MA.W.0038.170421T2356Z-170422T0130Z/
+
+BULLETIN - IMMEDIATE BROADCAST REQUESTED
+SPECIAL MARINE WARNING
+NATIONAL WEATHER SERVICE BALTIMORE MD/WASHINGTON DC
+756 PM EDT FRI APR 21 2017
+
+THE NATIONAL WEATHER SERVICE IN STERLING VIRGINIA HAS ISSUED A
+
+* SPECIAL MARINE WARNING FOR...
+  CHESAPEAKE BAY FROM DRUM POINT MD TO SMITH POINT VA...
+  TIDAL POTOMAC FROM COBB ISLAND MD TO SMITH POINT VA...
+
+* UNTIL 930 PM EDT
+
+* AT 755 PM EDT...A SEVERE THUNDERSTORM WAS LOCATED OVER COLES 
+  POINT... MOVING EAST AT 30 KNOTS.
+
+  HAZARD...WIND GUSTS 34 KNOTS OR GREATER AND LARGE HAIL. 
+
+  SOURCE...RADAR INDICATED. 
+
+  IMPACT...BOATERS IN SMALL CRAFT COULD BE THROWN OVERBOARD BY 
+           SUDDENLY HIGHER WINDS AND WAVES CAPSIZING THEIR VESSEL. 
+           HAIL MAY DAMAGE YOUR VESSEL. 
+
+* LOCATIONS IMPACTED INCLUDE...
+  YEOCOMICO RIVER...
+  POINT LOOKOUT...
+  MOUTH OF THE POTOMAC RIVER...
+  SAINT GEORGE ISLAND...
+  SOUTHWEST MIDDLE GROUNDS...
+  TALL TIMBERS...
+  AND PINEY POINT.
+
+PRECAUTIONARY/PREPAREDNESS ACTIONS...
+
+BOATERS SHOULD SEEK SAFE HARBOR IMMEDIATELY UNTIL THIS STORM PASSES.
+WIND GUSTS 34 KNOTS OR GREATER...LARGE HAIL...HIGH WAVES...DANGEROUS
+LIGHTNING...AND HEAVY RAIN ARE POSSIBLE WITH THIS STORM.
+
+  
+
+LAT...LON 3791 7627 3795 7634 3797 7641 3801 7647
+      3802 7651 3807 7654 3809 7658 3817 7655
+      3816 7653 3814 7652 3807 7633 3809 7633
+      3799 7606 3790 7604 3789 7624
+TIME...MOT...LOC 2355Z 285DEG 31KT 3812 7666 
+
+HAIL... .75IN
+WIND... 34KTS</pre>
+</description>
+<visibility>1</visibility>
+<open>0</open>
+<MultiGeometry>
+<LineString><extrude>1</extrude>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<coordinates>-76.269996643066406,37.909999847412109 -76.339996337890625,37.950000762939453 -76.410003662109375,37.970001220703125 -76.470001220703125,38.009998321533203 -76.510002136230469,38.020000457763672 -76.540000915527344,38.069999694824219 -76.580001831054688,38.090000152587891 -76.550003051757812,38.169998168945312 -76.529998779296875,38.159999847412109 -76.519996643066406,38.139999389648438 -76.330001831054688,38.069999694824219 -76.330001831054688,38.090000152587891 -76.05999755859375,37.990001678466797 -76.040000915527344,37.900001525878906 -76.239997863769531,37.889999389648438 -76.269996643066406,37.909999847412109</coordinates></LineString>
+<Point>
+<coordinates>-76.269996643066406,37.909999847412109</coordinates>
+</Point>
+<Polygon>
+<extrude>0</extrude>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>-76.269996643066406,37.909999847412109 -76.339996337890625,37.950000762939453 -76.410003662109375,37.970001220703125 -76.470001220703125,38.009998321533203 -76.510002136230469,38.020000457763672 -76.540000915527344,38.069999694824219 -76.580001831054688,38.090000152587891 -76.550003051757812,38.169998168945312 -76.529998779296875,38.159999847412109 -76.519996643066406,38.139999389648438 -76.330001831054688,38.069999694824219 -76.330001831054688,38.090000152587891 -76.05999755859375,37.990001678466797 -76.040000915527344,37.900001525878906 -76.239997863769531,37.889999389648438 -76.269996643066406,37.909999847412109</coordinates></LinearRing>
+</outerBoundaryIs>
+</Polygon>
+</MultiGeometry>
+</Placemark>
+</Folder>
+</Folder>
+</kml>
