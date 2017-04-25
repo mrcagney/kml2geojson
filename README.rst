@@ -56,8 +56,8 @@ History
 
 4.0.1, 2017-04-22
 -------------------
-- Moved the name of a FeatureCollection into a 'name' attribute, because `RFC 7946 says that a GeoJSON FetaureCollection must not have a 'properties' attribute <https://tools.ietf.org/html/rfc7946#section-7>`_
-- Stripped leanding and trailing whitespace from text content to avoid cluttered or blank name and description attribute values
+- Stopped making FeatureCollections with top-level 'properties' attributes, because `RFC 7946 says that's not allowed <https://tools.ietf.org/html/rfc7946#section-7>`_. Moved FeatureCollection names into a top-level 'name' attribute.
+- Stripped leading and trailing whitespace from text content to avoid cluttered or blank name and description attribute values
 - Switched to pytest for testing
 
 
