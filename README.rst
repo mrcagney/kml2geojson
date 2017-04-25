@@ -49,6 +49,11 @@ If you want to help develop this project, here is some background reading.
 History
 ========
 
+4.0.2, 2017-04-26
+-------------------
+- Fixed the bug where ``setup.py`` could not find the license file.
+
+
 4.0.1, 2017-04-22
 -------------------
 - Moved the name of a FeatureCollection into a 'name' attribute, because `RFC 7946 says that a GeoJSON FetaureCollection must not have a 'properties' attribute <https://tools.ietf.org/html/rfc7946#section-7>`_
