@@ -4,9 +4,6 @@ from setuptools import setup, find_packages
 with open('README.rst') as f:
     readme = f.read()
 
-with open('LICENSE.txt') as f:
-    license = f.read()
-
 setup(
     name='kml2geojson',
     version='4.0.2',
@@ -15,7 +12,8 @@ setup(
     data_files = [('', ['LICENSE.txt'])],
     description='A Python 3.4 package to convert KML files to GeoJSON files',
     long_description=readme,
-    license=license,
+    long_description_content_type='text/x-rst',
+    license='License :: OSI Approved :: MIT License',
     install_requires=[
         'click>=6.6',
     ],
