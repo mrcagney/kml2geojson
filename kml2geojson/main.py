@@ -587,3 +587,4 @@ def convert(kml_path, output_dir, separate_folders=False,
         path = output_dir/style_filename
         with path.open('w') as tgt:
             json.dump(style_dict, tgt)
+        return path
