@@ -18,8 +18,8 @@ Create a Python 3.6+ virtual environment and run ``poetry add kml2geojson``.
 
 Usage
 ======
-At the command line type ``k2g --help`` for instructions.
-You can also use kml2geojson as a library.
+Use as a library or from the command line.
+For instructions on the latter, type ``k2g --help``.
 
 
 Documentation
