@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "kml2geojson"
+version = "4.1.0"
+description = "A Python library to covert KML files to GeoJSON files"
+authors = ["Alex Raichev <alex@raichev.net>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+click = "^8.0.1"
+
+[tool.poetry.dev-dependencies]
+jupyter = "^1.0.0"
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+k2g = "kml2geojson.cli:k2g"
