@@ -1,21 +1,40 @@
-import click.testing
+import shutil
+
 from click.testing import CliRunner
 
-from .context import kml2geojson, DATA_DIR
-from kml2geojson import *
+from .context import DATA_DIR
 from kml2geojson.cli import *
 
 
 runner = CliRunner()
 
-def test_convert():
-    in_path = DATA_DIR/'two_layers'/'two_layers.kml'
-    out_path = DATA_DIR/'tmp'
-    rm_paths(out_path)
+def rm_paths(*paths):
+    """
+    Delete the given file paths/directory paths, if they exists.
+    """
+    for p in paths:
+        p = pl.Path(p)
+        if p.exists():
+            if p.is_file():
+                p.unlink()
+            else:
+                shutil.rmtree(str(p))
 
-    result = runner.invoke(k2g, [str(in_path),
-      str(out_path), '--separate-folders', '--style-type=svg', 
-      '-sf=wakawakawaka.json'])
+def test_k2g():
+    kml_path = DATA_DIR / "two_layers" / "two_layers.kml"
+    out_dir = DATA_DIR / "tmp"
+    rm_paths(out_dir)
+
+    result = runner.invoke(
+        k2g,
+        [
+            str(kml_path),
+            str(out_dir),
+            "--style-type=svg",
+            "-sf=wakawakawaka.json",
+            "--separate-folders",
+        ]
+    )
     assert result.exit_code == 0
 
-    rm_paths(out_path)
+    rm_paths(out_dir)
