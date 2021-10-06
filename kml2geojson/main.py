@@ -1,8 +1,7 @@
-import os
 import shutil
 import xml.dom.minidom as md
 import re
-from pathlib import Path
+import pathlib as pl
 import json
 
 
@@ -24,20 +23,6 @@ STYLE_TYPES = [
 
 SPACE = re.compile(r'\s+')
 
-# ----------------
-# Helper functions
-# ----------------
-def rm_paths(*paths):
-    """
-    Delete the given file paths/directory paths, if they exists.
-    """
-    for p in paths:
-        p = Path(p)
-        if p.exists():
-            if p.is_file():
-                p.unlink()
-            else:
-                shutil.rmtree(str(p))
 
 def get(node, name):
     """
@@ -177,7 +162,7 @@ def to_filename(s):
 
     EXAMPLE::
 
-        >>> to_filename("%  A d\sbla'{-+\)(ç? ")
+        >>> to_filename("%  A dbla'{-+)(ç? ")
         'A_dsbla-ç'
 
     """
@@ -538,58 +523,48 @@ def build_layers(node, *, disambiguate_names=True):
 
 def convert(
     kml_path,
-    output_dir,
     style_type=None,
-    style_filename='style.json',
     *,
     separate_folders=False,
 ):
     """
-    Given a path to a KML file, convert it to one or several GeoJSON FeatureCollection files and save the result(s) to the given output directory.
+    Given a path to a KML file, convert it to a single GeoJSON FeatureCollection
+    dictionary.
 
-    If not ``separate_folders`` (the default), then create one GeoJSON file.
-    Otherwise, create several GeoJSON files, one for each folder in the KML file that contains geodata or that has a descendant node that contains geodata.
-    Warning: this can produce GeoJSON files with the same geodata in case the KML file has nested folders with geodata.
+    If ``separate_folders``, then return several FeatureCollections,
+    one for each folder in the KML file that contains geodata or that has a descendant
+    node that contains geodata.
+    Warning: this can produce FeatureCollections with the same geodata in case the KML
+    file has nested folders with geodata.
 
-    If a ``style_type`` is given, then also build a JSON style file of the given style type and save it to the output directory under the name given by ``style_filename``.
+    If a style type from :const:`STYLE_TYPES` is given, then also create a JSON
+    dictionary that encodes into the style type the style information contained in the
+    KML file.
+
+    Return a tuple (style dict, FeatureCollection 1, ..., FeatureCollection n),
+    where the style dict is present if and only if ``style_type`` is given and
+    where n > 1 if and only if ``separate_folders`` and the KML file contains more than
+    one folder of geodata.
     """
-    # Create absolute paths
-    kml_path = Path(kml_path).resolve()
-    output_dir = Path(output_dir)
-    if not output_dir.exists():
-        output_dir.mkdir()
-    output_dir = output_dir.resolve()
-
     # Parse KML
+    kml_path = pl.Path(kml_path).resolve()
     with kml_path.open(encoding='utf-8', errors='ignore') as src:
         kml_str = src.read()
     root = md.parseString(kml_str)
 
     # Build GeoJSON layers
     if separate_folders:
-        layers = build_layers(root)
+        result = build_layers(root)
     else:
-        layers = [build_feature_collection(root, name=kml_path.stem)]
+        result = [build_feature_collection(root, name=kml_path.stem)]
 
-    # Create filenames for layers
-    filenames = disambiguate(
-      [to_filename(layer['name'])
-      for layer in layers])
-    filenames = [name + '.geojson' for name in filenames]
-
-    # Write layers to files
-    for i in range(len(layers)):
-        path = output_dir/filenames[i]
-        with path.open('w') as tgt:
-            json.dump(layers[i], tgt)
-
-    # Build and export style file if desired
     if style_type is not None:
+        # Build style dictionary
         if style_type not in STYLE_TYPES:
-            raise ValueError('style type must be one of {!s}'.format(
-              STYLE_TYPES))
-        builder_name = 'build_{!s}_style'.format(style_type)
-        style_dict = globals()[builder_name](root)
-        path = output_dir/style_filename
-        with path.open('w') as tgt:
-            json.dump(style_dict, tgt)
+            raise ValueError(f"style type must be one of {STYLE_TYPES}")
+        else:
+            builder_name = f'build_{style_type}_style'
+            style_dict = globals()[builder_name](root)
+            result = style_dict, *result
+
+    return result
