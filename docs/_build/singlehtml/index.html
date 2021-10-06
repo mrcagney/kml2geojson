@@ -1,29 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>kml2geojson documentation</title>
-    
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>kml2geojson 5.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
    
@@ -32,275 +21,284 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body role="document">
+  </head><body>
   
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="section" id="kml2geojson-version-documentation">
-<h1>kml2geojson 4.0 Documentation<a class="headerlink" href="#kml2geojson-version-documentation" title="Permalink to this headline">¶</a></h1>
+  <section id="kml2geojson-version-documentation">
+<h1>kml2geojson 5.0.0 Documentation<a class="headerlink" href="#kml2geojson-version-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
-<span id="document-introduction"></span><div class="section" id="introduction">
+<span id="document-introduction"></span><section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>kml2geojson is a Python 3.4+ program to convert KML files to GeoJSON files.</p>
-<p>Much of the code is a translation into Python of the Node.js package <a class="reference external" href="https://github.com/mapbox/togeojson">togeojson</a>.
-But kml2geojson also adds the following features.</p>
+<p>kml2geojson is a Python 3.6+ package to convert KML files to GeoJSON files.
+Most of its code is a translation into Python of the Node.js package <a class="reference external" href="https://github.com/mapbox/togeojson">togeojson</a>, but kml2geojson also adds the following features.</p>
 <ul class="simple">
-<li>Preserves KML object styling, such as color and opacity</li>
-<li>Optionally writes one JSON file cataloging all the KML styles used</li>
-<li>Optionally creates several GeoJSON files of FeatureCollections, one for each KML folder</li>
+<li><p>Preserve KML object styling, such as color and opacity</p></li>
+<li><p>Optionally create a style dictionary cataloging all the KML styles used</p></li>
+<li><p>Optionally create several GeoJSON FeatureCollections, one for each KML folder present</p></li>
 </ul>
-<div class="section" id="installation">
+<section id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">kml2geojson</span></code></p>
-</div>
-<div class="section" id="usage">
+<p>Create a Python 3.6+ virtual environment and run <code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">add</span> <span class="pre">kml2geojson</span></code>.</p>
+</section>
+<section id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<p>At the command line type <code class="docutils literal"><span class="pre">k2g</span> <span class="pre">--help</span></code> for instructions.
+<p>At the command line type <code class="docutils literal notranslate"><span class="pre">k2g</span> <span class="pre">--help</span></code> for instructions.
 You can also use kml2geojson as a library.</p>
-</div>
-<div class="section" id="notes">
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">docs</span></code> and on RawGit <a class="reference external" href="https://rawgit.com/mrcagney/kml2geojson/master/docs/_build/singlehtml/index.html">here</a>.</p>
+</section>
+<section id="notes">
 <h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Development status: Alpha</li>
-<li>This project uses semantic versioning (major.minor.micro), where each breaking feature or API change is considered a major change</li>
+<li><p>Development status is Alpha.</p></li>
+<li><p>This project uses semantic versioning.</p></li>
 </ul>
-</div>
-<div class="section" id="authors">
+</section>
+<section id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Alex Raichev (2015-10-03)</li>
+<li><p>Alex Raichev (2015-10-03), maintainer</p></li>
 </ul>
-</div>
-</div>
-<span id="document-api"></span><div class="section" id="api">
+</section>
+</section>
+<span id="document-api"></span><section id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
-<p>The kml2geojson package contains two independent modules, <code class="docutils literal"><span class="pre">main</span></code> and <code class="docutils literal"><span class="pre">cli</span></code>, the latter of which is a command line interface for the package.</p>
-<div class="section" id="module-kml2geojson.main">
+<p>The kml2geojson package contains two independent modules, <code class="docutils literal notranslate"><span class="pre">main</span></code> and <code class="docutils literal notranslate"><span class="pre">cli</span></code>, the latter of which is a command line interface for the package.</p>
+<section id="module-kml2geojson.main">
 <span id="kml2geojson-main-module"></span><h3>kml2geojson.main module<a class="headerlink" href="#module-kml2geojson.main" title="Permalink to this headline">¶</a></h3>
-<dl class="data">
-<dt id="kml2geojson.main.GEOTYPES">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">GEOTYPES</code><em class="property"> = ['Polygon', 'LineString', 'Point', 'Track', 'gx:Track']</em><a class="headerlink" href="#kml2geojson.main.GEOTYPES" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt class="sig sig-object py" id="kml2geojson.main.GEOTYPES">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">GEOTYPES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">['Polygon',</span> <span class="pre">'LineString',</span> <span class="pre">'Point',</span> <span class="pre">'Track',</span> <span class="pre">'gx:Track']</span></em><a class="headerlink" href="#kml2geojson.main.GEOTYPES" title="Permalink to this definition">¶</a></dt>
 <dd><p>Atomic KML geometry types supported.
 MultiGeometry is handled separately.</p>
 </dd></dl>
 
-<dl class="data">
-<dt id="kml2geojson.main.STYLE_TYPES">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">STYLE_TYPES</code><em class="property"> = ['svg', 'leaflet']</em><a class="headerlink" href="#kml2geojson.main.STYLE_TYPES" title="Permalink to this definition">¶</a></dt>
+<dl class="py data">
+<dt class="sig sig-object py" id="kml2geojson.main.STYLE_TYPES">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">STYLE_TYPES</span></span><em class="property"> <span class="pre">=</span> <span class="pre">['svg',</span> <span class="pre">'leaflet']</span></em><a class="headerlink" href="#kml2geojson.main.STYLE_TYPES" title="Permalink to this definition">¶</a></dt>
 <dd><p>Supported style types</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.attr">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">attr</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.attr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return as a string the value of the given DOM node&#8217;s attribute named by <code class="docutils literal"><span class="pre">name</span></code>, if it exists.
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.attr">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return as a string the value of the given DOM node’s attribute named by <code class="docutils literal notranslate"><span class="pre">name</span></code>, if it exists.
 Otherwise, return an empty string.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.build_feature">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">build_feature</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_feature" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.build_feature">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">build_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_feature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build and return a (decoded) GeoJSON Feature corresponding to this KML node (typically a KML Placemark).
-Return <code class="docutils literal"><span class="pre">None</span></code> if no Feature can be built.</p>
+Return <code class="docutils literal notranslate"><span class="pre">None</span></code> if no Feature can be built.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.build_feature_collection">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">build_feature_collection</code><span class="sig-paren">(</span><em>node</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_feature_collection" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.build_feature_collection">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">build_feature_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_feature_collection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build and return a (decoded) GeoJSON FeatureCollection corresponding to this KML DOM node (typically a KML Folder).
-If a name is given, store it in the FeatureCollection&#8217;s <code class="docutils literal"><span class="pre">'name'</span></code> attribute.</p>
+If a name is given, store it in the FeatureCollection’s <code class="docutils literal notranslate"><span class="pre">'name'</span></code> attribute.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.build_geometry">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">build_geometry</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_geometry" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.build_geometry">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">build_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_geometry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a (decoded) GeoJSON geometry dictionary corresponding to the given KML node.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.build_layers">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">build_layers</code><span class="sig-paren">(</span><em>node</em>, <em>disambiguate_names=True</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_layers" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.build_layers">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">build_layers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disambiguate_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_layers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of GeoJSON FeatureCollections, one for each folder in the given KML DOM node that contains geodata.
-Name each FeatureCollection (via a <code class="docutils literal"><span class="pre">'name'</span></code> attribute) according to its corresponding KML folder name.</p>
-<p>If <code class="docutils literal"><span class="pre">disambiguate_names</span> <span class="pre">==</span> <span class="pre">True</span></code>, then disambiguate repeated layer names via <a class="reference internal" href="#kml2geojson.main.disambiguate" title="kml2geojson.main.disambiguate"><code class="xref py py-func docutils literal"><span class="pre">disambiguate()</span></code></a>.</p>
+Name each FeatureCollection (via a <code class="docutils literal notranslate"><span class="pre">'name'</span></code> attribute) according to its corresponding KML folder name.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">disambiguate_names</span> <span class="pre">==</span> <span class="pre">True</span></code>, then disambiguate repeated layer names via <a class="reference internal" href="#kml2geojson.main.disambiguate" title="kml2geojson.main.disambiguate"><code class="xref py py-func docutils literal notranslate"><span class="pre">disambiguate()</span></code></a>.</p>
 <p>Warning: this can produce layers with the same geodata in case the KML node has nested folders with geodata.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.build_leaflet_style">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">build_leaflet_style</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_leaflet_style" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.build_leaflet_style">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">build_leaflet_style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_leaflet_style" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a DOM node, grab its top-level Style nodes, convert every one into a Leaflet style dictionary, put them in a master dictionary of the form</p>
 <blockquote>
-<div>#style ID -&gt; Leaflet style dictionary,</div></blockquote>
+<div><p>#style ID -&gt; Leaflet style dictionary,</p>
+</div></blockquote>
 <p>and return the result.</p>
 <p>The the possible keys and values of each Leaflet style dictionary, the style options, are</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">iconUrl</span></code>: URL of icon</li>
-<li><code class="docutils literal"><span class="pre">color</span></code>: stroke color; RGB hex string</li>
-<li><code class="docutils literal"><span class="pre">opacity</span></code>: stroke opacity</li>
-<li><code class="docutils literal"><span class="pre">weight</span></code>:  stroke width in pixels</li>
-<li><code class="docutils literal"><span class="pre">fillColor</span></code>: fill color; RGB hex string</li>
-<li><code class="docutils literal"><span class="pre">fillOpacity</span></code>: fill opacity</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iconUrl</span></code>: URL of icon</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">color</span></code>: stroke color; RGB hex string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">opacity</span></code>: stroke opacity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weight</span></code>:  stroke width in pixels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fillColor</span></code>: fill color; RGB hex string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fillOpacity</span></code>: fill opacity</p></li>
 </ul>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.build_rgb_and_opacity">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">build_rgb_and_opacity</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_rgb_and_opacity" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.build_rgb_and_opacity">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">build_rgb_and_opacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_rgb_and_opacity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a KML color string, return an equivalent RGB hex color string and an opacity float rounded to 2 decimal places.</p>
 <p>EXAMPLE:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">build_rgb_and_opacity</span><span class="p">(</span><span class="s1">&#39;ee001122&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">build_rgb_and_opacity</span><span class="p">(</span><span class="s1">&#39;ee001122&#39;</span><span class="p">)</span>
 <span class="go">(&#39;#221100&#39;, 0.93)</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.build_svg_style">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">build_svg_style</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_svg_style" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.build_svg_style">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">build_svg_style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.build_svg_style" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a DOM node, grab its top-level Style nodes, convert every one into a SVG style dictionary, put them in a master dictionary of the form</p>
 <blockquote>
-<div>#style ID -&gt; SVG style dictionary,</div></blockquote>
+<div><p>#style ID -&gt; SVG style dictionary,</p>
+</div></blockquote>
 <p>and return the result.</p>
 <p>The possible keys and values of each SVG style dictionary, the style options, are</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">iconUrl</span></code>: URL of icon</li>
-<li><code class="docutils literal"><span class="pre">stroke</span></code>: stroke color; RGB hex string</li>
-<li><code class="docutils literal"><span class="pre">stroke-opacity</span></code>: stroke opacity</li>
-<li><code class="docutils literal"><span class="pre">stroke-width</span></code>:  stroke width in pixels</li>
-<li><code class="docutils literal"><span class="pre">fill</span></code>: fill color; RGB hex string</li>
-<li><code class="docutils literal"><span class="pre">fill-opacity</span></code>: fill opacity</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iconUrl</span></code>: URL of icon</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stroke</span></code>: stroke color; RGB hex string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stroke-opacity</span></code>: stroke opacity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stroke-width</span></code>:  stroke width in pixels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fill</span></code>: fill color; RGB hex string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fill-opacity</span></code>: fill opacity</p></li>
 </ul>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.convert">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">convert</code><span class="sig-paren">(</span><em>kml_path</em>, <em>output_dir</em>, <em>separate_folders=False</em>, <em>style_type=None</em>, <em>style_filename='style.json'</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.convert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a path to a KML file, convert it to one or several GeoJSON FeatureCollection files and save the result(s) to the given output directory.</p>
-<p>If not <code class="docutils literal"><span class="pre">separate_folders</span></code> (the default), then create one GeoJSON file.
-Otherwise, create several GeoJSON files, one for each folder in the KML file that contains geodata or that has a descendant node that contains geodata.
-Warning: this can produce GeoJSON files with the same geodata in case the KML file has nested folders with geodata.</p>
-<p>If a <code class="docutils literal"><span class="pre">style_type</span></code> is given, then also build a JSON style file of the given style type and save it to the output directory under the name given by <code class="docutils literal"><span class="pre">style_filename</span></code>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.convert">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kml_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separate_folders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a path to a KML file, convert it to a single GeoJSON FeatureCollection
+dictionary.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">separate_folders</span></code>, then return several FeatureCollections,
+one for each folder in the KML file that contains geodata or that has a descendant
+node that contains geodata.
+Warning: this can produce FeatureCollections with the same geodata in case the KML
+file has nested folders with geodata.</p>
+<p>If a style type from <a class="reference internal" href="#kml2geojson.main.STYLE_TYPES" title="kml2geojson.main.STYLE_TYPES"><code class="xref py py-const docutils literal notranslate"><span class="pre">STYLE_TYPES</span></code></a> is given, then also create a JSON
+dictionary that encodes into the style type the style information contained in the
+KML file.</p>
+<p>Return a tuple (style dict, FeatureCollection 1, …, FeatureCollection n),
+where the style dict is present if and only if <code class="docutils literal notranslate"><span class="pre">style_type</span></code> is given and
+where n &gt; 1 if and only if <code class="docutils literal notranslate"><span class="pre">separate_folders</span></code> and the KML file contains more than
+one folder of geodata.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.coords">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">coords</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.coords" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.coords">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.coords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the given KML string containing multiple coordinate tuples into a list of lists of floats.</p>
 <p>EXAMPLE:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coords</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coords</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="gp">... </span><span class="s1">-112.0,36.1,0</span>
-<span class="gp">... </span><span class="s1">-113.0,36.0,0 </span>
+<span class="gp">... </span><span class="s1">-113.0,36.0,0</span>
 <span class="gp">... </span><span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
 <span class="go">[[-112.0, 36.1, 0.0], [-113.0, 36.0, 0.0]]</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.coords1">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">coords1</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.coords1" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.coords1">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">coords1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.coords1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the given KML string containing one coordinate tuple into a list of floats.</p>
 <p>EXAMPLE:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coords1</span><span class="p">(</span><span class="s1">&#39; -112.2,36.0,2357 &#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coords1</span><span class="p">(</span><span class="s1">&#39; -112.2,36.0,2357 &#39;</span><span class="p">)</span>
 <span class="go">[-112.2, 36.0, 2357.0]</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.disambiguate">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">disambiguate</code><span class="sig-paren">(</span><em>names</em>, <em>mark='1'</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.disambiguate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a list of strings <code class="docutils literal"><span class="pre">names</span></code>, return a new list of names where repeated names have been disambiguated by repeatedly appending the given mark.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.disambiguate">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">disambiguate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mark</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.disambiguate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of strings <code class="docutils literal notranslate"><span class="pre">names</span></code>, return a new list of names where repeated names have been disambiguated by repeatedly appending the given mark.</p>
 <p>EXAMPLE:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">disambiguate</span><span class="p">([</span><span class="s1">&#39;sing&#39;</span><span class="p">,</span> <span class="s1">&#39;song&#39;</span><span class="p">,</span> <span class="s1">&#39;sing&#39;</span><span class="p">,</span> <span class="s1">&#39;sing&#39;</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">disambiguate</span><span class="p">([</span><span class="s1">&#39;sing&#39;</span><span class="p">,</span> <span class="s1">&#39;song&#39;</span><span class="p">,</span> <span class="s1">&#39;sing&#39;</span><span class="p">,</span> <span class="s1">&#39;sing&#39;</span><span class="p">])</span>
 <span class="go">[&#39;sing&#39;, &#39;song&#39;, &#39;sing1&#39;, &#39;sing11&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.get">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">get</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.get" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.get">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a KML Document Object Model (DOM) node, return a list of its sub-nodes that have the given tag name.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.get1">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">get1</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.get1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the first element of <code class="docutils literal"><span class="pre">get(node,</span> <span class="pre">name)</span></code>, if it exists.
-Otherwise return <code class="docutils literal"><span class="pre">None</span></code>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.get1">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">get1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.get1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first element of <code class="docutils literal notranslate"><span class="pre">get(node,</span> <span class="pre">name)</span></code>, if it exists.
+Otherwise return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.gx_coords">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">gx_coords</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.gx_coords" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.gx_coords">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">gx_coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.gx_coords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a KML DOM node, grab its &lt;gx:coord&gt; and &lt;gx:timestamp&gt;&lt;when&gt;subnodes, and convert them into a dictionary with the keys and values</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">'coordinates'</span></code>: list of lists of float coordinates</li>
-<li><code class="docutils literal"><span class="pre">'times'</span></code>: list of timestamps corresponding to the coordinates</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'coordinates'</span></code>: list of lists of float coordinates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'times'</span></code>: list of timestamps corresponding to the coordinates</p></li>
 </ul>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.gx_coords1">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">gx_coords1</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.gx_coords1" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.gx_coords1">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">gx_coords1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.gx_coords1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the given KML string containing one gx coordinate tuple into a list of floats.</p>
 <p>EXAMPLE:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gx_coords1</span><span class="p">(</span><span class="s1">&#39;-113.0 36.0 0&#39;</span><span class="p">)</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gx_coords1</span><span class="p">(</span><span class="s1">&#39;-113.0 36.0 0&#39;</span><span class="p">)</span>
 <span class="go">[-113.0, 36.0, 0.0]</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.numarray">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">numarray</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.numarray" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.numarray">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">numarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.numarray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the given list into a list of floats.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.rm_paths">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">rm_paths</code><span class="sig-paren">(</span><em>*paths</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.rm_paths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Delete the given file paths/directory paths, if they exists.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="kml2geojson.main.to_filename">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">to_filename</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.to_filename" title="Permalink to this definition">¶</a></dt>
-<dd><p>Based on <a class="reference external" href="https://github.com/django/django/blob/master/django/utils/text.py">django/utils/text.py</a>. 
-Return the given string converted to a string that can be used for a clean filename. 
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.to_filename">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">to_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.to_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on <a class="reference external" href="https://github.com/django/django/blob/master/django/utils/text.py">django/utils/text.py</a>.
+Return the given string converted to a string that can be used for a clean filename.
 Specifically, leading and trailing spaces are removed; other spaces are converted to underscores, and anything that is not a unicode alphanumeric, dash, underscore, or dot, is removed.</p>
 <p>EXAMPLE:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">to_filename</span><span class="p">(</span><span class="s2">&quot;%  A d\sbla&#39;{-+\)(ç? &quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">to_filename</span><span class="p">(</span><span class="s2">&quot;%  A dbla&#39;{-+)(ç? &quot;</span><span class="p">)</span>
 <span class="go">&#39;A_dsbla-ç&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.val">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">val</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.val" title="Permalink to this definition">¶</a></dt>
-<dd><p>Normalize the given DOM node and return the value of its first child (the string content of the node) stripped of leanding and trailing whitespace.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.val">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">val</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the given DOM node and return the value of its first child (the string content of the node) stripped of leading and trailing whitespace.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="kml2geojson.main.valf">
-<code class="descclassname">kml2geojson.main.</code><code class="descname">valf</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.valf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cast <code class="docutils literal"><span class="pre">val(node)</span></code> as a float.
-Return <code class="docutils literal"><span class="pre">None</span></code> if that does not work.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="kml2geojson.main.valf">
+<span class="sig-prename descclassname"><span class="pre">kml2geojson.main.</span></span><span class="sig-name descname"><span class="pre">valf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kml2geojson.main.valf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast <code class="docutils literal notranslate"><span class="pre">val(node)</span></code> as a float.
+Return <code class="docutils literal notranslate"><span class="pre">None</span></code> if that does not work.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="kml2geojson-cli-module">
+</section>
+<section id="kml2geojson-cli-module">
 <h3>kml2geojson.cli module<a class="headerlink" href="#kml2geojson-cli-module" title="Permalink to this headline">¶</a></h3>
-<p>Sphinx auto-documentation does not work on this module, because all the functions inside are decorated by Click decorators, which don&#8217;t play nicely with Sphinx. So use the command line to access the documentation for k2g, the command line interface for kml2geojson:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>~&gt; k2g --help
+<p>Sphinx auto-documentation does not work on this module, because all the functions inside are decorated by Click decorators, which don’t play nicely with Sphinx. So use the command line to access the documentation for k2g, the command line interface for kml2geojson:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>~&gt; k2g --help
 Usage: k2g [OPTIONS] KML_PATH OUTPUT_DIR
 
 Given a path to a KML file, convert it to a a GeoJSON FeatureCollection
@@ -322,47 +320,56 @@ Options:
   --help                          Show this message and exit.
 </pre></div>
 </div>
+</section>
+</section>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
+</section>
+<section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</div>
+</section>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html#document-index">Table Of Contents</a></h3>
-  <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-introduction">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#authors">Authors</a></li>
+<h1 class="logo"><a href="#">kml2geojson</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-introduction">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-api">API</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="index.html#document-api">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="index.html#module-kml2geojson.main">kml2geojson.main module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index.html#kml2geojson-cli-module">kml2geojson.cli module</a></li>
-</ul>
-</li>
-</ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="index.html#document-index">Documentation overview</a><ul>
+  <li><a href="#">Documentation overview</a><ul>
   </ul></li>
 </ul>
 </div>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -371,8 +378,8 @@ Options:
       &copy;2015, Alex Raichev.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
 

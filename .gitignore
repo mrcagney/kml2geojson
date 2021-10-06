@@ -1,3 +1,5 @@
+output/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -65,6 +67,7 @@ instance/
 target/
 
 # Jupyter Notebook
+notebooks/
 .ipynb_checkpoints
 
 # pyenv

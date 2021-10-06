@@ -6,12 +6,14 @@ authors = ["Alex Raichev <alex@raichev.net>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = ">=3.6"
+python = "^3.6"
 click = "^8.0.1"
 
 [tool.poetry.dev-dependencies]
 jupyter = "^1.0.0"
 pytest = "^6.2.5"
+Sphinx = "^4.2.0"
+publish-sphinx-docs = "1.0.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

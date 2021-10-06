@@ -24,7 +24,7 @@ You can also use kml2geojson as a library.
 
 Documentation
 ==============
-In ``docs`` and on RawGit `here <https://rawgit.com/mrcagney/kml2geojson/master/docs/_build/singlehtml/index.html>`_.
+In the ``docs`` directory and published at `mrcagney.github.io/kml2geojson_docs <https://mrcagney.github.io/kml2geojson_docs/>`_.
 
 
 Notes
@@ -54,6 +54,7 @@ Changes
 - Upgraded to Python 3.9 and dropped support for Python versions < 3.6.
 - Switched to Poetry.
 - Breaking change: refactored the ``convert`` function to return dictionaries instead of files.
+- Moved docs from Rawgit to Github Pages.
 
 
 4.0.2, 2017-04-26
