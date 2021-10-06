@@ -1,8 +1,7 @@
-import os
 import shutil
 import xml.dom.minidom as md
 import re
-from pathlib import Path
+import pathlib as pl
 import json
 
 
@@ -32,7 +31,7 @@ def rm_paths(*paths):
     Delete the given file paths/directory paths, if they exists.
     """
     for p in paths:
-        p = Path(p)
+        p = pl.Path(p)
         if p.exists():
             if p.is_file():
                 p.unlink()
@@ -538,24 +537,51 @@ def build_layers(node, *, disambiguate_names=True):
 
 def convert(
     kml_path,
-    output_dir,
-    style_type=None,
-    style_filename='style.json',
+    style_type=STYLE_TYPES[0],
     *,
     separate_folders=False,
 ):
     """
-    Given a path to a KML file, convert it to one or several GeoJSON FeatureCollection files and save the result(s) to the given output directory.
+    Given a path to a KML file, convert it to a single GeoJSON FeatureCollection
+    dictionary.
+    Also create a JSON dictionary that encodes into the given style type
+    the style information contained in the KML file.
 
-    If not ``separate_folders`` (the default), then create one GeoJSON file.
-    Otherwise, create several GeoJSON files, one for each folder in the KML file that contains geodata or that has a descendant node that contains geodata.
-    Warning: this can produce GeoJSON files with the same geodata in case the KML file has nested folders with geodata.
+    If ``separate_folders``, then return several FeatureCollections,
+    one for each folder in the KML file that contains geodata or that has a descendant
+    node that contains geodata.
+    Warning: this can produce FeatureCollections with the same geodata in case the KML
+    file has nested folders with geodata.
 
-    If a ``style_type`` is given, then also build a JSON style file of the given style type and save it to the output directory under the name given by ``style_filename``.
+    Return a tuple (style dict, FeatureCollection 1, ..., FeatureCollection n),
+    where n > 1 if and only if ``separate_folders`` and the KML file contains more than
+    one folder of geodata.
     """
+    # Parse KML
+    kml_path = pl.Path(kml_path).resolve()
+    with kml_path.open(encoding='utf-8', errors='ignore') as src:
+        kml_str = src.read()
+    root = md.parseString(kml_str)
+
+    # Build GeoJSON layers
+    if separate_folders:
+        layers = build_layers(root)
+    else:
+        layers = [build_feature_collection(root, name=kml_path.stem)]
+
+    if style_type not in STYLE_TYPES:
+        raise ValueError('style type must be one of {!s}'.format(
+          STYLE_TYPES))
+
+    builder_name = f'build_{style_type}_style'
+    style_dict = globals()[builder_name](root)
+
+    return style_dict, *layers
+
+def convert_bak():
     # Create absolute paths
-    kml_path = Path(kml_path).resolve()
-    output_dir = Path(output_dir)
+    kml_path = pl.Path(kml_path).resolve()
+    output_dir = pl.Path(output_dir)
     if not output_dir.exists():
         output_dir.mkdir()
     output_dir = output_dir.resolve()
