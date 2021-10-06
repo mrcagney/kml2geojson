@@ -7,8 +7,8 @@ kml2geojson is a Python 3.6+ package to convert KML files to GeoJSON files.
 Most of its code is a translation into Python of the Node.js package `togeojson <https://github.com/mapbox/togeojson>`_, but kml2geojson also adds the following features.
 
 - Preserve KML object styling, such as color and opacity
-- Optionally write one JSON file cataloging all the KML styles used
-- Optionally create several GeoJSON files of FeatureCollections, one for each KML folder 
+- Optionally create a style dictionary cataloging all the KML styles used
+- Optionally create several GeoJSON FeatureCollections, one for each KML folder present
 
 
 Installation
@@ -24,7 +24,7 @@ You can also use kml2geojson as a library.
 
 Documentation
 ==============
-In ``docs`` and on RawGit `here <https://rawgit.com/araichev/kml2geojson/master/docs/_build/singlehtml/index.html>`_.
+In ``docs`` and on RawGit `here <https://rawgit.com/mrcagney/kml2geojson/master/docs/_build/singlehtml/index.html>`_.
 
 
 Notes
@@ -49,10 +49,11 @@ If you want to help develop this project, here is some background reading.
 Changes
 ========
 
-4.1.0, 2021-??-??
+5.0.0, 2021-10-07
 -----------------
 - Upgraded to Python 3.9 and dropped support for Python versions < 3.6.
 - Switched to Poetry.
+- Breaking change: refactored the ``convert`` function to return dictionaries instead of files.
 
 
 4.0.2, 2017-04-26
