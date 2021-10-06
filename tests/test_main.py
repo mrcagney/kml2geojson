@@ -84,7 +84,7 @@ def test_disambiguate():
     assert get == expect
 
 def test_to_filename():
-    name = u"%   A d\nbla'{-+\)(ç?"
+    name = "%   A d\nbla'{-+)(ç?"
     get = to_filename(name)
     expect = "A_dbla-ç"
     assert get == expect

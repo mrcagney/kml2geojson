@@ -500,7 +500,7 @@ def build_feature_collection(node, name=None):
 
     return geojson
 
-def build_layers(node, disambiguate_names=True):
+def build_layers(node, *, disambiguate_names=True):
     """
     Return a list of GeoJSON FeatureCollections, one for each folder in the given KML DOM node that contains geodata.
     Name each FeatureCollection (via a ``'name'`` attribute) according to its corresponding KML folder name.
@@ -536,8 +536,14 @@ def build_layers(node, disambiguate_names=True):
 
     return layers
 
-def convert(kml_path, output_dir, separate_folders=False,
-  style_type=None, style_filename='style.json'):
+def convert(
+    kml_path,
+    output_dir,
+    style_type=None,
+    style_filename='style.json',
+    *,
+    separate_folders=False,
+):
     """
     Given a path to a KML file, convert it to one or several GeoJSON FeatureCollection files and save the result(s) to the given output directory.
 

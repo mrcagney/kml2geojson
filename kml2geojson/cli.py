@@ -22,4 +22,10 @@ def k2g(kml_path, output_dir, separate_folders, style_type,
 
     If ``--style_type`` is specified, then also build a JSON style file of the given style type and save it to the output directory under the file name given by ``--style_filename``.
     """
-    m.convert(kml_path, output_dir, separate_folders, style_type, style_filename)
+    m.convert(
+      kml_path,
+      output_dir,
+      style_type,
+      style_filename,
+      separate_folders=separate_folders,
+    )
