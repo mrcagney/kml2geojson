@@ -102,7 +102,7 @@ Forgot to do that last time.
 
 
 3.0.0, 2015-10-12
----------------
+------------------
 Changed the output of ``build_layers()`` and moved layer names into the GeoJSON FeatureCollections
 
 
