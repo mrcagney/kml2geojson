@@ -49,6 +49,11 @@ If you want to help develop this project, here is some background reading.
 Changes
 ========
 
+5.0.1, 2021-10-11
+-----------------
+- Re-included the MIT License file and added more metadata to the file ``pyproject.toml`` for a more informative listing on PyPi.
+
+
 5.0.0, 2021-10-07
 -----------------
 - Upgraded to Python 3.9 and dropped support for Python versions < 3.6.
