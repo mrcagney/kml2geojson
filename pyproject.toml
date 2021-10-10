@@ -4,6 +4,7 @@ version = "5.0.0"
 description = "A Python library to covert KML files to GeoJSON files"
 authors = ["Alex Raichev <alex@raichev.net>"]
 license = "MIT"
+readme = "README.rst"
 
 [tool.poetry.dependencies]
 python = "^3.6"
