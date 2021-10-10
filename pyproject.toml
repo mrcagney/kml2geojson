@@ -1,10 +1,12 @@
 [tool.poetry]
 name = "kml2geojson"
-version = "5.0.0"
+version = "5.0.1"
 description = "A Python library to covert KML files to GeoJSON files"
 authors = ["Alex Raichev <alex@raichev.net>"]
 license = "MIT"
 readme = "README.rst"
+homepage = "https://github.com/mrcagney/kml2geojson"
+documentation = "https://mrcagney.github.io/kml2geojson_docs"
 
 [tool.poetry.dependencies]
 python = "^3.6"
