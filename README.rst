@@ -31,6 +31,7 @@ Notes
 ========
 - Development status is Alpha.
 - This project uses semantic versioning.
+- Thanks to `MRCagney <https://mrcagney.com>`_ for funding this project.
 
 
 Authors
