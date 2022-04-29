@@ -54,6 +54,7 @@ Changes
 -----------------
 - Extended ``convert()`` to accept a KML file object.
 - Added type hints.
+- Updated dependencies and removed version caps.
 
 
 5.0.1, 2021-10-11
