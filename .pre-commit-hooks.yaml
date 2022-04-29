@@ -1,0 +1,6 @@
+-   id: black
+    name: black
+    description: 'Black: The uncompromising Python code formatter'
+    entry: black
+    language: python
+    types: [python]

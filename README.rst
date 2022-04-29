@@ -50,6 +50,12 @@ If you want to help develop this project, here is some background reading.
 Changes
 ========
 
+5.1.0, 2022-04-29
+-----------------
+- Extended ``convert()`` to accept a KML file object.
+- Added type hints.
+
+
 5.0.1, 2021-10-11
 -----------------
 - Re-included the MIT License file and added more metadata to the file ``pyproject.toml`` for a more informative listing on PyPi.
