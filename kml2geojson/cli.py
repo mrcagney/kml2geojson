@@ -7,15 +7,25 @@ import kml2geojson.main as m
 
 
 @click.command(short_help="Convert KML to GeoJSON")
-@click.argument('kml_path', type=click.Path(exists=True))
-@click.argument('output_dir')
-@click.option('-st', '--style-type', type=click.Choice(m.STYLE_TYPES),  default=None)
-@click.option('-sf', '--style-filename', default='style.json')
-@click.option('-f', '--separate-folders', is_flag=True, default=False)
-def k2g(kml_path, output_dir, style_type, style_filename, separate_folders):
+@click.argument("kml_path_or_buffer", type=click.Path(exists=True))
+@click.argument("output_dir")
+@click.option("-fcn", "--feature-collection-name", default="main")
+@click.option("-st", "--style-type", type=click.Choice(m.STYLE_TYPES), default=None)
+@click.option("-sf", "--style-filename", default="style.json")
+@click.option("-f", "--separate-folders", is_flag=True, default=False)
+def k2g(
+    kml_path_or_buffer,
+    output_dir,
+    feature_collection_name,
+    style_type,
+    style_filename,
+    separate_folders,
+):
     """
-    Given a path to a KML file, convert it to a a GeoJSON FeatureCollection file and
-    save it to the given output directory.
+    Given a path to a KML file or given a KML file, convert it to a a GeoJSON
+    FeatureCollection with name = ``--feature_collection_name``
+    (which defaults to 'main') and save the GeoJSON to the file '<name>.geojson'
+    in the given output directory.
 
     If ``--separate_folders``, then create several GeoJSON files,
     one for each folder in the KML file that contains geodata or that has a descendant
@@ -27,7 +37,12 @@ def k2g(kml_path, output_dir, style_type, style_filename, separate_folders):
     style type and save it to the output directory under the file name given by
     ``--style_filename`` which defaults to "style.json".
     """
-    style, *layers = m.convert(kml_path, style_type, separate_folders=separate_folders)
+    style, *layers = m.convert(
+        kml_path_or_buffer,
+        style_type=style_type,
+        separate_folders=separate_folders,
+        feature_collection_name=feature_collection_name,
+    )
 
     # Create output directory if it doesn't exist
     output_dir = pl.Path(output_dir)
@@ -37,15 +52,15 @@ def k2g(kml_path, output_dir, style_type, style_filename, separate_folders):
 
     # Write style file
     path = output_dir / style_filename
-    with path.open('w') as tgt:
+    with path.open("w") as tgt:
         json.dump(style, tgt)
 
     # Create filenames for layers
-    stems = m.disambiguate(m.to_filename(layer['name']) for layer in layers)
+    stems = m.disambiguate(m.to_filename(layer["name"]) for layer in layers)
     filenames = [f"{stem}.geojson" for stem in stems]
 
     # Write layer files
     for i in range(len(layers)):
         path = output_dir / filenames[i]
-        with path.open('w') as tgt:
+        with path.open("w") as tgt:
             json.dump(layers[i], tgt)
