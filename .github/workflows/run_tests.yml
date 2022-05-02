@@ -36,10 +36,11 @@ jobs:
       # Install dependencies if cache does not exist
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-dev
+        run: |
+          poetry install --no-interaction --no-dev
+          poetry add pytest
       # Run tests
       - name: Run tests
         run: |
           source .venv/bin/activate
-          poetry add pytest
           pytest -v
