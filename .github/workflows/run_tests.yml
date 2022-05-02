@@ -40,5 +40,6 @@ jobs:
       # Run tests
       - name: Run tests
         run: |
+          poetry add pytest
           source .venv/bin/activate
           pytest -v
