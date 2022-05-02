@@ -27,4 +27,5 @@ jobs:
           poetry install -v --no-dev
       - name: Test with pytest
         run: |
+          poetry add pytest
           pytest
