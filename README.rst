@@ -32,6 +32,7 @@ Notes
 - This project's development status is Alpha.
   I use this project for work and change it breakingly to suit my needs.
 - This project uses semantic versioning.
+- If you would like to fund additional features to this project, feel free to email me.
 - Thanks to `MRCagney <http://www.mrcagney.com/>`_ for periodically donating to this project.
 - Constructive feedback and contributions are welcome.
   Please issue pull requests from a feature branch into the ``develop`` branch and include tests.
