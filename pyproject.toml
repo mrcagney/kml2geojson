@@ -9,7 +9,7 @@ homepage = "https://github.com/mrcagney/kml2geojson"
 documentation = "https://mrcagney.github.io/kml2geojson_docs"
 
 [tool.poetry.dependencies]
-python = ">=3.8, <4.0"
+python = ">=3.7, <4.0"
 click = ">=8.0.1"
 
 [tool.poetry.dev-dependencies]
