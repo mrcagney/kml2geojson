@@ -29,10 +29,12 @@ In the ``docs`` directory and published at `mrcagney.github.io/kml2geojson_docs 
 
 Notes
 ========
-- Development status is Alpha.
+- This project's development status is Alpha.
+  I use this project for work and change it breakingly to suit my needs.
 - This project uses semantic versioning.
-- Thanks to `MRCagney <https://mrcagney.com>`_ for funding this project.
-
+- Thanks to `MRCagney <http://www.mrcagney.com/>`_ for periodically donating to this project.
+- Constructive feedback and contributions are welcome.
+  Please issue pull requests from a feature branch into the ``develop`` branch and include tests.
 
 Authors
 ========
