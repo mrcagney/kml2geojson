@@ -56,6 +56,7 @@ Changes
 - Added type hints.
 - Updated dependencies and removed version caps.
 - Dropped support for Python versions less than 3.8.
+- Switched from Travis CI to Github Actions.
 
 
 5.0.1, 2021-10-11
