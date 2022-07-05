@@ -24,6 +24,7 @@ stages:
     - pip install --upgrade pip
     - pip install poetry
     - poetry install -v --no-dev
+    - poetry add pytest
 
 .test-template: &test
   <<: *install-deps
