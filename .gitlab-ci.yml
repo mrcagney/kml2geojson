@@ -21,10 +21,9 @@ stages:
 
 .install-deps-template: &install-deps
   before_script:
+    - pip install --upgrade pip
     - pip install poetry
-    - poetry --version
-    - poetry config settings.virtualenvs.in-project true
-    - poetry install -vv
+    - poetry install -v
 
 .test-template: &test
   <<: *install-deps
