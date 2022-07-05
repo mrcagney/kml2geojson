@@ -23,7 +23,7 @@ stages:
   before_script:
     - pip install --upgrade pip
     - pip install poetry
-    - poetry install -v
+    - poetry install -v --no-dev
 
 .test-template: &test
   <<: *install-deps
