@@ -23,21 +23,15 @@ stages:
   before_script:
     - pip install --upgrade pip
     - pip install poetry
-    - poetry install -v --no-dev
-    - poetry add pytest
+    - poetry add --lock pytest
+    - poetry install --no-dev -v
 
 .test-template: &test
   <<: *install-deps
   stage: testing
   script:
-    - echo "This is the test stage"
-    - pytest --junitxml=report.xml
-  artifacts:
-    when: always
-    expire_in: 1 week
-    reports:
-      junit: /builds/mrcagney/python-devop/tests/report.xml
-
+    - echo "Testing now"
+    - pytest -x
 
 # Testing jobs ------------------------
 
