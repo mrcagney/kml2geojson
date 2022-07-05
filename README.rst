@@ -23,7 +23,7 @@ For instructions on the latter, type ``k2g --help``.
 
 Documentation
 ==============
-In the ``docs`` directory and published at `mrcagney.github.io/kml2geojson_docs <https://mrcagney.github.io/kml2geojson_docs/>`_.
+In the ``docs`` directory and published at `mrcagney.gitlab.io/kml2geojson_docs <https://mrcagney.gitlab.io/kml2geojson_docs/>`_.
 
 
 Notes
@@ -35,6 +35,7 @@ Notes
 - Thanks to `MRCagney <http://www.mrcagney.com/>`_ for periodically donating to this project.
 - Constructive feedback and contributions are welcome.
   Please issue pull requests from a feature branch into the ``develop`` branch and include tests.
+
 
 Authors
 ========
