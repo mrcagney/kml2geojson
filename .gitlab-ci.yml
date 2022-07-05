@@ -29,6 +29,7 @@ stages:
 .test-template: &test
   <<: *install-deps
   stage: testing
+  script:
     - echo "This is the test stage"
     - pytest --junitxml=report.xml
   artifacts:
