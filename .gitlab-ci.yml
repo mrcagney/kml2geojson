@@ -1,0 +1,53 @@
+# Global -----------------------------
+
+# Official language image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/python/tags/
+default:
+  image: python:latest
+
+variables:
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/pip"
+
+cache:
+  key: "${CI_JOB_NAME}"
+  paths:
+    - .cache/pip
+    - .venv
+
+stages:
+  - testing
+
+# Templates --------------------------
+
+.install-deps-template: &install-deps
+  before_script:
+    - pip install poetry
+    - poetry --version
+    - poetry config settings.virtualenvs.in-project true
+    - poetry install -vv
+
+.test-template: &test
+  <<: *install-deps
+  stage: testing
+    - echo "This is the test stage"
+    - pytest --junitxml=report.xml
+  artifacts:
+    when: always
+    expire_in: 1 week
+    reports:
+      junit: /builds/mrcagney/python-devop/tests/report.xml
+
+
+# Testing jobs ------------------------
+
+python3.8:
+  <<: *test
+  image: python:3.8
+
+python3.9:
+  <<: *test
+  image: python:3.9
+
+python3.10:
+  <<: *test
+  image: python:3.10
