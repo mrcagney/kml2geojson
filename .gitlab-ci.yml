@@ -22,12 +22,13 @@ stages:
 .install-deps-template: &install-deps
   before_script:
     - python -V  # Print out python version for debugging
-    - pip install virtualenv
-    - virtualenv .venv
-    - source .venv/bin/activate
+    # - pip install virtualenv
+    # - virtualenv .venv
+    # - source .venv/bin/activate
     - pip install poetry
-#    - poetry config --local virtualenvs.create true
-    - poetry config --local virtualenvs.in-project true
+    - poetry config virtualenvs.create false
+#    - poetry config virtualenvs.create true
+    # - poetry config virtualenvs.in-project true
     - poetry add --lock pytest
     - poetry install --no-dev --no-root -v
 
