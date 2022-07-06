@@ -30,11 +30,6 @@ stages:
     - "$HOME/.local/bin/poetry" config --local virtualenvs.in-project true
     - "$HOME/.local/bin/poetry" add --lock pytest
     - "$HOME/.local/bin/poetry" install --no-dev --no-root
-    # - pip install poetry
-    # - poetry config --local virtualenvs.create true
-    # - poetry config --local virtualenvs.in-project true
-    # - poetry add --lock pytest
-    # - poetry install --no-dev --no-root -v
 
 .test-template: &test
   <<: *install-deps
