@@ -26,7 +26,8 @@ stages:
     - virtualenv .venv
     - source .venv/bin/activate
     - pip install poetry
-    - poetry config virtualenvs.in-project true
+    - poetry config --local virtualenvs.create true
+    - poetry config --local virtualenvs.in-project true
     - poetry add --lock pytest
     - poetry install --no-dev --no-root -v
 
