@@ -1,18 +1,20 @@
 image: python:3.10-alpine
 
-stages:
-  - deploy
-
+test:
+  stage: test
+  script:
+  - pip install -U sphinx
+  - sphinx-build -b html . public
+  rules:
+    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
+    
 pages:
-  tags:
-    - sphinx
   stage: deploy
   script:
-    - python3 -m pip install sphinx furo
-    - sphinx-build -b html docs/source/ public/
+  - pip install -U sphinx
+  - sphinx-build -b html . public
   artifacts:
     paths:
-      - public
-  only:
-    - main # 'master' was renamed to 'main' 
-    - master
+    - public
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
